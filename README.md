@@ -3,6 +3,9 @@ This is the private GitHub repository for our CSc 4350: Software Engineering pro
 
 Using this repository, we can upload our documents and code and keep track of changes.
 
+Phoenix Doc 2 Problem Statement Google Doc:
+https://docs.google.com/document/d/17oNb4L21PLyGfs8VDycuksB1o8FWvpFD6GhLJ1SMUfM/edit?usp=sharing
+
 ### Contact information
 
 Name | Email | Phone
