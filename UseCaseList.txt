@@ -2,7 +2,7 @@ Use Cases
 
 Columns: Case#, Para#, Name
 
-01	3.2	user login
+01	3.2	user login    //Use case doc to be written by Ryan Ocampo//
 02	3.0	create or modify employee profile
 03	4.1 manage hotel rooms
 04	4.1 modify room profile- as
