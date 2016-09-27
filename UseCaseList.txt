@@ -4,11 +4,11 @@ Columns: Case#, Para#, Name
 
 01	3.2	user login    //Use case doc to be written by Ryan Ocampo//
 02	3.0	create or modify employee profile //Use case doc to be written by Ryan Ocampo//
-03	4.1 manage hotel rooms
-04	4.1 modify room profile- as
-05	4.2	create or  modify reservation
-06	4.2	modify or output room billing
-07	4.3 manage room maintanance and inventory
+03	4.1 manage hotel rooms //Viraj Shah//
+04	4.1 modify room profile- as //Viraj Shah//
+05	4.2	create or  modify reservation //Viraj Shah//
+06	4.2	modify or output room billing //Viraj Shah//
+07	4.3 manage room maintanance and inventory //Viraj Shah//
 08	5.1 manage conference rooms //Use case doc to be written by Ryan Ocampo//
 09	5.2 create or modify conference booking
 10	5.2 modify or output conference billing
@@ -16,4 +16,4 @@ Columns: Case#, Para#, Name
 12	6.1 modify or update order
 13	6.1 output orders
 14	6.2 manage restaurant
-15	7.0	make reports
+15	7.0	make reports //Viraj Shah//
