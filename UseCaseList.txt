@@ -13,7 +13,7 @@ Columns: Case#, Para#, Name
 09	5.2 create or modify conference booking
 10	5.2 modify or output conference billing
 11	6.0 create new order //Use case doc to be written by Ryan Ocampo//
-12	6.1 modify or update order
+12	6.1 modify or update order // Deividas Rutkauskas //
 13	6.1 output orders
-14	6.2 manage restaurant
+14	6.2 manage restaurant // Deividas Rutkauskas //
 15	7.0	make reports //Viraj Shah//
