@@ -10,10 +10,10 @@ Columns: Case#, Para#, Name
 06	4.2	modify or output room billing //Viraj Shah//
 07	4.3 manage room maintanance and inventory //Viraj Shah//
 08	5.1 manage conference rooms //Use case doc to be written by Ryan Ocampo//
-09	5.2 create or modify conference booking
-10	5.2 modify or output conference billing
+09	5.2 create or modify conference booking //Andrew//
+10	5.2 modify or output conference billing //Andrew//
 11	6.0 create new order //Use case doc to be written by Ryan Ocampo//
 12	6.1 modify or update order // Deividas Rutkauskas //
-13	6.1 output orders
+13	6.1 output orders // Andrew//
 14	6.2 manage restaurant // Deividas Rutkauskas //
 15	7.0	make reports //Viraj Shah//
