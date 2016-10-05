@@ -1,0 +1,83 @@
+public class Order {
+	
+	// ArrayList of BillableItem objects
+	private List billables;
+
+	//	Date and time expected represented as a Date object and and integer representing minutes
+	private Date orderDate;
+	private int estimatedTime;
+
+	//	State represented as an integer (either ordered 0, preparing 1, complete 2)
+	private int orderstatus;
+
+	// Reference to Invoice Object(to which the order is billed represented as a String 
+	private String InvoiceNumber;
+
+
+
+	public void setBillables(ArrayList<Billables> billablesList){
+		this.billables = billablesList;
+	}
+
+	public int getNumberofBillables(){
+		return billables.size();
+	}
+
+	public void setOrderDate(){
+		Date currentDate = ?
+		this.orderDate = currentDate
+	}
+
+	public String getEstimatedOrderTime(){
+	int finishTime;
+	int currentTime = ?
+	finishTime += this.estimatedTime;
+	//Do time formatting logic
+	finishTime.toString();
+
+	return finishTime;
+	}
+
+	public void setOrderStatus(){
+	this.orderStatus = 0;
+	}
+
+	public String getOrderStatus(){
+
+	String status;
+
+	 switch(this.state){
+	 case 1: 
+	 	status = "Ordered";
+	 	break;
+	 case 2:
+	 	status = "Preparing";
+	 	break;
+	 case 3:
+	 	status = "Complete";
+	 	break;
+	default:
+		status = "Processing"
+		break;
+	}
+
+	return status;
+	}
+
+	public void updateOrder(){
+
+	if (this.state =< 1){
+	this.state++;
+	}
+
+	}
+
+	public void setInvoiceReference(String invoice){
+		this.InvoiceNumber = invoice;
+	}
+
+	public String getInvoiceReference(){
+	return this.InvoiceNumber
+	}
+
+}
