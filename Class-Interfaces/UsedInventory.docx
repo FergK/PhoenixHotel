@@ -1,0 +1,42 @@
+/* This class stores and updates
+ * InventoryItems.
+ */
+public class UsedInventory {
+	
+	/* Updates quantity for a given
+	 * InventoryItem
+	 * 
+	 * @Precondition: the relevant
+	 * InventoryItem has to exist.
+	 * 
+	 * @Postcondition: the relevant
+	 * InventoryItem is updated with the
+	 * provided quantity.
+	 */
+	
+	UpdateQuantity(InventoryItem e, int quantity) {...}
+	
+	/* Updates expected quantity
+	 * for a given InventoryItem
+	 * 
+	 * @Precondition: the relevant
+	 * InventoryItem has to exist.
+	 * 
+	 * @Postcondition: the provided
+	 * InventoryItem is updated with the
+	 * provided quantity.
+	 */
+	
+	UpdateExpectedQuantity(InventoryItem e, int quantity) {...}
+	
+	/* Clears the UsedInventory of all
+	 * InventoryItem objects
+	 * 
+	 * @Precondition: none
+	 * @Postcondition: the UsedInventory
+	 * array list is empty.
+	 */
+	
+	ResetInventory() {...}
+	
+}
