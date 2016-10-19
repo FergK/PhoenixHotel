@@ -1,31 +1,18 @@
-TASKS TO DO
+We need to decide who will be responsible for the following in Doc #6:
 
-Problem Statement and RTM:
-- employee types: manager, front-desk, custodial, restaurant, etc.
-- which employee types have access to what
-- employee list, delete
-- add items to inventory: TV, remote control, phone, etc.
-- add maintenance status to open room reservation query
-- redo how payments/charges work. explicitly define how payments and charges work
-- activities module: tours, outings, etc.
-- redo orders, maybe separate room service, table service, maintenance, catering, etc.
-- bhola suggested adding a customer facing interface for orders
+RTM - Fergus
+WSD - Fergus
+Gantt - Fergus
+Source code (compiling and packaging for turning in)
+Test Cases and rationale for test cases
+COCOMO
+Assembling and printing final document
 
-RTM:
-- add fifth column containing applicable use cases
+==========
 
-Use Cases and Interaction Diagrams:
-- complete
+Some things to thing about when it comes to code formatting:
 
-Function Point Cost Analysis:
-- complete
-
-Database:
-- pick
-
-Gantt Chart:
-- horizontal axis: name, task
-- vertical axis: starting date, block off by weeks and days
-
-Rationale:
-- specify that the software is flexible, may accomidate resorts of different sizes
+Classes should begin with capital letters
+Method and variable names should be given in lowerCamelCase ( https://en.wikipedia.org/wiki/Camel_case ) for consistancy
+It's better to spell out the full words in a variable name to make code more readable
+examples: hotelRoom, isSmoking, roomReservation, billableItem
