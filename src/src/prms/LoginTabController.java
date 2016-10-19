@@ -36,10 +36,52 @@ public class LoginTabController implements Initializable {
     private void handleLoginButtonPress(ActionEvent event) {
         String username = usernameField.getText();
         String password = passwordField.getText();
+        boolean success = false;
+        
+        Connection c = null;
+	  Statement stmt = null;
+	  
+	  try {
+	    Class.forName("org.sqlite.JDBC");
+	    c = DriverManager.getConnection("jdbc:sqlite:PhoenixHotel.db");
+	    c.setAutoCommit(false);
+	
+	      stmt = c.createStatement();
+	      
+	      
+	      //String all= "SELECT * FROM EMPLOYEE ;";
+	      String verify= "SELECT * FROM EMPLOYEE WHERE userName== '"+username+"' ;";
+	      c.commit();
+	         
+	      ResultSet rs = stmt.executeQuery(verify);
+	      
+	      while ( rs.next() ) {
+	    	  //String firstName= rs.getString("FIRSTNAME");	
+	    	  //String lastName= rs.getString("LASTNAME");
+	    	  String userName= rs.getString("USERNAME");
+	    	  String passWord= rs.getString("PASSWORD");
+	    	  //String uid= rs.getString("UID");
+	    	  //int isAdmin= rs.getInt("ISADMIN");
+	    	  
+	    	  System.out.println("PASSWORD: " + password);
+	    	  
+	    	  if(password.compareTo(passWord)==0){
+		    	success=true;  
+		    	
+		      }
+	    	  System.out.println(isLoggedin);	    	  
+	      }
+	      rs.close();
+	      stmt.close(); 
+	      c.close();
+	  } catch ( Exception e ) {
+	    System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+	    System.exit(0);
+	  }
 
         // Here is where we will put the code to query the database for the given username and check the password
         // set success to true if the login was successful, false otherwise
-        boolean success = true;
+        
 
         if (success) {
             usernameField.setDisable(true);
