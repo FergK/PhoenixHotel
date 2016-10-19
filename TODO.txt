@@ -10,9 +10,15 @@ Assembling and printing final document
 
 ==========
 
-Some things to thing about when it comes to code formatting:
+Some things to thing about when it comes to code:
 
 Classes should begin with capital letters
 Method and variable names should be given in lowerCamelCase ( https://en.wikipedia.org/wiki/Camel_case ) for consistancy
 It's better to spell out the full words in a variable name to make code more readable
 examples: hotelRoom, isSmoking, roomReservation, billableItem
+
+==========
+
+Open questions:
+
+What are the jobs, what can they access?
