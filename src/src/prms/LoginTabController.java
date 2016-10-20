@@ -3,6 +3,7 @@ package prms;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.sql.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,10 +37,45 @@ public class LoginTabController implements Initializable {
     private void handleLoginButtonPress(ActionEvent event) {
         String username = usernameField.getText();
         String password = passwordField.getText();
+        boolean success = false;
 
         // Here is where we will put the code to query the database for the given username and check the password
         // set success to true if the login was successful, false otherwise
-        boolean success = true;
+        
+        // Working login for testing:
+        // username: oromeo
+        // password: finalfantasy15
+        
+        Connection c = null;
+        Statement stmt = null;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:PhoenixHotel.db");
+            c.setAutoCommit(false);
+
+            stmt = c.createStatement();
+
+            String verify = "SELECT * FROM EMPLOYEE WHERE userName== '" + username + "' ;";
+            c.commit();
+
+            ResultSet rs = stmt.executeQuery(verify);
+
+            while (rs.next()) {
+                String correctPassword = rs.getString("PASSWORD");
+
+                if (password.compareTo(correctPassword) == 0) {
+                    success = true;
+                }
+            }
+
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
 
         if (success) {
             usernameField.setDisable(true);

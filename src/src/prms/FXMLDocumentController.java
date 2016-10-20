@@ -30,7 +30,7 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        // This code should stay commented out unless you are actively developing
+        // This code should stay commented out unless you are actively working on a tab
 //        ObservableList<Tab> tabList = allTabs.getTabs();
 //        for (Tab next : tabList) {
 //            next.setDisable(false);

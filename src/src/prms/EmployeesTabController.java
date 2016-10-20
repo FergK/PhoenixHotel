@@ -17,16 +17,7 @@ import javafx.scene.control.TableView;
 public class EmployeesTabController implements Initializable {
 
     @FXML
-    private Button createButton;
-
-    @FXML
     private Button modifyButton;
-
-    @FXML
-    private Button removeButton;
-
-    @FXML
-    private ChoiceBox createJobTitleChoiceBox;
 
     @FXML
     private ChoiceBox modifyJobTitleChoiceBox;
@@ -35,18 +26,14 @@ public class EmployeesTabController implements Initializable {
     private TableView employeesTable;
 
     @FXML
-    private void handleCreateButtonPress(ActionEvent event) {
+    private void handleEmployeeApplyButtonPress(ActionEvent event) {
 
     }
 
     @FXML
-    private void handleModifyButtonPress(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void handleRemoveButtonPress(ActionEvent event) {
-
+    private void handleTableSelect(ActionEvent event) {
+//        System.out.println("tableclicked");
+//table.getSelectionModel().getSelectedIndex();
     }
 
     @Override
@@ -54,7 +41,6 @@ public class EmployeesTabController implements Initializable {
         // TODO implement the code that gets a list of possible job titles
         // then adds the list of job titles to the dropdowns
         String[] jobList = {"Manager", "Front-desk staff", "Custodial staff", "Bellhop", "Server", "Cook"};
-        createJobTitleChoiceBox.getItems().addAll(jobList);
         modifyJobTitleChoiceBox.getItems().addAll(jobList);
 
         // TODO implement the code that adds all the employees to the table

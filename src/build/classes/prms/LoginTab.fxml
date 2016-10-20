@@ -9,7 +9,7 @@
 <!--@author Fergus Kelley-->
 
 <VBox fx:id="loginBox" alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prms.LoginTabController" spacing="10" >
-    <Label fx:id="titleLabel" text="Pheonix Resort Management System" />
+    <Label fx:id="titleLabel" text="Phoenix Resort Management System" />
     <GridPane hgap="10" vgap="10" alignment="CENTER">
         <Label fx:id="usernameLabel" text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <TextField fx:id="usernameField" promptText="username" GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="CENTER" />
