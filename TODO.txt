@@ -1,12 +1,19 @@
+Presentation date Nov 8th
+
 We need to decide who will be responsible for the following in Doc #6:
 
 RTM - Fergus
 WSD - Fergus
 Gantt - Fergus
-Source code (compiling and packaging for turning in)
+COCOMO - andrew
+Source code (compiling and packaging for turning in, readable) - Deividas?
 Test Cases and rationale for test cases
-COCOMO
-Assembling and printing final document
+  Login - ryan
+  Logout - viraj
+  Create employee - deividas
+  Modify employee - fergus
+  remove employee - andrew
+Assembling and printing final document - fergus
 
 ==========
 
@@ -22,3 +29,9 @@ examples: hotelRoom, isSmoking, roomReservation, billableItem
 Open questions:
 
 What are the jobs, what can they access?
+
+Manager
+Front-desk
+Custodial
+Staff
+Kitchen
