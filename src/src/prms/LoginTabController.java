@@ -63,13 +63,13 @@ public class LoginTabController implements Initializable {
 	    	  //String uid= rs.getString("UID");
 	    	  //int isAdmin= rs.getInt("ISADMIN");
 	    	  
-	    	  System.out.println("PASSWORD: " + password);
+	    	  //System.out.println("PASSWORD: " + password);
 	    	  
 	    	  if(password.compareTo(passWord)==0){
 		    	success=true;  
 		    	
 		      }
-	    	  System.out.println(isLoggedin);	    	  
+	    	  //System.out.println(isLoggedin);	    	  
 	      }
 	      rs.close();
 	      stmt.close(); 
