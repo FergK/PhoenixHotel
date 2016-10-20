@@ -30,13 +30,19 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        // This code should stay commented out unless you are actively working on a tab
-//        ObservableList<Tab> tabList = allTabs.getTabs();
-//        for (Tab next : tabList) {
-//            next.setDisable(false);
-//        }
-//        SingleSelectionModel<Tab> selectionModel = allTabs.getSelectionModel();
-//        selectionModel.select(1);
+        // TODO Add the code to detect if the DB exists,
+        // If it doesn't exist it should create a new DB file and add the proper tables.
+        
+        // This block of code automatically makes all tabs availible on startup and
+        // selects a given tab. This is useful if you are working on the code for a tab
+        // and you don't want to go through the login procedure every time
+        // This code should stay commented out whenever you push to github
+        ObservableList<Tab> tabList = allTabs.getTabs();
+        for (Tab next : tabList) {
+            next.setDisable(false);
+        }
+        SingleSelectionModel<Tab> selectionModel = allTabs.getSelectionModel();
+        selectionModel.select(1);
 
     }
 
