@@ -1,14 +1,12 @@
 package prms;
 
 import java.net.URL;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.sql.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -45,45 +43,42 @@ public class LoginTabController implements Initializable {
         
         // Attempt to connect to the DB and see if the given login info matches anything in the DB
         boolean success = false;
-        Connection c;
-        Statement stmt;
-
+        Connection c = null;
+        Statement stmt = null;
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:PhoenixHotel.db");
-            c.setAutoCommit(false);
-
+            c = DriverManager.getConnection(prms.PRMS.DBFILE);
             stmt = c.createStatement();
 
-            String verify = "SELECT * FROM EMPLOYEE WHERE userName== '" + username + "' ;";
-            c.commit();
-
-            ResultSet rs = stmt.executeQuery(verify);
+            String sql = "SELECT * FROM employees WHERE username='" + username + "' ;";
+            ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
                 String correctPassword = rs.getString("PASSWORD");
-
                 if (password.compareTo(correctPassword) == 0) {
+                    // Set the logged in employee object
+                    prms.PRMS.loggedInEmployee = new Employee(rs.getString("FIRSTNAME"), rs.getString("LASTNAME"), rs.getString("JOBTITLE"), rs.getString("USERNAME"), "");
+//                    System.out.println( "Logged in as:\n" + prms.PRMS.loggedInEmployee.toString());
                     success = true;
+                    break;
                 }
             }
-
+            
             rs.close();
             stmt.close();
             c.close();
+
         } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.err.println("Login database error: " + e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
 
         if (success) {
+            
+            // Update the UI pieces
             usernameField.setDisable(true);
-
             passwordField.setText("");
             passwordField.setDisable(true);
-
             loginLabel.setText("Login successful!");
-
             loginButton.setVisible(false);
             logoutButton.setVisible(true);
 
@@ -103,6 +98,9 @@ public class LoginTabController implements Initializable {
 
     @FXML
     private void handleLogoutButtonPress(ActionEvent event) {
+        
+        // Reset the logged in employee object
+        prms.PRMS.loggedInEmployee = null;
         
         // Clear the fields, display the login button, and disable the other tabs
         usernameField.setText("");

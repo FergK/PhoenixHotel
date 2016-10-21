@@ -1,5 +1,9 @@
 package prms;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,11 +15,16 @@ import javafx.stage.Stage;
  * @author Fergus Kelley
  */
 public class PRMS extends Application {
-    
-    // Here we can define constants that will be used throughout the application
-    
+
+    // Here we can define globals and constants that will be used throughout the application
     // List of all the possible jobTitle values. Used in the DB and in the UI
-    static final String[] jobTitleList = {"Manager", "Front-desk", "Custodial", "Staff", "Kitchen"};
+    static final String[] JOBTITLELIST = {"Manager", "Front-desk", "Custodial", "Staff", "Kitchen"};
+
+    // String pointing to database location
+    static final String DBFILE = "jdbc:sqlite:PhoenixHotel.db";
+    
+    // Employee object holding the currently logged in employee
+    static Employee loggedInEmployee = null;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -23,15 +32,63 @@ public class PRMS extends Application {
 
         Scene scene = new Scene(root);
 
-        stage.setTitle("Pheonix Resort Management System");
+        stage.setTitle("Phoenix Resort Management System"); // I will learn to spell our team name someday -F
+        stage.setMinWidth(800);
+        stage.setMinHeight(600);
         stage.setScene(scene);
         stage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
+
+        // Connect to the DB and create any tables if they are missing
+        System.out.print("\nAttempting to connect to SQLite database: " + prms.PRMS.DBFILE + "...");
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            c = DriverManager.getConnection(prms.PRMS.DBFILE);
+            stmt = c.createStatement();
+            System.out.println(" Connected!");
+
+            String sql;
+            
+            // This is how we should be creating the table definitions, so that
+            // the database can be rebuilt if something breaks or is lost
+            
+            // We'll probably want to put the table definitions somewhere else
+            // eventually, but for the time being we can stick them here.
+            
+            // Create employee table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS employees (\n"
+                + " firstName     TEXT    NOT NULL,\n"
+                + " lastName      TEXT    NOT NULL,\n"
+                + " jobTitle      TEXT    NOT NULL,\n"
+                + " username      TEXT    PRIMARY KEY   NOT NULL,\n"
+                + " password      TEXT    NOT NULL\n"
+                + ");";
+            stmt.execute(sql);
+                        
+            // If the employee table is empty, create a default account so we can login
+            sql = "SELECT count(*) FROM employees;";
+            ResultSet rs = stmt.executeQuery(sql);
+            if ( rs.getInt(1) == 0 ) {
+                System.out.println("\n\tEmployees table was empty, created a temporary employee:");
+                System.out.println("\tusername: admin");
+                System.out.println("\tpassword: admin");
+                System.out.println("\tThis employee should be deleted as soon as possible!\n");
+                sql = "INSERT INTO employees VALUES ('admin', 'admin', 'Manager', 'admin', 'admin');";
+                stmt.executeUpdate(sql);
+            }
+
+            rs.close();
+            stmt.close();
+            c.close();
+
+        } catch (Exception e) {
+            System.err.println("Database connection error: " + e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
         launch(args);
     }
 

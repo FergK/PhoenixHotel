@@ -60,4 +60,12 @@ public class Employee {
         return username.get();
     }
     
+    @Override
+    public String toString() {
+        return "First Name: " + getFirstName()
+            + "\nLast Name: " + getLastName()
+            + "\nJob Title: " + getJobTitle()
+            + "\nUsername: " + getUsername();
+    }
+    
 }

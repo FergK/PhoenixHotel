@@ -7,9 +7,6 @@
 <?import javafx.scene.layout.*?>
 
 <!--@author Fergus Kelley-->
-
-<!--<AnchorPane fx:controller="prms.FXMLDocumentController" xmlns:fx="http://javafx.com/fxml" minWidth="800" minHeight="600">
-    <TabPane fx:id="allTabs" tabClosingPolicy="UNAVAILABLE" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">-->
     
 <BorderPane fx:controller="prms.FXMLDocumentController" xmlns:fx="http://javafx.com/fxml">
     <center>
@@ -35,5 +32,3 @@
         </TabPane>
     </center>
 </BorderPane>
-<!--</AnchorPane>-->
-
