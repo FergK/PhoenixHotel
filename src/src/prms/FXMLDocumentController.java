@@ -24,8 +24,7 @@ import javafx.scene.control.TextField;
  */
 public class FXMLDocumentController implements Initializable {
 
-    @FXML
-    public TabPane allTabs;
+    @FXML   public TabPane allTabs;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -42,7 +41,7 @@ public class FXMLDocumentController implements Initializable {
             next.setDisable(false);
         }
         SingleSelectionModel<Tab> selectionModel = allTabs.getSelectionModel();
-        selectionModel.select(1);
+//        selectionModel.select(1);
 
     }
 

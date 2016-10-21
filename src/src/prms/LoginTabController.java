@@ -22,22 +22,19 @@ import javafx.scene.control.TextField;
  */
 public class LoginTabController implements Initializable {
 
-    @FXML
-    private Label loginLabel;
-    @FXML
-    private TextField usernameField;
-    @FXML
-    private PasswordField passwordField;
-    @FXML
-    private Button loginButton;
-    @FXML
-    private Button logoutButton;
+    @FXML   private Label loginLabel;
+    @FXML   private TextField usernameField;
+    @FXML   private PasswordField passwordField;
+    @FXML   private Button loginButton;
+    @FXML   private Button logoutButton;
 
     @FXML
     private void handleLoginButtonPress(ActionEvent event) {
+        // TODO set a global variable containing the currently logged in employee
+        
+        // Get the login info from the text boxes
         String username = usernameField.getText();
         String password = passwordField.getText();
-        boolean success = false;
 
         // Here is where we will put the code to query the database for the given username and check the password
         // set success to true if the login was successful, false otherwise
@@ -46,8 +43,10 @@ public class LoginTabController implements Initializable {
         // username: oromeo
         // password: finalfantasy15
         
-        Connection c = null;
-        Statement stmt = null;
+        // Attempt to connect to the DB and see if the given login info matches anything in the DB
+        boolean success = false;
+        Connection c;
+        Statement stmt;
 
         try {
             Class.forName("org.sqlite.JDBC");
@@ -104,7 +103,8 @@ public class LoginTabController implements Initializable {
 
     @FXML
     private void handleLogoutButtonPress(ActionEvent event) {
-        // code to logout and disable the other tabs
+        
+        // Clear the fields, display the login button, and disable the other tabs
         usernameField.setText("");
         usernameField.setDisable(false);
         usernameField.requestFocus();

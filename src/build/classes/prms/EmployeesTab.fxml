@@ -16,7 +16,7 @@
         <Insets bottom="10.0" left="10.0" right ="10.0" top="10.0"/>
     </padding>
     
-    <GridPane hgap="10" vgap="10" GridPane.columnIndex="0" GridPane.rowIndex="0">
+    <GridPane hgap="10" vgap="10" GridPane.columnIndex="0" GridPane.rowIndex="0" maxWidth="Infinity">
         <Label text="Manage Employees" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
         <Label text="Enter values to create a new employee profile,&#xD;or select an employee to modify or remove" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
         
@@ -27,7 +27,7 @@
         <TextField fx:id="modifyLastNameField" promptText="last name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         
         <Label text="Job title: " GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <ChoiceBox fx:id="modifyJobTitleChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="4" maxWidth="Infinity"/>
+        <ChoiceBox fx:id="modifyJobTitleChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="4" maxWidth="Infinity" />
         
         <Label text="Username: " GridPane.columnIndex="0" GridPane.rowIndex="5" />
         <TextField fx:id="modifyUsernameField" promptText="username" GridPane.columnIndex="1" GridPane.rowIndex="5" />
@@ -43,27 +43,27 @@
                 <ToggleGroup fx:id="toggleGroup"/>
             </fx:define>
             <children>
-                <RadioButton text="Create" toggleGroup="$toggleGroup" selected="true" />
-                <RadioButton text="Modify" toggleGroup="$toggleGroup" />
-                <RadioButton text="Remove" toggleGroup="$toggleGroup" />
+                <RadioButton fx:id="createRadio" text="Create" toggleGroup="$toggleGroup" selected="true" />
+                <RadioButton fx:id="modifyRadio" text="Modify" toggleGroup="$toggleGroup" />
+                <RadioButton fx:id="removeRadio" text="Remove" toggleGroup="$toggleGroup" />
             </children>
         </HBox>
         
         <Button fx:id="modifyButton" text="Apply" onAction="#handleEmployeeApplyButtonPress" GridPane.columnIndex="0" GridPane.rowIndex="9" GridPane.columnSpan="2" maxWidth="Infinity"/>
     </GridPane>
     
-    <TableView fx:id="employeesTable" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="2" GridPane.rowSpan="2" GridPane.hgrow="always" GridPane.vgrow="always" minWidth="400" maxWidth="Infinity">
+    <TableView fx:id="employeesTable" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.hgrow="always" GridPane.vgrow="always" maxWidth="Infinity">
         <columns>
-             <TableColumn fx:id="firstNameCol" text="First Name">
+             <TableColumn fx:id="firstNameCol" text="First Name" prefWidth="125">
                  <cellValueFactory><PropertyValueFactory property="firstName" /></cellValueFactory>
              </TableColumn>
-             <TableColumn fx:id="lastNameCol" text="Last Name">
+             <TableColumn fx:id="lastNameCol" text="Last Name" prefWidth="125">
                  <cellValueFactory><PropertyValueFactory property="lastName" /></cellValueFactory>
              </TableColumn>
-             <TableColumn fx:id="jobTitleCol" text="Job Title">
+             <TableColumn fx:id="jobTitleCol" text="Job Title" prefWidth="125">
                  <cellValueFactory><PropertyValueFactory property="jobTitle" /></cellValueFactory>
              </TableColumn>
-             <TableColumn fx:id="usernameCol" text="Username">
+             <TableColumn fx:id="usernameCol" text="Username" prefWidth="125">
                  <cellValueFactory><PropertyValueFactory property="username" /></cellValueFactory>
              </TableColumn>
         </columns>    
