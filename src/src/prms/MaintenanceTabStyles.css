@@ -1,0 +1,10 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    
+.table-column {
+  -fx-alignment: CENTER_RIGHT;
+}
+}

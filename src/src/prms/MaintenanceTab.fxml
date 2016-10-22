@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.*?>
+<?import java.net.*?>
+
+<!--@author Fergus Kelley-->
+
+<GridPane fx:id="maintenancePane" hgap="20" maxWidth="Infinity" styleClass="mainFxmlClass" vgap="20" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prms.MaintenanceTabController">
+    <stylesheets>
+        <URL value="@MaintenanceTabStyles.css" />
+    </stylesheets>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
+   <children>
+   <!--    
+       <GridPane hgap="10" vgap="10" GridPane.columnIndex="0" GridPane.rowIndex="0">
+           <Label text="Manage Employees" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+           <Label text="Enter values to create a new employee profile,&#xD;or select an employee to modify or remove" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
+           
+           <Label text="First name: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+           <TextField fx:id="modifyFirstNameField" promptText="first name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+           
+           <Label text="Last name: " GridPane.columnIndex="0" GridPane.rowIndex="3" />
+           <TextField fx:id="modifyLastNameField" promptText="last name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+           
+           <Label text="Job title: " GridPane.columnIndex="0" GridPane.rowIndex="4" />
+           <ChoiceBox fx:id="modifyJobTitleChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="4" maxWidth="Infinity"/>
+           
+           <Label text="Username: " GridPane.columnIndex="0" GridPane.rowIndex="5" />
+           <TextField fx:id="modifyUsernameField" promptText="username" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+           
+           <Label text="Password: " GridPane.columnIndex="0" GridPane.rowIndex="6" />
+           <PasswordField fx:id="modifyPasswordField" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+           
+           <Label text="Confirm PW: " GridPane.columnIndex="0" GridPane.rowIndex="7" />
+           <PasswordField fx:id="confirmPasswordField" promptText="confirm password" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+           
+           <HBox GridPane.columnIndex="0" GridPane.rowIndex="8" GridPane.columnSpan="2" spacing="10" alignment="center">
+               <fx:define>
+                   <ToggleGroup fx:id="toggleGroup"/>
+               </fx:define>
+               <children>
+                   <RadioButton text="Create" toggleGroup="$toggleGroup" selected="true" />
+                   <RadioButton text="Modify" toggleGroup="$toggleGroup" />
+                   <RadioButton text="Remove" toggleGroup="$toggleGroup" />
+               </children>
+           </HBox>
+           
+           <Button fx:id="modifyButton" text="Apply" onAction="#handleEmployeeApplyButtonPress" GridPane.columnIndex="0" GridPane.rowIndex="9" GridPane.columnSpan="2" maxWidth="Infinity"/>
+       </GridPane>
+       -->
+       
+       <TableView fx:id="maintenanceTable"  maxWidth="Infinity" minWidth="400.0" prefHeight="302.0" prefWidth="401.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.hgrow="always" GridPane.rowSpan="2" GridPane.vgrow="always">
+           <columns>
+                <TableColumn fx:id="nameCol" prefWidth="108.0" text="Name">
+                    <cellValueFactory>
+                  <PropertyValueFactory property="name" />
+               </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="quantityCol" prefWidth="67.0" text="Quantity">
+                    <cellValueFactory>
+                  <PropertyValueFactory property="quantity" />
+               </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="expectedQuantityCol" prefWidth="122.0" text="Expected Quantity">
+                    <cellValueFactory>
+                  <PropertyValueFactory property="expectedQuantity" />
+               </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="isConsumableCol" prefWidth="102.0" text="Is Consumable">
+                    <cellValueFactory>
+                  <PropertyValueFactory property="isConsumable" />
+               </cellValueFactory>
+                </TableColumn>
+           </columns>    
+       </TableView>
+      <TableView fx:id="roomTable" layoutX="60.0" layoutY="20.0" maxWidth="Infinity" minWidth="150.0" prefHeight="400.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowSpan="2">
+         <columns>
+            <TableColumn prefWidth="199.0" text="Room" />
+         </columns>
+      </TableView>
+      <GridPane GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="175.0">
+               <children>
+                  <Label layoutX="6.0" prefHeight="40.0" prefWidth="161.0" text="Room Service needed on:" wrapText="true" />
+                  <DatePicker layoutX="16.0" layoutY="46.0" prefHeight="27.0" prefWidth="144.0" />
+                  <Button fx:id="roomServiceUpdateBtn" onAction="#handleRoomServiceUpdate"  layoutX="38.0" layoutY="93.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="98.0" text="Update"  />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="174.0" GridPane.rowIndex="1">
+               <children>
+                  <Label layoutX="7.0" layoutY="80.0" prefHeight="40.0" prefWidth="161.0" text="Change Item Expected Quantity:" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="quantityUpdateBtn" onAction="#handleQuantityUpdate" layoutX="88.0" layoutY="46.0" mnemonicParsing="false" text="Update" />
+                  <Label layoutX="21.0" layoutY="6.0" text="Change Item Quantity" />
+                  <TextField layoutX="21.0" layoutY="46.0" prefHeight="27.0" prefWidth="62.0" />
+                  <TextField layoutX="21.0" layoutY="129.0" prefHeight="27.0" prefWidth="62.0" />
+                  
+                  <Button fx:id="expectedQuantityUpdateBtn" onAction="#handleExpectedQuantityUpdate" layoutX="90.0" layoutY="129.0" mnemonicParsing="false" text="Update" />
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+      <!--<ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />-->
+   </children>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints maxWidth="176.0" minWidth="162.0" prefWidth="163.0" />
+      <ColumnConstraints maxWidth="176.0" minWidth="162.0" prefWidth="163.0" />
+      <ColumnConstraints maxWidth="178.0" minWidth="164.0" prefWidth="177.0" />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+    
+</GridPane>
