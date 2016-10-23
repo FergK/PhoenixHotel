@@ -1,10 +1,10 @@
 
-public class hotelReservation {
+public class HotelReservation {
 	private int adults;
 	private int children;
 	private int startDate;	//assuming date entered in database is a unix timestamp(epoch)//
 	private int endDate;	//assuming date entered in database is a unix timestamp(epoch)//
-	public hotelReservation(int adults, int children, int startDate, int endDate){
+	public HotelReservation(int adults, int children, int startDate, int endDate){
 		this.adults= adults;
 		this.children= children;
 		this.startDate= startDate;
