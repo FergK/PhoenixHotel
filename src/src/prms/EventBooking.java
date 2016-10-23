@@ -1,9 +1,9 @@
 
-public class eventBooking {
+public class EventBooking {
 	private int startDate;
 	private int endDate;
 	
-	public eventBooking(int startDate, int endDate){
+	public EventBooking(int startDate, int endDate){
 		this.startDate= startDate;
 		this.endDate= endDate;
 		
