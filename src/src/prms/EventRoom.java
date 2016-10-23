@@ -1,12 +1,12 @@
 
-public class eventRoom {
+public class EventRoom {
 	private String roomNumber;
 	private double price;
 	private int party;
 	private int hasStage;
 	private int hasAudioVisual;
 	
-	public eventRoom(String room, double price, int party, int hasStage, int hasAudioVisual){
+	public EventRoom(String room, double price, int party, int hasStage, int hasAudioVisual){
 		this.roomNumber= room;
 		this.price= price;
 		this.party= party;
