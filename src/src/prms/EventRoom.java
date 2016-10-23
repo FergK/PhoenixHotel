@@ -1,6 +1,6 @@
 
 public class EventRoom {
-	private String roomNumber;
+	private String roomNumber
 	private double price;
 	private int party;
 	private int hasStage;
