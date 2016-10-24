@@ -2,9 +2,8 @@
 Name
 	Modify Employee
 
-Location
-	src/PRMS/EmployeesTab.fxml
-	src/PRMS/EmployeesTabController.java
+Name of Tester
+	Fergus Kelley
 
 Input
 	An employee is selected in the table containing a list of employees.
@@ -15,7 +14,8 @@ Input
 	To apply the changes made in the field, the apply button is pressed.
 
 Oracle
-	The employee table is correctly updated to reflect the applied modifications to the selected employee.
+	If the password and confirm password fields do not match, "password fields do not match" is displayed and modifications are not applied.
+	The employee table and database are correctly updated to reflect the applied modifications to the selected employee.
 
 Log
 	Results match expected output.
