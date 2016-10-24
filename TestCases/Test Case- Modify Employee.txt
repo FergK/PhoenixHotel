@@ -1,0 +1,21 @@
+ 
+Name
+	Modify Employee
+
+Location
+	src/PRMS/EmployeesTab.fxml
+	src/PRMS/EmployeesTabController.java
+
+Input
+	An employee is selected in the table containing a list of employees.
+	The "Modify" radio button is selected.
+	To modify the employee's first or last names, the values in each field is changed.
+	To modify the employee's job title, a new value is selected from the drop down box.
+	To modify the employee's password, a new value is entered in the password field and the same value is entered into the confirm password field.
+	To apply the changes made in the field, the apply button is pressed.
+
+Oracle
+	The employee table is correctly updated to reflect the applied modifications to the selected employee.
+
+Log
+	Results match expected output.
