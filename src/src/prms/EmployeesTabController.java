@@ -108,7 +108,7 @@ public class EmployeesTabController implements Initializable {
 
     public ArrayList<Employee> fetchEmployeesFromDB() {
 
-        ArrayList<Employee> employees = new ArrayList();
+        ArrayList<Employee> employees = new ArrayList<>();
         Connection c = null;
         Statement stmt = null;
         try {
@@ -222,7 +222,7 @@ public class EmployeesTabController implements Initializable {
         
         // Since we may only be modifying a few things, we can build the sql string based on what's filled out
         String sql = "UPDATE employees SET ";
-        ArrayList<String> updatedColumns = new ArrayList();
+        ArrayList<String> updatedColumns = new ArrayList<>();
         
         if (firstName.equals("")) {
             modifyLabel.setText("Error modifying employee:\nFirst name required");

@@ -1,68 +1,71 @@
+/* Change Log
+10/26/2016  Fergus
+    Renamed some variables and functions for clarity
+ */
+package prms;
 
 public class EventRoom {
-	private String roomNumber;
-	private double price;
-	private int party;
-	private int hasStage;
-	private int hasAudioVisual;
-	
-	public EventRoom(String room, double price, int party, int hasStage, int hasAudioVisual){
-		this.roomNumber= room;
-		this.price= price;
-		this.party= party;
-		this.hasStage= hasStage;
-		this.hasAudioVisual= hasAudioVisual;
-	}
 
-	public String getRoomNumber() {
-		return roomNumber;
-	}
+    private String roomName;
+    private double price;
+    private int maxCapacity;
+    private Boolean hasStage;
+    private Boolean hasAudioVisual;
 
-	public double getPrice() {
-		return price;
-	}
+    public EventRoom(String roomName, double price, int maxCapacity, Boolean hasStage, Boolean hasAudioVisual) {
+        this.roomName = roomName;
+        this.price = price;
+        this.maxCapacity = maxCapacity;
+        this.hasStage = hasStage;
+        this.hasAudioVisual = hasAudioVisual;
+    }
 
-	public int getParty() {
-		return party;
-	}
+    public String getRoomName() {
+        return roomName;
+    }
 
-	public boolean getHasStage() {
-		if(this.hasStage==1){
-			return true;
-		}
-		return false;
-	}
+    public double getPrice() {
+        return price;
+    }
 
-	public boolean getHasAudioVisual() {
-		if(this.hasAudioVisual==1){
-			return true;
-		}
-		return false;
-	}
+    public int getMaxCapacity() {
+        return maxCapacity;
+    }
 
-	public void setRoomNumber(String roomNumber) {
-		this.roomNumber = roomNumber;
-	}
+    public boolean getHasStage() {
+        return hasStage;
+    }
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
+    public boolean getHasAudioVisual() {
+        return hasAudioVisual;
+    }
 
-	public void setParty(int party) {
-		this.party = party;
-	}
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
 
-	public void setHasStage(int hasStage) {
-		this.hasStage = hasStage;
-	}
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
-	public void setHasAudioVisual(int hasAudioVisual) {
-		this.hasAudioVisual = hasAudioVisual;
-	}
-	
-	public String toString(){
-		return "Room Number: "+this.getRoomNumber()+"\nPrice: $"+this.getPrice()+"\nParty: "+this.getParty()+"Has Stage: "+this.getHasStage()+"Has Audio/Visual Equipment: "+this.getHasAudioVisual();
-	}
+    public void setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
+    }
 
-	
+    public void setHasStage(Boolean hasStage) {
+        this.hasStage = hasStage;
+    }
+
+    public void setHasAudioVisual(Boolean hasAudioVisual) {
+        this.hasAudioVisual = hasAudioVisual;
+    }
+
+    public String toString() {
+        return "Event Room Name: " + this.getRoomName()
+                + "\nPrice: $" + this.getPrice()
+                + "\nmaxCapacity: " + this.getMaxCapacity()
+                + "\nHas Stage: " + this.getHasStage()
+                + "\nHas Audio/Visual Equipment: " + this.getHasAudioVisual();
+    }
+
 }

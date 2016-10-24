@@ -3,10 +3,6 @@ package prms;
 
 import javafx.beans.property.SimpleStringProperty;
 
-/**
- *
- * @author Fergus Kelley
- */
 public class Employee {
     
     private SimpleStringProperty firstName = new SimpleStringProperty("");
