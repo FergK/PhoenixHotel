@@ -1,3 +1,4 @@
+package prms;
 
 public class EventBooking {
 	private int startDate;
@@ -25,9 +26,8 @@ public class EventBooking {
 		this.endDate = endDate;
 	}
 	
-	public void addInvoice( eventRoom m){
-		Invoice n= new Invoice(m.getRoomNumber());
-		
-	}
+//	public void addInvoice( eventRoom m){
+//		Invoice n= new Invoice(m.getRoomNumber());
+//	}
 
 }
