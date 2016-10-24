@@ -1,6 +1,6 @@
+package prms;
 
-
-public class hotelRoom {
+public class HotelRoom {
 	private double price;
 	private int beds;
 	private int hasPets;
@@ -9,7 +9,7 @@ public class hotelRoom {
 	private int startDate;		//assumed to be unix timestamp in database//
 	private int endDate;		//assumed to be unix timestamp in database//
 	
-	public hotelRoom(int price, int beds, int hasPets, int disableAccessible, int allowsSmoking,int startDate, int endDate ){
+	public HotelRoom(int price, int beds, int hasPets, int disableAccessible, int allowsSmoking,int startDate, int endDate ){
 		this.price=price;
 		this.beds=beds;
 		this.hasPets=hasPets;

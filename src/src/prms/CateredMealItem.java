@@ -1,20 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package invoice;
+
+
+package prms;
 
 /**
  *
  * @author AndrewAn
  */
-public class CaterMealItem {
+public class CateredMealItem {
    private String MealName;
    private double PricePerSeat;
    private String CaterDescription;
    
-   public CaterMealItem(String MealName, double PricePerSeat, String CaterDescription){
+   public CateredMealItem(String MealName, double PricePerSeat, String CaterDescription){
        this.MealName=MealName;
        this.PricePerSeat=PricePerSeat;
        this.CaterDescription=CaterDescription;

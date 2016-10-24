@@ -1,3 +1,4 @@
+package prms;
 
 public class HotelReservation {
 	private int adults;

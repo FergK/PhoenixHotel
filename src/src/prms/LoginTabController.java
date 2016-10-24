@@ -37,10 +37,6 @@ public class LoginTabController implements Initializable {
         // Here is where we will put the code to query the database for the given username and check the password
         // set success to true if the login was successful, false otherwise
         
-        // Working login for testing:
-        // username: oromeo
-        // password: finalfantasy15
-        
         // Attempt to connect to the DB and see if the given login info matches anything in the DB
         boolean success = false;
         Connection c = null;
