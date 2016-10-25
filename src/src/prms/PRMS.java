@@ -84,17 +84,16 @@ public class PRMS extends Application {
                     + " price         REAL    NOT NULL,\n"
                     + " beds          INT     NOT NULL,\n"
                     + " allowsPets      NUMERIC    NOT NULL,\n"
-                    + " disabilityAccessible      NUMERIC    NOT NULL\n"
-                    + " allowssmoking      NUMERIC    NOT NULL\n"
+                    + " disabilityAccessible      NUMERIC    NOT NULL,\n"
+                    + " allowssmoking      NUMERIC    NOT NULL,\n"
                     + " dateLastCleaned      INT    NOT NULL\n"
                     + ");";
-            System.out.println("\n\n" + sql + "\n\n");
             stmt.execute(sql);
 
             // Create hotelreservations table if it doesn't already exist
             sql = "CREATE TABLE IF NOT EXISTS hotelreservations (\n"
                     + " roomnumber     TEXT    NOT NULL,\n"
-                    + " adults           INT      NOT NULL\n"
+                    + " adults           INT      NOT NULL,\n"
                     + " children      INT    NOT NULL,\n"
                     + " startDate    INT    NOT NULL,\n"
                     + " endDate     INT    NOT NULL,\n"
