@@ -103,7 +103,7 @@ public class PRMS extends Application {
             stmt.execute(sql);
 
             // boolean values stored in table should be of type NUMERIC
-            // Create eventroomS table if it doesn't already exist
+            // Create eventrooms table if it doesn't already exist
             sql = "CREATE TABLE IF NOT EXISTS eventrooms (\n"
                     + " roomname     TEXT    NOT NULL,\n"
                     + " price      REAL    NOT NULL,\n"
@@ -112,7 +112,17 @@ public class PRMS extends Application {
                     + " hasAudioVisual      NUMERIC    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
+            
+            // boolean values stored in table should be of type NUMERIC
+            // Create eventrooms table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS eventrooms (\n"
+                   + " startDate    INT    NOT NULL,\n"
+                    + " endDate     INT    NOT NULL,\n"
+                    + " bill        INT    UNIQUE   NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
 
+            
             rs.close();
             stmt.close();
             c.close();
