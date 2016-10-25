@@ -1,99 +1,83 @@
+/* Change Log
+10/24/2016  Fergus
+    Removed the startDate and endDate fields since those will be in the reservation
+    Change the type of hasPets, disabilityAccessible, allowsSmoking to Boolean
+    Renamed some variables and functions for clarity
+    Added the inventory arraylist field.
+ */
 package prms;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 public class HotelRoom {
-	private double price;
-	private int beds;
-	private int hasPets;
-	private int disabilityAccessible;
-	private int allowsSmoking;
-	private int startDate;		//assumed to be unix timestamp in database//
-	private int endDate;		//assumed to be unix timestamp in database//
-	
-	public HotelRoom(int price, int beds, int hasPets, int disableAccessible, int allowsSmoking,int startDate, int endDate ){
-		this.price=price;
-		this.beds=beds;
-		this.hasPets=hasPets;
-		this.disabilityAccessible= disableAccessible;
-		this.allowsSmoking= allowsSmoking;
-		this.startDate= startDate;
-		this.endDate= endDate;
-		
-	}
 
-	public boolean getAllowsSmoking() {
-		if(this.allowsSmoking==1){
-			return true;
-		}
-		return false;
-	}
+    private String roomNumber;
+    private double price;
+    private int beds;
+    private Boolean allowsPets;
+    private Boolean disabilityAccessible;
+    private Boolean allowsSmoking;
+    private ArrayList<InventoryItem> Inventory;
+    private Date dateLastCleaned;
 
-	public void setAllowsSmoking(int allowsSmoking) {
-		this.allowsSmoking = allowsSmoking;
-	}
+    public HotelRoom(String roomNumber, int price, int beds, Boolean allowsPets, Boolean disableAccessible, Boolean allowsSmoking) {
+        this.roomNumber = roomNumber;
+        this.price = price;
+        this.beds = beds;
+        this.allowsPets = allowsPets;
+        this.disabilityAccessible = disableAccessible;
+        this.allowsSmoking = allowsSmoking;
+    }
 
-	public double getPrice() {
-		return price;
-	}
+    public void setAllowsSmoking(Boolean allowsSmoking) {
+        this.allowsSmoking = allowsSmoking;
+    }
 
-	public int getBeds() {
-		return beds;
-	}
+    public double getPrice() {
+        return price;
+    }
 
-	public boolean hasPets(){
-		if (hasPets==1){
-			return true;
-		}
-		return false;
-	}
+    public int getBeds() {
+        return beds;
+    }
 
-	public boolean getDisabilityAccessible() {
-		if(disabilityAccessible==1){
-			return true;
-		}
-		return false;
-	}
+    public boolean getAllowsPets() {
+        return allowsPets;
+    }
 
-	public boolean allowsSmoking(){
-		if(allowsSmoking==1){
-			return true;
-		}
-		return false;
-	}
-	public int getStartDate() {
-		return startDate;
-	}
+    public boolean getDisabilityAccessible() {
+        return disabilityAccessible;
+    }
 
-	public int getEndDate() {
-		return endDate;
-	}
+    public boolean getAllowsSmoking() {
+        return allowsSmoking;
+    }
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
-	public void setBeds(int beds) {
-		this.beds = beds;
-	}
+    public void setBeds(int beds) {
+        this.beds = beds;
+    }
 
-	public void setHasPets(int hasPets) {
-		this.hasPets = hasPets;
-	}
+    public void setAllowsPets(Boolean allowsPets) {
+        this.allowsPets = allowsPets;
+    }
 
-	public void setDisabilityAccessible(int disabilityAccessible) {
-		this.disabilityAccessible = disabilityAccessible;
-	}
+    public void setDisabilityAccessible(Boolean disabilityAccessible) {
+        this.disabilityAccessible = disabilityAccessible;
+    }
 
-	public void setStartDate(int startDate) {
-		this.startDate = startDate;
-	}
+    @Override
+    public String toString() {
+        return "Hotel room name: $" + this.roomNumber
+                + "\nprice: $" + this.price
+                + "\n# of beds: " + this.beds
+                + "\nDisability Accessible: " + this.disabilityAccessible
+                + "\nAllows Pets: " + this.allowsPets
+                + "\nAllows Smoking: " + this.allowsSmoking;
+    }
 
-	public void setEndDate(int numberOfDays) {
-		this.endDate = startDate + numberOfDays;
-	}
-	
-	public String toString(){
-		return "Room price: $"+this.getPrice()+"\n# of beds: "+this.beds+"\nDisability Accessible: "+this.getDisabilityAccessible()+"\nHas Pets: "+this.hasPets()+"\nAllows Smoking: "+this.allowsSmoking()+"\nStart Date: "+this.startDate+"End Date: "+this.endDate;
-		
-	}
-	
 }

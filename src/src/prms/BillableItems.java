@@ -1,46 +1,51 @@
-
+/* Change Log
+10/24/2016  Fergus
+    Fixed capitalization and names of some variables
+    Changed dat and time variable to single var of LocalDateTime
+ */
 
 package prms;
+
+import java.time.LocalDateTime;
 
 /**
  *
  * @author AndrewAn
  */
 public class BillableItems {
-    private String BillableName;
+
+    private String billableName;
     private double price;
-    private int date;
-    private int time;
-    
-    public BillableItems(String BillableName, double price, int date, int time){
-        this.BillableName=BillableName;
-        this.price=price;
-        this.date=date;
-        this.time=time;
+    private LocalDateTime time;
+
+    public BillableItems(String billableName, double price, LocalDateTime time) {
+        this.billableName = billableName;
+        this.price = price;
+        this.time = time;
     }
-    public String getBillableName(){
-        return BillableName;
+
+    public String getBillableName() {
+        return billableName;
     }
-    public double getPrice(){
+
+    public double getPrice() {
         return price;
     }
-    public int getDate(){
-        return date;
-    }
-    public int getTime(){
+    
+    public LocalDateTime getTime() {
         return time;
     }
-    public void setBillableName(String BillableName){
-        this.BillableName=BillableName;
+
+    public void setBillableName(String billableName) {
+        this.billableName = billableName;
     }
-    public void setPrice(double price){
-        this.price=price;
+
+    public void setPrice(double price) {
+        this.price = price;
     }
-    public void setDate(int date){
-        this.date=date;
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
     }
-    public void setTime(int time){
-        this.time=time;
-    }
-    
+
 }

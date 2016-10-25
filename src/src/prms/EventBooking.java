@@ -1,30 +1,39 @@
+
+/* Change Log
+10/24/2016  Fergus
+    Change the type of startDate and endDate to LocalDate
+    Added bill field
+ */
+
 package prms;
+
+import java.time.LocalDate;
 
 public class EventBooking {
 
-    private int startDate;
-    private int endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private Invoice bill;
 
-    public EventBooking(int startDate, int endDate, Invoice bill) {
+    public EventBooking(LocalDate startDate, LocalDate endDate, Invoice bill) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.bill = bill;
     }
 
-    public int getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public int getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setStartDate(int startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(int endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

@@ -1,22 +1,21 @@
-
 /* Change Log
-10/26/2016  Fergus
-    Change the type of startDate and endDate to Boolean
+10/24/2016  Fergus
+    Change the type of startDate and endDate to LocalDate
     Added bill field
  */
 package prms;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class HotelReservation {
 
     private int adults;
     private int children;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private Invoice bill;
 
-    public HotelReservation(int adults, int children, Date startDate, Date endDate, Invoice bill) {
+    public HotelReservation(int adults, int children, LocalDate startDate, LocalDate endDate, Invoice bill) {
         this.adults = adults;
         this.children = children;
         this.startDate = startDate;
@@ -32,11 +31,11 @@ public class HotelReservation {
         return children;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
@@ -48,11 +47,11 @@ public class HotelReservation {
         this.children = children;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 }

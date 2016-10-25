@@ -1,4 +1,7 @@
-
+/* Change Log
+10/24/2016  Fergus
+    Fixed capitalization and names of some variables
+ */
 
 package prms;
 
@@ -7,31 +10,38 @@ package prms;
  * @author AndrewAn
  */
 public class CateredMealItem {
-   private String MealName;
-   private double PricePerSeat;
-   private String CaterDescription;
-   
-   public CateredMealItem(String MealName, double PricePerSeat, String CaterDescription){
-       this.MealName=MealName;
-       this.PricePerSeat=PricePerSeat;
-       this.CaterDescription=CaterDescription;
-   }
-   public String getMealName(){
-       return MealName;
-   }
-   public double getPricePerSeat(){
-       return PricePerSeat;
-   }
-   public String getCaterDescription(){
-       return CaterDescription;
-   }
-   public void setMealName(String MealName){
-       this.MealName=MealName;
-   }
-   public void setPricePerSeat(double PricePerSeat){
-       this.PricePerSeat=PricePerSeat;
-   }
-   public void setCaterDescription(String CaterDescription){
-       this.CaterDescription=CaterDescription;
-   }
+
+    private String mealName;
+    private double pricePerSeat;
+    private String mealDescription;
+
+    public CateredMealItem(String mealName, double pricePerSeat, String mealDescription) {
+        this.mealName = mealName;
+        this.pricePerSeat = pricePerSeat;
+        this.mealDescription = mealDescription;
+    }
+
+    public String getMealName() {
+        return mealName;
+    }
+
+    public double getPricePerSeat() {
+        return pricePerSeat;
+    }
+
+    public String getMealDescription() {
+        return mealDescription;
+    }
+
+    public void setMealName(String mealName) {
+        this.mealName = mealName;
+    }
+
+    public void setPricePerSeat(double pricePerSeat) {
+        this.pricePerSeat = pricePerSeat;
+    }
+
+    public void setMealDescription(String mealDescription) {
+        this.mealDescription = mealDescription;
+    }
 }

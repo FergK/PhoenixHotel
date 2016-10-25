@@ -1,5 +1,10 @@
 package prms;
 
+/**
+ *
+ * @author Fergus Kelley
+ */
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,25 +24,34 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
-/**
- *
- * @author Fergus Kelley
- */
 public class EmployeesTabController implements Initializable {
 
-    @FXML   private TextField modifyFirstNameField;
-    @FXML   private TextField modifyLastNameField;
-    @FXML   private ChoiceBox<String> modifyJobTitleChoiceBox;
-    @FXML   private TextField modifyUsernameField;
-    @FXML   private PasswordField modifyPasswordField;
-    @FXML   private PasswordField confirmPasswordField;
-    @FXML   private ToggleGroup toggleGroup;
-    @FXML   private RadioButton createRadio;
-    @FXML   private RadioButton modifyRadio;
-    @FXML   private RadioButton removeRadio;
-    @FXML   private Button modifyButton;
-    @FXML   private Label modifyLabel;
-    @FXML   private TableView<Employee> employeesTable;
+    @FXML
+    private TextField modifyFirstNameField;
+    @FXML
+    private TextField modifyLastNameField;
+    @FXML
+    private ChoiceBox<String> modifyJobTitleChoiceBox;
+    @FXML
+    private TextField modifyUsernameField;
+    @FXML
+    private PasswordField modifyPasswordField;
+    @FXML
+    private PasswordField confirmPasswordField;
+    @FXML
+    private ToggleGroup toggleGroup;
+    @FXML
+    private RadioButton createRadio;
+    @FXML
+    private RadioButton modifyRadio;
+    @FXML
+    private RadioButton removeRadio;
+    @FXML
+    private Button modifyButton;
+    @FXML
+    private Label modifyLabel;
+    @FXML
+    private TableView<Employee> employeesTable;
 
     @FXML
     private void handleCreateToggle(ActionEvent event) {
@@ -99,7 +113,7 @@ public class EmployeesTabController implements Initializable {
         });
 
     }
-    
+
     public void updateEmployeesTable() {
         employeesTable.getItems().clear();
         employeesTable.getItems().addAll(fetchEmployeesFromDB());
@@ -169,11 +183,11 @@ public class EmployeesTabController implements Initializable {
         try {
             c = DriverManager.getConnection(prms.PRMS.DBFILE);
             stmt = c.createStatement();
-            
+
             // Check if a employee already exists with that username
             String sql = "SELECT count(*) FROM employees WHERE username='" + username + "'";
             ResultSet rs = stmt.executeQuery(sql);
-            if ( rs.getInt(1) > 0 ) {
+            if (rs.getInt(1) > 0) {
                 // username is taken, display a message and quit
                 modifyLabel.setText("Error creating employee:\nAn employee with that username already exists");
                 rs.close();
@@ -181,7 +195,7 @@ public class EmployeesTabController implements Initializable {
                 c.close();
                 return;
             }
-            
+
             // We can now go ahead and insert the new employee
             sql = "INSERT INTO employees VALUES ('" + firstName + "', '" + lastName + "', '" + jobTitle + "', '" + username + "', '" + password + "' );";
             stmt.executeUpdate(sql);
@@ -189,7 +203,7 @@ public class EmployeesTabController implements Initializable {
             rs.close();
             stmt.close();
             c.close();
-            
+
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -219,32 +233,32 @@ public class EmployeesTabController implements Initializable {
             modifyLabel.setText("Error modifying employee:\nPassword fields do not match");
             return;
         }
-        
+
         // Since we may only be modifying a few things, we can build the sql string based on what's filled out
         String sql = "UPDATE employees SET ";
         ArrayList<String> updatedColumns = new ArrayList<>();
-        
+
         if (firstName.equals("")) {
             modifyLabel.setText("Error modifying employee:\nFirst name required");
             return;
         } else {
-            updatedColumns.add( "firstName='" + firstName + "'" );
+            updatedColumns.add("firstName='" + firstName + "'");
         }
-                
+
         if (lastName.equals("")) {
             modifyLabel.setText("Error modifying employee:\nLast name required");
             return;
-        } else  {
-            updatedColumns.add( "lastName='" + lastName + "'" );
+        } else {
+            updatedColumns.add("lastName='" + lastName + "'");
         }
-        
-        updatedColumns.add( "jobTitle='" + jobTitle + "'" );
-        
+
+        updatedColumns.add("jobTitle='" + jobTitle + "'");
+
         if (!password.equals("")) {
-            updatedColumns.add( "password='" + password + "'" );
+            updatedColumns.add("password='" + password + "'");
         }
-        
-        while ( updatedColumns.size() > 1 ) {
+
+        while (updatedColumns.size() > 1) {
             sql += updatedColumns.get(0) + ", ";
             updatedColumns.remove(0);
         }
@@ -256,13 +270,13 @@ public class EmployeesTabController implements Initializable {
         try {
             c = DriverManager.getConnection(prms.PRMS.DBFILE);
             stmt = c.createStatement();
-            
+
             // Run the query
             stmt.executeUpdate(sql);
 
             stmt.close();
             c.close();
-            
+
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -286,11 +300,11 @@ public class EmployeesTabController implements Initializable {
         try {
             c = DriverManager.getConnection(prms.PRMS.DBFILE);
             stmt = c.createStatement();
-            
+
             // Check if there is employee with that username
             String sql = "SELECT count(*) FROM employees WHERE username='" + username + "';";
             ResultSet rs = stmt.executeQuery(sql);
-            if ( rs.getInt(1) == 0 ) {
+            if (rs.getInt(1) == 0) {
                 // No employee found
                 modifyLabel.setText("Error removing employee:\nThere is no employee " + username);
                 rs.close();
@@ -298,7 +312,7 @@ public class EmployeesTabController implements Initializable {
                 c.close();
                 return;
             }
-            
+
             // We can now go ahead and remove the employee
             sql = "DELETE FROM employees WHERE username='" + username + "'";
             stmt.executeUpdate(sql);
@@ -306,7 +320,7 @@ public class EmployeesTabController implements Initializable {
             rs.close();
             stmt.close();
             c.close();
-            
+
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);

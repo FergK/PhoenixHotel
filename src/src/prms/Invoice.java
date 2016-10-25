@@ -1,5 +1,12 @@
-
+/* Change Log
+10/24/2016  Fergus
+    Changed the CCNum and CCExp types
+    Added the arraylist of BillableItems
+ */
 package prms;
+
+import java.time.YearMonth;
+import java.util.ArrayList;
 
 /**
  *
@@ -7,31 +14,38 @@ package prms;
  */
 public class Invoice {
 
-    private String names;
-    private int CCNum;
-    private int CCExp;
+    private String customerName;
+    private String CCNum;
+    private YearMonth CCExp;
+    private ArrayList<BillableItems> items;
 
-    public Invoice(String names, int CCNum, int CCExp){
-        this.names=names;
-        this.CCNum=CCNum;
-        this.CCExp=CCExp;
+    public Invoice(String customerName, String CCNum, YearMonth CCExp) {
+        this.customerName = customerName;
+        this.CCNum = CCNum;
+        this.CCExp = CCExp;
     }
-    public String getNames(){
-        return names;
+
+    public String getCustomerName() {
+        return customerName;
     }
-    public int CCNum(){
+
+    public String CCNum() {
         return CCNum;
     }
-    public int CCExp(){
+
+    public YearMonth CCExp() {
         return CCExp;
     }
-    public void setNames(String names){
-        this.names=names;
+
+    public void setNames(String customerName) {
+        this.customerName = customerName;
     }
-    public void setCCNum(int CCNum){
-        this.CCNum=CCNum;
+
+    public void setCCNum(String CCNum) {
+        this.CCNum = CCNum;
     }
-    public void setCCExp(int CCExp){
-        this.CCExp=CCExp;
+
+    public void setCCExp(YearMonth CCExp) {
+        this.CCExp = CCExp;
     }
 }

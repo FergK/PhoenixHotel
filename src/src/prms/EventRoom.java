@@ -1,5 +1,5 @@
 /* Change Log
-10/26/2016  Fergus
+10/24/2016  Fergus
     Renamed some variables and functions for clarity
  */
 package prms;
