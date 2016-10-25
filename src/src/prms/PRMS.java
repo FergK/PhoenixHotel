@@ -79,6 +79,18 @@ public class PRMS extends Application {
                 sql = "INSERT INTO employees VALUES ('admin', 'admin', 'Manager', 'admin', 'admin');";
                 stmt.executeUpdate(sql);
             }
+            
+            // Create hotelroom table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS hotelrooms (\n"
+                + " roomNumber    TEXT    PRIMARY KEY   NOT NULL,\n"
+                + " price         REAL    NOT NULL,\n"
+                + " beds          INT     NOT NULL,\n"
+                + " allowsPets      NUMERIC    NOT NULL,\n"
+                + " disabilityAccessible      NUMERIC    NOT NULL,\n"
+                + " allowssmoking      NUMERIC    NOT NULL,\n"
+                + " dateLastCleaned      INT    NOT NULL\n"
+                + ");";
+            stmt.execute(sql);
 
             rs.close();
             stmt.close();
