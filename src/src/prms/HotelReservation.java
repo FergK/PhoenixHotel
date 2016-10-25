@@ -1,3 +1,4 @@
+
 /* Change Log
 10/26/2016  Fergus
     Change the type of startDate and endDate to Boolean
