@@ -67,7 +67,33 @@ public class PRMS extends Application {
                 + " password      TEXT    NOT NULL\n"
                 + ");";
             stmt.execute(sql);
-                        
+                     
+            // Create hotelreservations table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS hotelreservations (\n"
+                + " roomnumber     TEXT    NOT NULL,\n"
+                + " adults           INT      NOT NULL\n"
+                + " children      INT    NOT NULL,\n"
+                + " startDate    INT    NOT NULL,\n"
+                + " endDate     INT    NOT NULL,\n"
+                + " bill      INT    UNIQUE    NOT NULL\n"
+                + ");";
+            stmt.execute(sql);
+            
+            
+            //boolean values stored in table should be of type NUMERIC//
+            //
+            // Create eventroom table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS eventrooms (\n"
+                + " roomnumber     TEXT    NOT NULL,\n"
+                + " price      TEXT    NOT NULL,\n"
+                + " maxcapacity      TEXT    NOT NULL,\n"
+                + " hasStage      NUMERIC      NOT NULL,\n"
+                + " hasAudioVisual      NUMERIC    NOT NULL\n"
+                + ");";
+            stmt.execute(sql);
+            
+            
+            
             // If the employee table is empty, create a default account so we can login
             sql = "SELECT count(*) FROM employees;";
             ResultSet rs = stmt.executeQuery(sql);
@@ -79,18 +105,6 @@ public class PRMS extends Application {
                 sql = "INSERT INTO employees VALUES ('admin', 'admin', 'Manager', 'admin', 'admin');";
                 stmt.executeUpdate(sql);
             }
-            
-            // Create hotelroom table if it doesn't already exist
-            sql = "CREATE TABLE IF NOT EXISTS hotelrooms (\n"
-                + " roomNumber    TEXT    PRIMARY KEY   NOT NULL,\n"
-                + " price         REAL    NOT NULL,\n"
-                + " beds          INT     NOT NULL,\n"
-                + " allowsPets      NUMERIC    NOT NULL,\n"
-                + " disabilityAccessible      NUMERIC    NOT NULL,\n"
-                + " allowssmoking      NUMERIC    NOT NULL,\n"
-                + " dateLastCleaned      INT    NOT NULL\n"
-                + ");";
-            stmt.execute(sql);
 
             rs.close();
             stmt.close();
