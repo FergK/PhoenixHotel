@@ -7,8 +7,8 @@
  */
 package prms;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class HotelRoom {
 
@@ -18,10 +18,10 @@ public class HotelRoom {
     private Boolean allowsPets;
     private Boolean disabilityAccessible;
     private Boolean allowsSmoking;
-    private ArrayList<InventoryItem> Inventory;
-    private Date dateLastCleaned;
+    public ArrayList<InventoryItem> inventory;
+    private LocalDate dateLastCleaned;
 
-    public HotelRoom(String roomNumber, int price, int beds, Boolean allowsPets, Boolean disableAccessible, Boolean allowsSmoking) {
+    public HotelRoom(String roomNumber, double price, int beds, Boolean allowsPets, Boolean disableAccessible, Boolean allowsSmoking) {
         this.roomNumber = roomNumber;
         this.price = price;
         this.beds = beds;

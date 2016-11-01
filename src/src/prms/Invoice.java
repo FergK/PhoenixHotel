@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class Invoice {
 
+    private int UID;
     private String customerName;
     private String CCNum;
     private YearMonth CCExp;

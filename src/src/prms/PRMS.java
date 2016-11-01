@@ -22,7 +22,7 @@ public class PRMS extends Application {
 
     // String pointing to database location
     static final String DBFILE = "jdbc:sqlite:PhoenixHotel.db";
-    
+
     // Employee object holding the currently logged in employee
     static Employee loggedInEmployee = null;
 
@@ -51,27 +51,25 @@ public class PRMS extends Application {
             System.out.println(" Connected!");
 
             String sql;
-            
+
             // This is how we should be creating the table definitions, so that
             // the database can be rebuilt if something breaks or is lost
-            
             // We'll probably want to put the table definitions somewhere else
             // eventually, but for the time being we can stick them here.
-            
             // Create employee table if it doesn't already exist
             sql = "CREATE TABLE IF NOT EXISTS employees (\n"
-                + " firstName     TEXT    NOT NULL,\n"
-                + " lastName      TEXT    NOT NULL,\n"
-                + " jobTitle      TEXT    NOT NULL,\n"
-                + " username      TEXT    PRIMARY KEY   NOT NULL,\n"
-                + " password      TEXT    NOT NULL\n"
-                + ");";
+                    + " firstName     TEXT    NOT NULL,\n"
+                    + " lastName      TEXT    NOT NULL,\n"
+                    + " jobTitle      TEXT    NOT NULL,\n"
+                    + " username      TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " password      TEXT    NOT NULL\n"
+                    + ");";
             stmt.execute(sql);
-                        
+
             // If the employee table is empty, create a default account so we can login
             sql = "SELECT count(*) FROM employees;";
             ResultSet rs = stmt.executeQuery(sql);
-            if ( rs.getInt(1) == 0 ) {
+            if (rs.getInt(1) == 0) {
                 System.out.println("\n\tEmployees table was empty, created a temporary employee:");
                 System.out.println("\tusername: admin");
                 System.out.println("\tpassword: admin");
@@ -80,6 +78,50 @@ public class PRMS extends Application {
                 stmt.executeUpdate(sql);
             }
 
+            // Create hotelroom table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS hotelroom (\n"
+                    + " roomNumber    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " price         REAL    NOT NULL,\n"
+                    + " beds          INT     NOT NULL,\n"
+                    + " allowsPets      NUMERIC    NOT NULL,\n"
+                    + " disabilityAccessible      NUMERIC    NOT NULL,\n"
+                    + " allowssmoking      NUMERIC    NOT NULL,\n"
+                    + " dateLastCleaned      INT    NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+
+            // Create hotelreservations table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS hotelreservations (\n"
+                    + " roomnumber     TEXT    NOT NULL,\n"
+                    + " adults           INT      NOT NULL,\n"
+                    + " children      INT    NOT NULL,\n"
+                    + " startDate    INT    NOT NULL,\n"
+                    + " endDate     INT    NOT NULL,\n"
+                    + " bill      INT    UNIQUE    NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+
+            // boolean values stored in table should be of type NUMERIC
+            // Create eventrooms table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS eventrooms (\n"
+                    + " roomname     TEXT    NOT NULL,\n"
+                    + " price      REAL    NOT NULL,\n"
+                    + " maxcapacity     INT     NOT NULL,\n"
+                    + " hasStage      NUMERIC      NOT NULL,\n"
+                    + " hasAudioVisual      NUMERIC    NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+            
+            // boolean values stored in table should be of type NUMERIC
+            // Create eventrooms table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS eventrooms (\n"
+                   + " startDate    INT    NOT NULL,\n"
+                    + " endDate     INT    NOT NULL,\n"
+                    + " bill        INT    UNIQUE   NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+
+            
             rs.close();
             stmt.close();
             c.close();
