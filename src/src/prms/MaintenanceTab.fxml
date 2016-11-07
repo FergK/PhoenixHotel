@@ -19,7 +19,7 @@
     </padding>
    <children>
        
-       <TableView fx:id="inventoryTable" onMouseClicked="#handleInventorySelection"  maxWidth="Infinity" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="always">
+       <TableView fx:id="maintenanceTable" maxWidth="Infinity" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="always">
            <columns>
                 <TableColumn fx:id="nameCol" prefWidth="125" text="Name">
                     <cellValueFactory>
@@ -56,14 +56,14 @@
                <children>
                   <Label layoutX="19.0" layoutY="-6.0" prefHeight="40.0" prefWidth="161.0" text="Room Service needed on:" wrapText="true" />
                   <DatePicker layoutX="27.0" layoutY="47.0" prefHeight="27.0" prefWidth="144.0" />
+                  <Button fx:id="roomServiceUpdateBtn" layoutX="28.0" layoutY="82.0" mnemonicParsing="false" onAction="#handleRoomServiceUpdate" prefHeight="27.0" prefWidth="144.0" text="Update to Selection" />
                   <AnchorPane layoutX="19.0" layoutY="200.0" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-                  <Button fx:id="roomServiceUpdateBtn" onMouseClicked="#handleRoomServiceUpdate" layoutX="53.0" layoutY="100.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="92.0" text="Update" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="195.0" prefWidth="198.0" GridPane.rowIndex="1">
                <children>
                   <Label layoutX="20.0" prefHeight="55.0" prefWidth="161.0" text="Replenish item quantity to the expected amount:" wrapText="true" />
-                  <Button fx:id="quantityUpdateBtn" layoutX="54.0" layoutY="69.0" mnemonicParsing="false" onMouseClicked="#handleQuantityUpdate" prefHeight="62.0" prefWidth="92.0" text="Replenish" />
+                  <Button fx:id="roomServiceUpdateBtn" layoutX="28.0" layoutY="82.0" mnemonicParsing="false" onAction="#handleRoomServiceUpdate" prefHeight="27.0" prefWidth="144.0" text="Replenish" />
                </children>
             </AnchorPane>
          </children>
@@ -78,14 +78,10 @@
             <Insets left="10.0" />
          </padding>
       </Label>
-      <TableView fx:id="roomTable" layoutX="419.0" layoutY="40.0" maxWidth="Infinity" onMouseClicked="#handleRoomSelection"  GridPane.rowIndex="1">
-         <columns>
-            <TableColumn fx:id="roomCol" prefWidth="245.25403213500977" text="Room List">
-               <cellValueFactory>
-                  <PropertyValueFactory property="roomNumber"/>
-               </cellValueFactory>
-            </TableColumn>
-         </columns>
+      <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+        <columns>
+          <TableColumn prefWidth="199.0" text="Room List" />
+        </columns>
       </TableView>
    </children>
    <columnConstraints>
