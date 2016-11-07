@@ -79,7 +79,7 @@ public class PRMS extends Application {
             }
 
             // Create hotelroom table if it doesn't already exist
-            sql = "CREATE TABLE IF NOT EXISTS hotelroom (\n"
+            sql = "CREATE TABLE IF NOT EXISTS hotelRooms (\n"
                     + " roomNumber    TEXT    PRIMARY KEY   NOT NULL,\n"
                     + " price         REAL    NOT NULL,\n"
                     + " beds          INT     NOT NULL,\n"
@@ -89,6 +89,38 @@ public class PRMS extends Application {
                     + " dateLastCleaned      INT    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
+
+            // THIS BLOCK IS FOR TROUBLESHOOTING ROOM LIST ONLY
+            // If the room table is empty, create a default one 
+            sql = "SELECT count(*) FROM hotelRooms;";
+            ResultSet rsroom = stmt.executeQuery(sql);
+            if (rsroom.getInt(1) == 0) {
+                System.out.println("\n\tRoom table was empty, created a temporary Room:");
+                System.out.println("\tThis room should be deleted later on!\n");
+                sql = "INSERT INTO hotelRooms VALUES ('100', '80.00', '2', '0', '1', '0', '01012016');";
+                stmt.executeUpdate(sql);
+            }
+
+            // Create inventoryItems table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS inventoryItems (\n"
+                    + " name            TEXT    NOT NULL,\n"
+                    + "roomNumber       TEXT    NOT NULL,\n"
+                    + " quantity        INT    NOT NULL,\n"
+                    + " expectedQuantity        INT   NOT NULL,\n"
+                    + " isConsumable        NUMERIC    NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+
+            // If the inventoryItem table is empty, create a placeholder
+            // for troubleshooting
+            sql = "SELECT count(*) FROM inventoryItems;";
+            ResultSet rsinv = stmt.executeQuery(sql);
+            if (rsinv.getInt(1) == 0) {
+                System.out.println("\n\tinventory table was empty, created a temporary item:");
+                sql = "INSERT INTO inventoryItems VALUES ('Soap','100', '5', '5', '1');";
+                System.out.println("\tSoap added!");
+                stmt.executeUpdate(sql);
+            }
 
             // Create hotelreservations table if it doesn't already exist
             sql = "CREATE TABLE IF NOT EXISTS hotelreservations (\n"
@@ -111,26 +143,30 @@ public class PRMS extends Application {
                     + " hasAudioVisual      NUMERIC    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
-            
+
             // boolean values stored in table should be of type NUMERIC
             // Create eventrooms table if it doesn't already exist
             sql = "CREATE TABLE IF NOT EXISTS eventrooms (\n"
-                   + " startDate    INT    NOT NULL,\n"
+                    + " startDate    INT    NOT NULL,\n"
                     + " endDate     INT    NOT NULL,\n"
                     + " bill        INT    UNIQUE   NOT NULL\n"
                     + ");";
             stmt.execute(sql);
-
-            sql = "CREATE TABLE IF NOT EXISTS inventoryitem (\n"
-            + " name    TEXT    PRIMARY KEY   NOT NULL,\n"
-            + " roomnumber         TEXT    NOT NULL,\n"
-            + " quanitity          INT     NOT NULL,\n"
-            + " expectedQuantity      INT    NOT NULL,\n"
-            + " isConsumable      NUMERIC    NOT NULL,\n"
-            + ");";
-        stmt.execute(sql);
             
-            sql = "CREATE TABLE IF NOT EXISTS invoice (\n"
+            // Duplicate eventrooms tables here; which one is the definitive one?
+            // -Deividas
+
+            
+            // NOTICE:
+            // The following tables cause the following SQLITE syntax error:
+            // Database connection error: org.sqlite.SQLiteException:
+            // [SQLITE_ERROR] SQL error or missing database (near ")": syntax error)
+            // I commented them out for now for the program to be compilable
+            // and until we figure out the bug. 
+            // -Deividas
+            
+            /*    
+                       sql = "CREATE TABLE IF NOT EXISTS invoice (\n"
                 + " UID    INT    PRIMARY KEY   NOT NULL,\n"
                 + " customerName         TEXT    NOT NULL,\n"
                 + " CCNum          TEXT     NOT NULL,\n"
@@ -193,7 +229,7 @@ public class PRMS extends Application {
                                                     + " caterdescription          TEXT     NOT NULL,\n"
                                                     + ");";
                stmt.execute(sql);
-            
+             */
             rs.close();
             stmt.close();
             c.close();

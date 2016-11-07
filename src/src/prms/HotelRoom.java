@@ -9,65 +9,97 @@ package prms;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class HotelRoom {
 
-    private String roomNumber;
-    private double price;
-    private int beds;
-    private Boolean allowsPets;
-    private Boolean disabilityAccessible;
-    private Boolean allowsSmoking;
+    private SimpleStringProperty roomNumber = new SimpleStringProperty("");
+    private SimpleDoubleProperty price = new SimpleDoubleProperty();
+    private SimpleIntegerProperty beds = new SimpleIntegerProperty();
+    private SimpleBooleanProperty allowsPets = new SimpleBooleanProperty();
+    private SimpleBooleanProperty disabilityAccessible = new SimpleBooleanProperty();
+    private SimpleBooleanProperty allowsSmoking = new SimpleBooleanProperty();
+
     public ArrayList<InventoryItem> inventory;
-    private LocalDate dateLastCleaned;
+    
+    // dateLastCleaned is declared as int until we figure out proper LocalDate 
+    // functionality
+    private SimpleIntegerProperty dateLastCleaned = new SimpleIntegerProperty();
 
-    public HotelRoom(String roomNumber, double price, int beds, Boolean allowsPets, Boolean disableAccessible, Boolean allowsSmoking) {
-        this.roomNumber = roomNumber;
-        this.price = price;
-        this.beds = beds;
-        this.allowsPets = allowsPets;
-        this.disabilityAccessible = disableAccessible;
-        this.allowsSmoking = allowsSmoking;
-    }
+    public HotelRoom(String roomNumber, double price, int beds, Boolean allowsPets, Boolean disabilityAccessible, Boolean allowsSmoking) {
 
-    public void setAllowsSmoking(Boolean allowsSmoking) {
-        this.allowsSmoking = allowsSmoking;
+        setRoomNumber(roomNumber);
+        setPrice(price);
+        setBeds(beds);
+        setAllowsPets(allowsPets);
+        setDisabilityAccessible(disabilityAccessible);
+        setAllowsSmoking(allowsSmoking);
+        inventory = new ArrayList<InventoryItem>();
+        setDateLastCleaned(0);
+
     }
 
     public double getPrice() {
-        return price;
+        return price.get();
+    }
+
+    public int getDateLastCleaned() {
+        return dateLastCleaned.get();
     }
 
     public int getBeds() {
-        return beds;
+        return beds.get();
     }
 
     public boolean getAllowsPets() {
-        return allowsPets;
+        return allowsPets.get();
     }
 
     public boolean getDisabilityAccessible() {
-        return disabilityAccessible;
+        return disabilityAccessible.get();
     }
 
     public boolean getAllowsSmoking() {
-        return allowsSmoking;
+        return allowsSmoking.get();
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public String getRoomNumber() {
+        return roomNumber.get();
+    }
+
+    public ArrayList<InventoryItem> getInventory() {
+        return inventory;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber.set(roomNumber);
+    }
+
+    public void setPrice(double price) {
+        this.price.set(price);
     }
 
     public void setBeds(int beds) {
-        this.beds = beds;
+        this.beds.set(beds);
     }
 
     public void setAllowsPets(Boolean allowsPets) {
-        this.allowsPets = allowsPets;
+        this.allowsPets.set(allowsPets);
     }
 
     public void setDisabilityAccessible(Boolean disabilityAccessible) {
-        this.disabilityAccessible = disabilityAccessible;
+        this.disabilityAccessible.set(disabilityAccessible);
+    }
+
+    public void setAllowsSmoking(Boolean allowsSmoking) {
+        this.allowsSmoking.set(allowsSmoking);
+    }
+
+    public void setDateLastCleaned(int dateLastCleaned) {
+        this.dateLastCleaned.set(dateLastCleaned);
     }
 
     @Override

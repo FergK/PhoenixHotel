@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.*?>
+
+<!--@author Deividas Rutkauskas-->
+
+<GridPane fx:id="maintenancePane" maxWidth="Infinity" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prms.MaintenanceTabController">
+
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
+   <children>
+       
+       <TableView fx:id="inventoryTable" onMouseClicked="#handleInventorySelection"  maxWidth="Infinity" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="always">
+           <columns>
+                <TableColumn fx:id="nameCol" prefWidth="125" text="Name">
+                    <cellValueFactory>
+                  <PropertyValueFactory property="name" />
+               </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="quantityCol" prefWidth="125" text="Quantity">
+                    <cellValueFactory>
+                  <PropertyValueFactory property="quantity" />
+               </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="expQuantityCol" prefWidth="125.0" text="Expected Quantity">
+                    <cellValueFactory>
+                  <PropertyValueFactory property="expectedQuantity" />
+               </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="isConsumableCol" prefWidth="125.0" text="Consumable">
+                    <cellValueFactory>
+                  <PropertyValueFactory property="isConsumable" />
+               </cellValueFactory>
+                </TableColumn>
+           </columns>    
+       </TableView>
+      <GridPane maxHeight="1.7976931348623157E308" maxWidth="200.0" minWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="195.0" prefWidth="198.0">
+               <children>
+                  <Label layoutX="19.0" layoutY="-6.0" prefHeight="40.0" prefWidth="161.0" text="Room Service needed on:" wrapText="true" />
+                  <DatePicker layoutX="27.0" layoutY="47.0" prefHeight="27.0" prefWidth="144.0" />
+                  <AnchorPane layoutX="19.0" layoutY="200.0" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                  <Button fx:id="roomServiceUpdateBtn" onMouseClicked="#handleRoomServiceUpdate" layoutX="53.0" layoutY="100.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="92.0" text="Update" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="195.0" prefWidth="198.0" GridPane.rowIndex="1">
+               <children>
+                  <Label layoutX="20.0" prefHeight="55.0" prefWidth="161.0" text="Replenish item quantity to the expected amount:" wrapText="true" />
+                  <Button fx:id="quantityUpdateBtn" layoutX="54.0" layoutY="69.0" mnemonicParsing="false" onMouseClicked="#handleQuantityUpdate" prefHeight="62.0" prefWidth="92.0" text="Replenish" />
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+      <Label prefHeight="17.0" prefWidth="199.0" text="Please Select a Room:">
+         <padding>
+            <Insets left="15.0" />
+         </padding>
+      </Label>
+      <Label prefHeight="17.0" prefWidth="250.0" text="Room Inventory:" GridPane.columnIndex="2">
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </Label>
+      <TableView fx:id="roomTable" layoutX="419.0" layoutY="40.0" maxWidth="Infinity" onMouseClicked="#handleRoomSelection"  GridPane.rowIndex="1">
+         <columns>
+            <TableColumn fx:id="roomCol" prefWidth="245.25403213500977" text="Room List">
+               <cellValueFactory>
+                  <PropertyValueFactory property="roomNumber"/>
+               </cellValueFactory>
+            </TableColumn>
+         </columns>
+      </TableView>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="10.0" />
+      <RowConstraints />
+   </rowConstraints>
+    
+</GridPane>
