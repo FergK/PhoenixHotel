@@ -21,7 +21,7 @@
                 <!--Fergus, includes hotel and event rooms -->
             </Tab>
             <Tab fx:id="maintenanceTab" text="Hotel Maintenance" disable="true" >
-                <!--Deividas, includes room inventory-->
+                <fx:include source="MaintenanceTab.fxml"/>
             </Tab> 
             <Tab fx:id="reservationsTab" text="Hotel Reservations" disable="true" ></Tab>
             <Tab fx:id="bookingsTab" text="Event Bookings" disable="true" ></Tab>
