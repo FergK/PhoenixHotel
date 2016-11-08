@@ -103,9 +103,9 @@ public class MaintenanceTabController implements Initializable {
         if (roomTable.getSelectionModel().getSelectedItem() != null) {
             int expinv = selectedInventory.getExpectedQuantity();
             HotelRoom selectedRoom = (HotelRoom) roomTable.getSelectionModel().getSelectedItem();
-            System.out.println("++++\n" + expinv);
-            System.out.println("++++\n" + selectedRoom.getRoomNumber());
-            System.out.println("++++\n" + selectedInventory.getName());
+//            System.out.println("++++\n" + expinv);
+//            System.out.println("++++\n" + selectedRoom.getRoomNumber());
+//            System.out.println("++++\n" + selectedInventory.getName());
             String sql = "UPDATE inventoryItems SET quantity ='" + expinv + "' WHERE roomNumber='" + selectedRoom.getRoomNumber() + "' AND name='" + selectedInventory.getName() + "';";
 
             // Connect to the DB and perform the necessary queries
@@ -129,6 +129,7 @@ public class MaintenanceTabController implements Initializable {
             inventoryTable.getSelectionModel().clearSelection();
             roomServiceUpdateBtn.setDisable(true);
             quantityUpdateBtn.setDisable(true);
+            selectedInventory.setQuantity(expinv);
             updateInventoryTable(selectedRoom);
 
         }
@@ -144,9 +145,6 @@ public class MaintenanceTabController implements Initializable {
 
         updateRoomTable(rooms);
         updateInventoryTable(rooms);
-
-        ObservableList inventoryItems = inventoryTable.getItems();
-//        inventoryItems.add(new InventoryItem("Towel", 3, 3, false));
 
     }
 

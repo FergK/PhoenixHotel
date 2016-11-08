@@ -165,7 +165,7 @@ public class PRMS extends Application {
             // and until we figure out the bug. 
             // -Deividas
             
-               
+             /*  
                        sql = "CREATE TABLE IF NOT EXISTS invoice (\n"
                 + " UID    INT    PRIMARY KEY   NOT NULL,\n"
                 + " customerName         TEXT    NOT NULL,\n"
@@ -173,7 +173,7 @@ public class PRMS extends Application {
                 + " CCExp    INT    NOT NULL,\n"
                 + ");";
             stmt.execute(sql);
-            /*
+            
             sql = "CREATE TABLE IF NOT EXISTS restaurant (\n"
                     + " numofTable    TEXT    PRIMARY KEY   NOT NULL,\n"
                     + ");";
