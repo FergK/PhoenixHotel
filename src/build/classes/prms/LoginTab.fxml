@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--@author Fergus Kelley-->
+
+<VBox fx:id="loginBox" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prms.LoginTabController" alignment="CENTER" spacing="10" >
+    <Label fx:id="titleLabel" text="Phoenix Resort Management System" />
+    <GridPane hgap="10" vgap="10" alignment="CENTER">
+        <Label fx:id="usernameLabel" text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="usernameField" promptText="username" GridPane.columnIndex="1" GridPane.rowIndex="0" alignment="CENTER" />
+        <Label fx:id="passwordLabel" text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <PasswordField fx:id="passwordField" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="1" alignment="CENTER" />
+    </GridPane>
+    <Button fx:id="loginButton" text="Login" onAction="#handleLoginButtonPress" />
+    <Label fx:id="loginLabel" textAlignment="CENTER" />
+    <Button fx:id="logoutButton" text="Logout" onAction="#handleLogoutButtonPress" visible="false" />
+</VBox>
+
