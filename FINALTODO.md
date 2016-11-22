@@ -19,8 +19,8 @@ Login | Fergus | Done | | | Done
 Employees | Fergus | Done | | | Done
 Manage Rooms | Fergus | | | | 
 Maintenance | Deividas | | | | 
-Reservations | No One | | | | 
-Bookings | No One | | | | 
+Reservations | Viraj | | | | 
+Bookings | Viraj | | | | 
 Invoices | Ryan | | | | 
 Orders | No One | | | | 
 Restaurant | No One | | | | 
