@@ -11,7 +11,7 @@ Bhola didn't like the hand drawn style we used for the previous sequence diagram
 
 To claim a tab, please replace "No One" in that row with your name.
 
-Let's plan on having this done by Mon, Nov. 21st so we can meet and assemble the final document.
+Let's plan on having this done by Mon, Nov. 28th so we can meet and assemble the final document.
 
 Tab | Claimed By | Code | Use Cases | Sequence Diagrams | Test Cases
 --- | --- | --- | --- | --- | ---
