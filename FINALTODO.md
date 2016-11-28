@@ -22,6 +22,6 @@ Maintenance | Deividas | | | |
 Reservations | Viraj | | | | 
 Bookings | Viraj | | | | 
 Invoices | Ryan | | | | 
-Orders | No One | | | | 
+Orders | Andrew | | | | 
 Restaurant | No One | | | | 
 Reports | No One | | | | 
