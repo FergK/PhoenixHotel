@@ -23,5 +23,5 @@ Reservations | Viraj | | | |
 Bookings | Viraj | | | | 
 Invoices | Ryan | | | | 
 Orders | Andrew | | | | 
-Restaurant | No One | | | | 
-Reports | No One | | | | 
+Restaurant | Deividas | | | | 
+Reports | Viraj | | | | 
