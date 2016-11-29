@@ -48,7 +48,9 @@ public class MaintenanceTabController implements Initializable {
 
     @FXML
     public void handleRoomSelection(MouseEvent event) {
+        
 
+        
         HotelRoom selectedRoom = (HotelRoom) roomTable.getSelectionModel().getSelectedItem();
         if (roomTable.getSelectionModel().getSelectedItem() != null) {
             updateInventoryTable(selectedRoom);
@@ -58,7 +60,6 @@ public class MaintenanceTabController implements Initializable {
             roomServiceUpdateBtn.setDisable(false);
 
             String temp = selectedRoom.getDateLastCleaned();
-
             roomServiceField.setText(
                     temp.substring(0, 2) + "-"
                     + temp.substring(2, 4) + "-"
@@ -125,6 +126,7 @@ public class MaintenanceTabController implements Initializable {
             roomServiceUpdateBtn.setDisable(true);
             quantityUpdateBtn.setDisable(true);
             dateUpdateLabel.setVisible(true);
+            selectedRoom.setDateLastCleaned(formattedCurrentDate);
 
         }
     }
@@ -233,9 +235,11 @@ public class MaintenanceTabController implements Initializable {
 
         Connection c = null;
         Statement stmt = null;
+        Statement stmt2 = null;
         try {
             c = DriverManager.getConnection(prms.PRMS.DBFILE);
             stmt = c.createStatement();
+            stmt2 = c.createStatement();
 
             String sql = "SELECT * FROM hotelRooms";
             ResultSet rs = stmt.executeQuery(sql);
@@ -243,17 +247,14 @@ public class MaintenanceTabController implements Initializable {
                 HotelRoom currentRoom = new HotelRoom(rs.getString("roomNumber"), rs.getDouble("price"), rs.getInt("beds"), rs.getBoolean("allowsPets"), rs.getBoolean("disabilityAccessible"), rs.getBoolean("allowsSmoking"));
                 currentRoom.setDateLastCleaned(rs.getString("dateLastCleaned"));
                 System.out.println(currentRoom.getRoomNumber() + " Room added");
-                ResultSet rs2 = stmt.executeQuery("SELECT * FROM inventoryItems WHERE roomNumber ='" + currentRoom.getRoomNumber() + "';");
+                ResultSet rs2 = stmt2.executeQuery("SELECT * FROM inventoryItems WHERE roomNumber ='" + currentRoom.getRoomNumber() + "';");
                 while (rs2.next()) {
                     InventoryItem currentInventory = new InventoryItem(rs2.getString("NAME"), rs2.getInt("QUANTITY"), rs2.getInt("EXPECTEDQUANTITY"), rs2.getBoolean("ISCONSUMABLE"));
                     currentRoom.inventory.add(currentInventory);
                     System.out.println(currentInventory.getName() + " Inventory added");
                 }
-System.out.println(currentRoom);
                 hotelRooms.add(currentRoom);
-                System.out.println("dess");
             }
-
             rs.close();
             stmt.close();
             c.close();

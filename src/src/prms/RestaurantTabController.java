@@ -242,9 +242,10 @@ public class RestaurantTabController implements Initializable {
                     stmt = c.createStatement();
 
 // ASK FERGUS ABOUT THIS
-///
-                    System.out.println("work work");
-                    String sql = "UPDATE restaurantItems SET itemName ='" + restaurantNameField.getText() + "' WHERE itemName ='" + selectedItem.getItemName() + "';";
+//
+                    String sql = "UPDATE restaurantItems SET itemName ='" + restaurantNameField.getText() +
+                            "', price = '" + restaurantPriceField.getText() + "', description = '" + restaurantDescriptionField.getText() +
+                            "' WHERE itemName ='" + selectedItem.getItemName() + "';";
                     stmt.executeUpdate(sql);
 
 //                sql = "UPDATE restaurantItems SET price ='" + restaurantPriceField.getText() + "' WHERE itemName ='" + selectedItem.getItemName() + "';";
