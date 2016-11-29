@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prms.ReservationTabController">
@@ -23,9 +24,18 @@
                         <DatePicker layoutX="134.0" layoutY="58.0" AnchorPane.leftAnchor="134.0" />
                         <DatePicker layoutX="134.0" layoutY="98.0" AnchorPane.leftAnchor="134.0" />
                         <Label layoutX="28.0" layoutY="149.0" text="Price" AnchorPane.leftAnchor="28.0" />
-                        <TableView fx:id="resultsTableView" layoutX="346.0" layoutY="66.0" prefHeight="344.0" prefWidth="421.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="20.0">
+                        <TableView fx:id="hotelRoomTableView" layoutX="346.0" layoutY="66.0" prefHeight="344.0" prefWidth="421.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="20.0">
                           <columns>
-                            <TableColumn prefWidth="420.0" text="Results" />
+                            <TableColumn fx:id="roomCol" minWidth="200.0" prefWidth="200.0" text="Room Number">
+                                <cellValueFactory>
+                                        <PropertyValueFactory property="roomNumber" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="roomPrice" minWidth="200.0" prefWidth="200.0" text="Room Price">
+                                <cellValueFactory>
+                                        <PropertyValueFactory property="price" />
+                                </cellValueFactory>
+                            </TableColumn>
                           </columns>
                         </TableView>
                         <Button fx:id="submitButton" layoutX="28.0" layoutY="517.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSubmitButton" prefHeight="27.0" prefWidth="150.0" text="Search" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="28.0" />

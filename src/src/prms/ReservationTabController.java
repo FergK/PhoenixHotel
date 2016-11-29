@@ -56,6 +56,10 @@ public class ReservationTabController implements Initializable {
     @FXML
     private ChoiceBox hasFridge;
     
+    @FXML
+    private TableView hotelRoomTableView;
+    
+    
     @FXML 
     private Button submitButton;
     
@@ -84,7 +88,7 @@ public class ReservationTabController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        //updateResultsTable();
+        updateResultsTable();
         setupComboBoxs();
         
         
@@ -110,35 +114,47 @@ public class ReservationTabController implements Initializable {
     }
     
     public void updateResultsTable(){
-        //resultsTableView.getItems().clear();
-        //resultsTableView.getItems().addAll(fetchEmployeesFromDB());
- 
+        hotelRoomTableView.getItems().clear();
+        hotelRoomTableView.getItems().addAll(fetchRoomsFromDB());
+        hotelRoomTableView.sort();
     }
     
-        public ArrayList<Employee> fetchEmployeesFromDB() {
+    public ArrayList<HotelRoom> fetchRoomsFromDB() {
 
-        ArrayList<Employee> employees = new ArrayList<>();
+        ArrayList<HotelRoom> hotelRooms = new ArrayList<>();
+
         Connection c = null;
         Statement stmt = null;
         try {
             c = DriverManager.getConnection(prms.PRMS.DBFILE);
             stmt = c.createStatement();
 
-            String sql = "SELECT * FROM employees";
+            String sql = "SELECT * FROM hotelRooms";
             ResultSet rs = stmt.executeQuery(sql);
-
             while (rs.next()) {
-                employees.add(new Employee(rs.getString("FIRSTNAME"), rs.getString("LASTNAME"), rs.getString("JOBTITLE"), rs.getString("USERNAME"), ""));
+                HotelRoom currentRoom = new HotelRoom(rs.getString("roomNumber"), rs.getDouble("price"), rs.getInt("beds"), rs.getBoolean("allowsPets"), rs.getBoolean("disabilityAccessible"), rs.getBoolean("allowsSmoking"));
+                currentRoom.setDateLastCleaned(rs.getString("dateLastCleaned"));
+                System.out.println(currentRoom.getRoomNumber() + " Room added");
+                ResultSet rs2 = stmt.executeQuery("SELECT * FROM inventoryItems WHERE roomNumber ='" + currentRoom.getRoomNumber() + "';");
+                while (rs2.next()) {
+                    InventoryItem currentInventory = new InventoryItem(rs2.getString("NAME"), rs2.getInt("QUANTITY"), rs2.getInt("EXPECTEDQUANTITY"), rs2.getBoolean("ISCONSUMABLE"));
+                    currentRoom.inventory.add(currentInventory);
+                    System.out.println(currentInventory.getName() + " Inventory added");
+                }
+System.out.println(currentRoom);
+                hotelRooms.add(currentRoom);
+                System.out.println("dess");
             }
 
             rs.close();
             stmt.close();
             c.close();
         } catch (Exception e) {
-            System.err.println("Could not fetch employees from database: " + e.getClass().getName() + ": " + e.getMessage());
+            System.err.println("Could not fetch Hotel Rooms from database: " + e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
 
-        return employees;
+        return hotelRooms;
     }
+    
 }
