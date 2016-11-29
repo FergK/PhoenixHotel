@@ -28,6 +28,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TabPane;
+
 
 
 
@@ -40,12 +42,16 @@ public class ReservationTabController implements Initializable {
 
     
     ObservableList<String> priceList = FXCollections.observableArrayList("100+", "200+", "300+");
+    ObservableList<String> beds = FXCollections.observableArrayList("1", "2","3", "4");
     ObservableList<String> options = FXCollections.observableArrayList("N/A", "Yes", "No");
     /**
      * Initializes the controller class.
      */
     @FXML
     private ChoiceBox priceChoiceBox;
+    
+    @FXML
+    private TabPane reservationTabPane;
     
     @FXML
     private ChoiceBox allowsSmoking;
@@ -76,7 +82,7 @@ public class ReservationTabController implements Initializable {
     @FXML
     private void handleSubmitButton(ActionEvent event){
         // update quantity update of a selected InventoryItem
-        System.out.println(" text " );
+        reservationTabPane.getSelectionModel().selectNext();
     }
     
     
@@ -106,8 +112,8 @@ public class ReservationTabController implements Initializable {
         allowsSmoking.setItems(options);
         allowsPets.setValue("Yes");
         allowsPets.setItems(options);
-        hasKitchen.setValue("Yes");
-        hasKitchen.setItems(options);
+        hasKitchen.setValue("1");
+        hasKitchen.setItems(beds);
         hasFridge.setValue("Yes");
         hasFridge.setItems(options);
 
@@ -133,17 +139,9 @@ public class ReservationTabController implements Initializable {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 HotelRoom currentRoom = new HotelRoom(rs.getString("roomNumber"), rs.getDouble("price"), rs.getInt("beds"), rs.getBoolean("allowsPets"), rs.getBoolean("disabilityAccessible"), rs.getBoolean("allowsSmoking"));
-                currentRoom.setDateLastCleaned(rs.getString("dateLastCleaned"));
-                System.out.println(currentRoom.getRoomNumber() + " Room added");
-                ResultSet rs2 = stmt.executeQuery("SELECT * FROM inventoryItems WHERE roomNumber ='" + currentRoom.getRoomNumber() + "';");
-                while (rs2.next()) {
-                    InventoryItem currentInventory = new InventoryItem(rs2.getString("NAME"), rs2.getInt("QUANTITY"), rs2.getInt("EXPECTEDQUANTITY"), rs2.getBoolean("ISCONSUMABLE"));
-                    currentRoom.inventory.add(currentInventory);
-                    System.out.println(currentInventory.getName() + " Inventory added");
-                }
+                
 System.out.println(currentRoom);
                 hotelRooms.add(currentRoom);
-                System.out.println("dess");
             }
 
             rs.close();
