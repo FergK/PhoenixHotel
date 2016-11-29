@@ -27,7 +27,9 @@
             <Tab fx:id="bookingsTab" text="Event Bookings" disable="true" ></Tab>
             <Tab fx:id="invoicesTab" text="Invoices" disable="true" ></Tab>
             <Tab fx:id="ordersTab" text="Orders" disable="true" ></Tab>
-            <Tab fx:id="restaurantTab" text="Restaurant" disable="true" ></Tab>
+            <Tab fx:id="restaurantTab" text="Restaurant" disable="true" >
+                <fx:include source="RestaurantTab.fxml"/>
+            </Tab>
             <Tab fx:id="reportsTab" text="Reports" disable="true" ></Tab>
         </TabPane>
     </center>

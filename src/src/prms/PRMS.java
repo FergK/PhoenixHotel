@@ -86,7 +86,7 @@ public class PRMS extends Application {
                     + " allowsPets      NUMERIC    NOT NULL,\n"
                     + " disabilityAccessible      NUMERIC    NOT NULL,\n"
                     + " allowssmoking      NUMERIC    NOT NULL,\n"
-                    + " dateLastCleaned      INT    NOT NULL\n"
+                    + " dateLastCleaned      TEXT    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
 
@@ -165,17 +165,17 @@ public class PRMS extends Application {
             // and until we figure out the bug. 
             // -Deividas
             
-             /*  
-                       sql = "CREATE TABLE IF NOT EXISTS invoice (\n"
+              
+                       sql = "CREATE TABLE IF NOT EXISTS invoices (\n"
                 + " UID    INT    PRIMARY KEY   NOT NULL,\n"
                 + " customerName         TEXT    NOT NULL,\n"
-                + " CCNum          TEXT     NOT NULL,\n"
-                + " CCExp    INT    NOT NULL,\n"
+                + " creditCardNum          INT     NOT NULL,\n"
+                + " creditCardExp    INT    NOT NULL\n"
                 + ");";
             stmt.execute(sql);
             
             sql = "CREATE TABLE IF NOT EXISTS restaurant (\n"
-                    + " numofTable    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " numofTable    TEXT    PRIMARY KEY   NOT NULL\n"
                     + ");";
              stmt.execute(sql); 
             
@@ -183,18 +183,32 @@ public class PRMS extends Application {
                         + " billableName    TEXT    PRIMARY KEY   NOT NULL,\n"
                         + " price         REAL    NOT NULL,\n"
                         + " date          INT     NOT NULL,\n"
-                        + " time      INT    NOT NULL,\n"
+                        + " time      INT    NOT NULL\n"
                         + ");";
              stmt.execute(sql);
-            
-            sql = "CREATE TABLE IF NOT EXISTS order (\n"
-                            + " InvoiceNumber    TEXT    PRIMARY KEY   NOT NULL,\n"
-                            + " orderDate         INT    NOT NULL,\n"
-                            + " orderStatus          INT     NOT NULL,\n"
-                            + " billables      TEXT    NOT NULL,\n"
-                            + ");";
+             
+             
+                         sql = "CREATE TABLE IF NOT EXISTS orders (\n"
+                        + " billableName    TEXT    PRIMARY KEY   NOT NULL,\n"
+                        + " price         REAL    NOT NULL,\n"
+                        + " date          INT     NOT NULL,\n"
+                        + " time      INT    NOT NULL\n"
+                        + ");";
              stmt.execute(sql);
+             
+             
+             
+             
             
+//            sql = "CREATE TABLE IF NOT EXISTS order (\n"
+//                            + " invoiceNumber    TEXT    PRIMARY KEY   NOT NULL,\n"
+//                            + " orderDate         INT    NOT NULL,\n"
+//                            + " orderStatus          INT     NOT NULL,\n"
+//                            + " billables      TEXT    NOT NULL\n"
+//                            + ");";
+//             stmt.execute(sql);
+             
+            /*
              sql = "CREATE TABLE IF NOT EXISTS roomserviceorder (\n"
                                 + " roomNumber   INT    PRIMARY KEY   NOT NULL,\n"
                                 + ");";
@@ -215,21 +229,33 @@ public class PRMS extends Application {
                                             + " description         TEXT    NOT NULL,\n"
                                             + ");";
               stmt.execute(sql);
+             */
             
-            sql = "CREATE TABLE IF NOT EXISTS restaurantmenuitem (\n"
+            sql = "CREATE TABLE IF NOT EXISTS restaurantItems (\n"
                                                 + " itemname    TEXT    PRIMARY KEY   NOT NULL,\n"
                                                 + " price         REAL    NOT NULL,\n"
-                                                + " description          TEXT     NOT NULL,\n"
+                                                + " description          TEXT    \n"
                                                 + ");";
               stmt.execute(sql);
+              
+                          // If the inventoryItem table is empty, create a placeholder
+            // for troubleshooting
+            sql = "SELECT count(*) FROM restaurantItems;";
+            ResultSet rsrest = stmt.executeQuery(sql);
+            if (rsrest.getInt(1) == 0) {
+                System.out.println("\n\r restaurant table was empty, created a temporary item:");
+                sql = "INSERT INTO restaurantItems VALUES ('Pesto Pasta','7.00', 'Cheese');";
+                //System.out.println("\tSoap added!");
+                stmt.executeUpdate(sql);
+            }
             
-            sql = "CREATE TABLE IF NOT EXISTS cateredmealitem (\n"
+            sql = "CREATE TABLE IF NOT EXISTS cateredMealItems (\n"
                                                     + " mealname    TEXT    PRIMARY KEY   NOT NULL,\n"
                                                     + " priceperseat         REAL    NOT NULL,\n"
-                                                    + " caterdescription          TEXT     NOT NULL,\n"
+                                                    + " caterdescription          TEXT     NOT NULL\n"
                                                     + ");";
                stmt.execute(sql);
-             */
+             
             rs.close();
             stmt.close();
             c.close();

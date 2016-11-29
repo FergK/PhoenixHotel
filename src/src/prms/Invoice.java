@@ -7,6 +7,10 @@ package prms;
 
 import java.time.YearMonth;
 import java.util.ArrayList;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  *
@@ -14,39 +18,45 @@ import java.util.ArrayList;
  */
 public class Invoice {
 
-    private int UID;
-    private String customerName;
-    private String CCNum;
-    private YearMonth CCExp;
-    private ArrayList<BillableItems> items;
-
-    public Invoice(String customerName, String CCNum, YearMonth CCExp) {
-        this.customerName = customerName;
-        this.CCNum = CCNum;
-        this.CCExp = CCExp;
+    private SimpleIntegerProperty UID = new SimpleIntegerProperty();
+    private SimpleStringProperty customerName = new SimpleStringProperty();
+    private SimpleIntegerProperty creditCardNum = new SimpleIntegerProperty();
+    private SimpleIntegerProperty creditCardExp = new SimpleIntegerProperty();
+    
+    private ArrayList<BillableItems> billItems;
+    
+    public Invoice(String customerName, int creditCardNum, int creditCardExp) {
+        setCustomerName(customerName);
+        setCreditCardNum(creditCardNum);
+        setCreditCardExp(creditCardExp);
+        billItems = new ArrayList<BillableItems>();
+    }
+    
+        public ArrayList<BillableItems> getBillItems() {
+        return billItems;
     }
 
     public String getCustomerName() {
-        return customerName;
+        return customerName.get();
     }
 
-    public String CCNum() {
-        return CCNum;
+    public int getCreditCardNo() {
+        return creditCardNum.get();
     }
 
-    public YearMonth CCExp() {
-        return CCExp;
+    public int getCreditCardExp() {
+        return creditCardExp.get();
     }
 
-    public void setNames(String customerName) {
-        this.customerName = customerName;
+    public void setCustomerName(String customerName) {
+        this.customerName.set(customerName);
     }
-
-    public void setCCNum(String CCNum) {
-        this.CCNum = CCNum;
+    
+    public void setCreditCardNum(int creditCardNum){
+        this.creditCardNum.set(creditCardNum);
     }
-
-    public void setCCExp(YearMonth CCExp) {
-        this.CCExp = CCExp;
+    
+        public void setCreditCardExp(int creditCardExp){
+        this.creditCardExp.set(creditCardExp);
     }
 }

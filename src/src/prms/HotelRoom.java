@@ -27,7 +27,7 @@ public class HotelRoom {
     
     // dateLastCleaned is declared as int until we figure out proper LocalDate 
     // functionality
-    private SimpleIntegerProperty dateLastCleaned = new SimpleIntegerProperty();
+    private SimpleStringProperty dateLastCleaned = new SimpleStringProperty();
 
     public HotelRoom(String roomNumber, double price, int beds, Boolean allowsPets, Boolean disabilityAccessible, Boolean allowsSmoking) {
 
@@ -38,7 +38,7 @@ public class HotelRoom {
         setDisabilityAccessible(disabilityAccessible);
         setAllowsSmoking(allowsSmoking);
         inventory = new ArrayList<InventoryItem>();
-        setDateLastCleaned(0);
+        setDateLastCleaned("0");
 
     }
 
@@ -46,7 +46,7 @@ public class HotelRoom {
         return price.get();
     }
 
-    public int getDateLastCleaned() {
+    public String getDateLastCleaned() {
         return dateLastCleaned.get();
     }
 
@@ -98,7 +98,7 @@ public class HotelRoom {
         this.allowsSmoking.set(allowsSmoking);
     }
 
-    public void setDateLastCleaned(int dateLastCleaned) {
+    public void setDateLastCleaned(String dateLastCleaned) {
         this.dateLastCleaned.set(dateLastCleaned);
     }
 
