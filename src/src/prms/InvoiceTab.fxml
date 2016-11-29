@@ -48,13 +48,9 @@
             </children>
         </HBox>
       <ButtonBar GridPane.columnIndex="1" GridPane.rowIndex="14" />
-      <TextField promptText="Pay Amount" GridPane.columnIndex="1" GridPane.rowIndex="7" />
     <Button mnemonicParsing="false" prefHeight="17.0" prefWidth="79.0" text="Update Info" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
-         <buttons>
-          <Button mnemonicParsing="false" text="Pay " />
-         </buttons>
-      </ButtonBar>
+      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="49.0" text="Pay" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      <Label text="Select invoice to display amount due " GridPane.columnIndex="1" GridPane.rowIndex="6" />
       <columnConstraints>
          <ColumnConstraints maxWidth="162.0" minWidth="36.0" prefWidth="66.0" />
          <ColumnConstraints maxWidth="254.0" minWidth="128.0" prefWidth="224.0" />
