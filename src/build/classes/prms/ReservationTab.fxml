@@ -1,39 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<GridPane fx:controller="prms.ReservationTabController" 
-    xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-    
-<padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
-<gridLinesVisible>true</gridLinesVisible>
-<Text text="Welcome" 
-        GridPane.columnIndex="0" GridPane.rowIndex="0"
-        GridPane.columnSpan="2"/>
- 
-    <Label text="User Name:"
-        GridPane.columnIndex="0" GridPane.rowIndex="1"/>
- 
-    <TextField 
-        GridPane.columnIndex="1" GridPane.rowIndex="1"/>
- 
-    <Label text="Password:"
-        GridPane.columnIndex="0" GridPane.rowIndex="2"/>
- 
-    <PasswordField fx:id="passwordField" 
-        GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-    
-    <HBox spacing="10" alignment="bottom_right" 
-        GridPane.columnIndex="1" GridPane.rowIndex="4">
-        <Button text="Sign In"     
-        onAction="#handleSubmitButtonAction"/>
-</HBox>
-
-<Text fx:id="actiontarget"
-       GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-</GridPane>
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65" fx:controller="prms.ReservationTabController">
+   <children>
+      <TabPane layoutX="63.0" layoutY="49.0" prefHeight="200.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Reservations">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0">
+                     <children>
+                        <Label layoutX="33.0" layoutY="62.0" text="Check In" />
+                        <Label layoutX="25.0" layoutY="103.0" text="Check Out" />
+                        <DatePicker layoutX="123.0" layoutY="58.0" />
+                        <DatePicker layoutX="124.0" layoutY="98.0" />
+                        <Label layoutX="28.0" layoutY="149.0" text="Price" />
+                        <ComboBox layoutX="125.0" layoutY="144.0" prefHeight="27.0" prefWidth="190.0" />
+                        <TableView layoutX="346.0" layoutY="66.0" prefHeight="344.0" prefWidth="421.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="20.0">
+                          <columns>
+                            <TableColumn prefWidth="420.0" text="Results" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab disable="true" text="Payment">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
