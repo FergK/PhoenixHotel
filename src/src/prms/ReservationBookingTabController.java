@@ -205,10 +205,11 @@ public class ReservationBookingTabController implements Initializable {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-//        
-//        EventRoom newEvent = new EventRoom(roomName, price, maxCapacity, flag, flag, companyName, dateReserved);
-//        eventBookingTableView.getItems().add(newEvent);
-//        eventBookingTableView.getSelectionModel().select(newEvent);
+        
+        HotelReservation currentReservation = new HotelReservation(roomnumber, numberOfAdults, numberOfChildren, checkInDate, checkOutDate, guestName);
+        reset();
+        reservationTableView.getItems().add(currentReservation);
+        reservationTableView.getSelectionModel().select(currentReservation);
         ReservationBookingTabPane.getSelectionModel().selectNext();
     }
     
@@ -281,6 +282,11 @@ public class ReservationBookingTabController implements Initializable {
        
     
 
+    }
+    
+    public void reset(){
+        setupInputs();
+        guestNameTextField.setText("");
     }
     
 }

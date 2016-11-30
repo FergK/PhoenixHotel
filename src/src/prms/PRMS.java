@@ -200,12 +200,23 @@ public class PRMS extends Application {
             }
 
             sql = "CREATE TABLE IF NOT EXISTS orders (\n"
-                    + " billableName    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " orderType    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " roomName    TEXT    NOT NULL,\n"
                     + " price         REAL    NOT NULL,\n"
-                    + " date          INT     NOT NULL,\n"
-                    + " time      INT    NOT NULL\n"
+                    + " date          TEXT     NOT NULL,\n"
+                    + " time      TEXT    NOT NULL,\n"
+                    + " status  TEXT    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
+            
+            
+//            
+//    private SimpleStringProperty orderType = new SimpleStringProperty("");
+//    private SimpleStringProperty roomName = new SimpleStringProperty("");
+//    private SimpleDoubleProperty price = new SimpleDoubleProperty();
+//    private SimpleStringProperty date = new SimpleStringProperty("");
+//    private SimpleStringProperty time = new SimpleStringProperty("");
+//    private SimpleStringProperty status = new SimpleStringProperty("");
 
 //            sql = "CREATE TABLE IF NOT EXISTS order (\n"
 //                            + " invoiceNumber    TEXT    PRIMARY KEY   NOT NULL,\n"

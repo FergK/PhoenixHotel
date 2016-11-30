@@ -9,6 +9,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
 
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65" fx:controller="prms.OrderTabController">
@@ -41,8 +43,31 @@
                      <children>
                         <TableView fx:id="ordersTableView" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                              <TableColumn fx:id="orderType" minWidth="200.0" prefWidth="200.0" text="Order Type">
+                                <cellValueFactory>
+                                        <PropertyValueFactory property="orderType" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="roomName" minWidth="200.0" prefWidth="200.0" text="Room Name">
+                                <cellValueFactory>
+                                        <PropertyValueFactory property="roomName" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="date" minWidth="200.0" prefWidth="200.0" text="Date">
+                                <cellValueFactory>
+                                        <PropertyValueFactory property="date" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="time" minWidth="200.0" prefWidth="200.0" text="Time">
+                                <cellValueFactory>
+                                        <PropertyValueFactory property="time" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="status" minWidth="200.0" prefWidth="200.0" text="Status">
+                                <cellValueFactory>
+                                        <PropertyValueFactory property="status" />
+                                </cellValueFactory>
+                            </TableColumn>
                           </columns>
                         </TableView>
                      </children>
