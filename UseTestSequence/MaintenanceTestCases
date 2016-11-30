@@ -1,0 +1,57 @@
+Maintenance Tab Test Cases
+
+Name
+	Replenish inventory
+
+
+	Name of tester
+	  Deividas Rutkauskas
+
+
+	Input
+	  The user selects a room for which he or she wants to replenish an item. 
+	  Selection is done by left-clicking the mouse on the room number.
+	  
+	  Then the user selects an inventory item which he or she wants to replenish
+	  
+	  Finally, the user clicks the “Replenish” button.
+
+
+	Oracle
+       	    The inventory item is immediately updated both in the database and
+	     in the user interface. The current item quantity is set to that particular
+	     item’s expected quantity.
+	 
+
+	Log
+		Results match expected output.
+
+
+
+
+
+
+
+Name
+	Update the last room service day
+
+	Name of tester
+	  Deividas Rutkauskas
+
+
+	Input
+	  The user selects a room for which he or she wants to update the room
+	  clean date. Selection is done by left-clicking the mouse on the room number.
+
+	  The user left-clicks the “Update” button. 
+
+
+	Oracle
+       	     The last clean date is immediately updated both in the database and
+	     in the user interface. The last room service date is set to today according
+	     to the computer’s native timezone.
+	 
+
+	Log
+		Results match expected output.
+
