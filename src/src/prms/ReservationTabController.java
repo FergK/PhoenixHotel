@@ -27,8 +27,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.Tab;
+import javafx.scene.input.MouseEvent;
 
 
 
@@ -47,24 +50,40 @@ public class ReservationTabController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
     @FXML
-    private ChoiceBox priceChoiceBox;
+    private DatePicker checkInDatePicker;
+    
+    @FXML
+    private DatePicker checkOutDatePicker;
+    
+    @FXML
+    private Label errorText;
+    
+    @FXML
+    private ChoiceBox<String> priceChoiceBox;
     
     @FXML
     private TabPane reservationTabPane;
     
     @FXML
-    private ChoiceBox allowsSmoking;
+    private Tab paymentTab;
+
+    
     @FXML
-    private ChoiceBox allowsPets;
+    private ChoiceBox<String> allowsSmoking;
     @FXML
-    private ChoiceBox hasKitchen;
+    private ChoiceBox<String> allowsPets;
     @FXML
-    private ChoiceBox hasFridge;
+    private ChoiceBox<String> hasKitchen;
+    @FXML
+    private ChoiceBox<String> hasFridge;
     
     @FXML
     private TableView hotelRoomTableView;
     
+    @FXML
+    private Button createInvoiceButton;
     
     @FXML 
     private Button submitButton;
@@ -78,11 +97,25 @@ public class ReservationTabController implements Initializable {
 //     @FXML
 //    private TableColumn<HotelRoom, String> hotelRoomPrice;
     
+    @FXML
+    private void handleInvoiceButton(ActionEvent event){        
+        reservationTabPane.getSelectionModel().selectFirst();
+        paymentTab.setDisable(true);
+    }
+    
     
     @FXML
     private void handleSubmitButton(ActionEvent event){
         // update quantity update of a selected InventoryItem
+        
+        if (checkInDatePicker.getValue() == null || checkOutDatePicker.getValue() == null ){
+//            System.out.println("Enter Dates son");
+            errorText.setText("Enter Dates for Reservation");
+            return;
+        }
+        
         reservationTabPane.getSelectionModel().selectNext();
+        paymentTab.setDisable(false);
     }
     
     
@@ -125,6 +158,18 @@ public class ReservationTabController implements Initializable {
         hotelRoomTableView.sort();
     }
     
+    @FXML
+    public void handleInventorySelection(MouseEvent event) {
+
+        HotelRoom selectedRoom = (HotelRoom) hotelRoomTableView.getSelectionModel().getSelectedItem();
+//        InventoryItem selectedInv = (InventoryItem) hotelRoomTableView.getSelectionModel().getSelectedItem();
+        if (hotelRoomTableView.getSelectionModel().getSelectedItem() != null) {
+
+              submitButton.setDisable(false);
+        }
+    }
+    
+    
     public ArrayList<HotelRoom> fetchRoomsFromDB() {
 
         ArrayList<HotelRoom> hotelRooms = new ArrayList<>();
@@ -140,7 +185,6 @@ public class ReservationTabController implements Initializable {
             while (rs.next()) {
                 HotelRoom currentRoom = new HotelRoom(rs.getString("roomNumber"), rs.getDouble("price"), rs.getInt("beds"), rs.getBoolean("allowsPets"), rs.getBoolean("disabilityAccessible"), rs.getBoolean("allowsSmoking"));
                 
-System.out.println(currentRoom);
                 hotelRooms.add(currentRoom);
             }
 

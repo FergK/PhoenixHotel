@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -54,7 +55,18 @@
           </Tab>
           <Tab disable="true" text="Payment">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="40.0" text="Billing Information" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="50.0" />
+                        <Label layoutX="24.0" layoutY="86.0" text="Name" AnchorPane.leftAnchor="25.0" />
+                        <Label layoutX="25.0" layoutY="115.0" text="Card Number" AnchorPane.leftAnchor="25.0" />
+                        <Label layoutX="25.0" layoutY="144.0" text="Card Expiration" AnchorPane.leftAnchor="25.0" />
+                        <Label layoutX="25.0" layoutY="174.0" text="Security Code" AnchorPane.leftAnchor="25.0" />
+                        <TextField layoutX="204.0" layoutY="81.0" AnchorPane.leftAnchor="204.0" AnchorPane.topAnchor="81.0" />
+                        <TextField layoutX="204.0" layoutY="110.0" AnchorPane.leftAnchor="204.0" />
+                        <DatePicker layoutX="206.0" layoutY="139.0" prefHeight="27.0" prefWidth="168.0" AnchorPane.leftAnchor="204.0" />
+                        <TextField layoutX="205.0" layoutY="169.0" AnchorPane.leftAnchor="204.0" />
+                     </children></AnchorPane>
             </content>
           </Tab>
         </tabs>
