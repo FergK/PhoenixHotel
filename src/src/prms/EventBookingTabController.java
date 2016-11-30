@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.paint.Color;
 import javafx.scene.control.TableView;
@@ -74,15 +75,67 @@ public class EventBookingTabController implements Initializable {
     private TextField companyNameTextField;
     
     @FXML
-    void handleEventBookingSelection(MouseEvent event) {
+    private TextField ccNumberTextField;
 
+    @FXML
+    private TextField ccExpirationTextField;
+
+    @FXML
+    private TextField ccCodeTextField;
+    
+    @FXML
+    private Label dateLabel;
+
+    @FXML
+    private Label roomNameLabel;
+
+    @FXML
+    private Label priceLabel;
+
+    @FXML
+    private Label ConfirmationLabel;
+    
+    @FXML
+    private Label companyNameLabel;
+    
+    @FXML
+    private Tab eventPaymentTab;
+    
+    @FXML
+    private Button createInvoiceButton;
+    
+    @FXML
+    void handleEventBookingSelection(MouseEvent event) {
+                
+        bookReservationButton.setDisable(false);
     }
 
     @FXML
     void handleReservationBooking(ActionEvent event) {
+       
+       EventRoom selectedRoom = (EventRoom) eventBookingTableView.getSelectionModel().getSelectedItem();
+       
+       companyNameLabel.setText(selectedRoom.getCompanyName());
+       dateLabel.setText(selectedRoom.getDateReserved());
+       roomNameLabel.setText(selectedRoom.getRoomName());
+       priceLabel.setText("$1,920");
+       ConfirmationLabel.setText("");
+
+      EventBookingTabPane.getSelectionModel().selectNext();
+      eventPaymentTab.setDisable(false);
 
     }
 
+    @FXML
+    void handleEventInvoice(ActionEvent event) {
+        System.out.println("fuck");
+        ConfirmationLabel.setText("Invoice created!");
+        
+        EventBookingTabPane.getSelectionModel().select(1);
+
+        eventPaymentTab.setDisable(true);
+
+    }
     
     @FXML
     void reserveEvenetHandle(ActionEvent event) {
@@ -144,7 +197,6 @@ public class EventBookingTabController implements Initializable {
             while (rs.next()) {
                 
                 EventRoom currentRoom = new EventRoom(rs.getString("roomname"), rs.getDouble("price"), rs.getInt("maxcapacity"), rs.getBoolean("hasStage"), rs.getBoolean("hasAudioVisual"), rs.getString("companyName"), rs.getString("dateReserved"));
-                                System.out.println(currentRoom);
 
                 eventRooms.add(currentRoom);
             }
@@ -152,6 +204,7 @@ public class EventBookingTabController implements Initializable {
             rs.close();
             stmt.close();
             c.close();
+            
         } catch (Exception e) {
             System.err.println("Could not fetch Hotel Rooms from database: " + e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
