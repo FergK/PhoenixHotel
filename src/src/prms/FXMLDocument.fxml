@@ -32,7 +32,9 @@
             <Tab fx:id="invoicesTab" text="Invoices" disable="true" >
                  <fx:include source="InvoicesTab.fxml"/>
             </Tab>
-            <Tab fx:id="ordersTab" text="Orders" disable="true" ></Tab>
+            <Tab fx:id="ordersTab" text="Orders" disable="true" >
+                <fx:include source="OrderTab.fxml"/>
+            </Tab>
             <Tab fx:id="restaurantTab" text="Restaurant" disable="true" >
                 <fx:include source="RestaurantTab.fxml"/>
             </Tab>
