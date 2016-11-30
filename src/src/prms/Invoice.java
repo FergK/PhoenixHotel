@@ -57,9 +57,9 @@ public class Invoice {
 
     // Should be generated beforehand
     
-//    public void generateUID() {
-//        UID.set(UUID.randomUUID().toString());
-//    }
+    public void generateUID() {
+        UID.set(UUID.randomUUID().toString());
+    }
     
         public void setUID(String UID) {
         this.UID.set(UID);

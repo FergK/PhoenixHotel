@@ -19,12 +19,18 @@ public class BillableItem {
     private SimpleDoubleProperty price = new SimpleDoubleProperty();
     private SimpleIntegerProperty time = new SimpleIntegerProperty();
     private SimpleStringProperty UID = new SimpleStringProperty();
+    private SimpleStringProperty billableUID = new SimpleStringProperty();
 
-    public BillableItem(String billableName, double price, int time, String billedTo) {
+    public BillableItem(String billableName, double price, int time, String billedTo, String billableUID) {
         setBillableName(billableName);
         setPrice(price);
         setTime(time);
         setBilledTo(billedTo);
+        setBillableUID(billableUID);
+    }
+    
+        public String getBillableUID() {
+        return billableUID.get();
     }
 
     public String getUID() {
@@ -58,5 +64,10 @@ public class BillableItem {
     public void setTime(int time) {
         this.time.set(time);
     }
+    
+        public void setBillableUID(String billableUID) {
+        this.billableUID.set(billableUID);
+    }
+    
 
 }

@@ -26,22 +26,22 @@
           </padding>
          <children>
              
-<!--                   onMouseClicked="#handleCaterMealItemSelection"-->
-             <TableView fx:id="billableItemsList" maxWidth="Infinity" GridPane.hgrow="always" GridPane.rowIndex="1" GridPane.vgrow="always">
+                  
+             <TableView fx:id="billableItemsList"  onMouseClicked="#handleBillableItemSelection" maxWidth="Infinity" GridPane.hgrow="always" GridPane.rowIndex="1" GridPane.vgrow="always">
                <columns>
-                  <TableColumn fx:id="mealName" maxWidth="1.7976931348623157E308" minWidth="99.0" prefWidth="195.0" text="Name">
+                  <TableColumn fx:id="billableName" maxWidth="1.7976931348623157E308" minWidth="99.0" prefWidth="195.0" text="Name">
                   <cellValueFactory>
-                        <PropertyValueFactory property="mealName" />
+                        <PropertyValueFactory property="billableName" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="pricePerSeat" prefWidth="137.0" text="Price ($)">
+                  <TableColumn fx:id="price" prefWidth="137.0" text="Price ($)">
                       <cellValueFactory>
-                        <PropertyValueFactory property="pricePerSeat" />
+                        <PropertyValueFactory property="price" />
                      </cellValueFactory>
                   </TableColumn>
-                  <TableColumn fx:id="mealDescription" maxWidth="1.7976931348623157E308" prefWidth="140.0" text="Date">
+                  <TableColumn fx:id="time" maxWidth="1.7976931348623157E308" prefWidth="140.0" text="Date">
                       <cellValueFactory>
-                        <PropertyValueFactory property="mealDescription" />
+                        <PropertyValueFactory property="time" />
                      </cellValueFactory>
                   </TableColumn>
                </columns>
@@ -54,8 +54,8 @@
             </Label>
             <GridPane layoutX="20.0" layoutY="490.0" prefHeight="40.0" prefWidth="423.0" GridPane.rowIndex="3">
                <children>
-<!--                   onMouseClicked="#handleAddEditCateredMealItem"-->
-                  <Button fx:id="addEditButton" mnemonicParsing="false" text="Add Item" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                   
+                  <Button fx:id="addEditButton" onMouseClicked="#handleAddEdit" mnemonicParsing="false" text="Add Item" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <TextField fx:id="customerNameField" />
                   <TextField fx:id="priceField" prefHeight="27.0" prefWidth="53.0" GridPane.columnIndex="1" />
                   <TextField fx:id="timeField" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="115.0" GridPane.columnIndex="2" />
@@ -72,11 +72,9 @@
             </GridPane>
             <GridPane layoutX="20.0" layoutY="530.0" maxWidth="1.7976931348623157E308" GridPane.rowIndex="4">
                <children>
-<!--                   onMouseClicked="#handleCateredMealDeselect"-->
-                  
-                   <Button fx:id="deselectButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Deselect" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-<!--                  onMouseClicked="#handleCateredMealDelete"-->
-                   <Button fx:id="deleteButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Delete Selected Item" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+
+                   <Button fx:id="deselectButton" onMouseClicked="#handleDeselect" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Deselect" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                   <Button fx:id="deleteButton" onMouseClicked="#handleDelete" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Delete Selected Item" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -99,7 +97,7 @@
          </rowConstraints>
           
       </GridPane>
-      <TableView fx:id="invoiceList" prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="invoiceList" prefHeight="200.0" prefWidth="200.0" onMouseClicked="#handleInvoiceListSelection" >
         <columns>
             <TableColumn fx:id="invoiceCol" prefWidth="200" text="Invoice List">
                <cellValueFactory>

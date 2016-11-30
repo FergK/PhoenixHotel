@@ -156,7 +156,7 @@ public class PRMS extends Application {
             // Duplicate eventrooms tables here; which one is the definitive one?
             // -Deividas
             sql = "CREATE TABLE IF NOT EXISTS invoices (\n"
-                    + " UID    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " UID    TEXT     PRIMARY KEY      NOT NULL,\n"
                     + " customerName         TEXT    NOT NULL,\n"
                     + " creditCardNum          INT     NOT NULL,\n"
                     + " creditCardExp    INT    NOT NULL\n"
@@ -168,7 +168,7 @@ public class PRMS extends Application {
             ResultSet rsinvoice = stmt.executeQuery(sql);
             if (rsinvoice.getInt(1) == 0) {
                 System.out.println("\n\tinventory table was empty, created a temporary item:");
-                sql = "INSERT INTO invoices VALUES ('mockuniqueID','rutk', '05052015', '31512');";
+                sql = "INSERT INTO invoices VALUES ('mockuniqueID', 'rutk', '05052015', '31512');";
                 System.out.println("\tplaceholder added!");
                 stmt.executeUpdate(sql);
             }
@@ -179,10 +179,11 @@ public class PRMS extends Application {
             stmt.execute(sql);
 
             sql = "CREATE TABLE IF NOT EXISTS billableItems (\n"
-                    + " billableName    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " billableName    TEXT     NOT NULL,\n"
                     + " price         REAL    NOT NULL,\n"
                     + " time          INT     NOT NULL,\n"
-                    + " UID      TEXT    NOT NULL\n"
+                    + " UID      TEXT    NOT NULL,\n"
+                    + " BillableUID    TEXT    PRIMARY KEY   NOT NULL\n"
                     + ");";
             stmt.execute(sql);
             // If the inventoryItem table is empty, create a placeholder
@@ -191,7 +192,7 @@ public class PRMS extends Application {
             ResultSet rsbill = stmt.executeQuery(sql);
             if (rsbill.getInt(1) == 0) {
                 System.out.println("\n\tinventory table was empty, created a temporary item:");
-                sql = "INSERT INTO billableItems VALUES ('Soap','100', '05052015', 'mockuniqueID');";
+                sql = "INSERT INTO billableItems VALUES ('Soap','100', '05052015', 'mockuniqueID', '111');";
                 System.out.println("\tplaceholder added!");
                 stmt.executeUpdate(sql);
             }
@@ -247,7 +248,6 @@ public class PRMS extends Application {
             if (rsrest.getInt(1) == 0) {
                 System.out.println("\n\r restaurant table was empty, created a temporary item:");
                 sql = "INSERT INTO restaurantItems VALUES ('Pesto Pasta','7.00', 'Cheese');";
-                //System.out.println("\tSoap added!");
                 stmt.executeUpdate(sql);
             }
 
