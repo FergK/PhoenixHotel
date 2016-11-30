@@ -195,6 +195,8 @@ public class RestaurantTabController implements Initializable {
             restaurantNameField.setText("");
             restaurantDescriptionField.setText("");
             selectedItem = null;
+                        restaurantDeselectButton.setDisable(true);
+            restaurantDeleteButton.setDisable(true);
         }
     }
 
