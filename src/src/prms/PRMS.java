@@ -183,7 +183,7 @@ public class PRMS extends Application {
                     + " price         REAL    NOT NULL,\n"
                     + " time          INT     NOT NULL,\n"
                     + " UID      TEXT    NOT NULL,\n"
-                    + " BillableUID    TEXT    PRIMARY KEY   NOT NULL\n"
+                    + " billableUID    TEXT    PRIMARY KEY   NOT NULL\n"
                     + ");";
             stmt.execute(sql);
             // If the inventoryItem table is empty, create a placeholder
