@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,8 +28,32 @@ public class PRMS extends Application {
     // String pointing to database location
     static final String DBFILE = "jdbc:sqlite:PhoenixHotel.db";
 
+    // Date and time formats used throughout
+    static final String DATE_FORMAT = "yyyy-MM-dd";
+    static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    
     // Employee object holding the currently logged in employee
     static Employee loggedInEmployee = null;
+    
+    // Utility function for getting the current date in the standard format
+    public static String getCurrentDateString() {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+        return sdf.format(cal.getTime());
+    }
+    
+    // Utility function for getting the current date in the standard format
+    public static Calendar parseDateString(String dateString) {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+        try {
+            cal.setTime(sdf.parse(dateString));
+        } catch (Exception e) {
+            System.err.println("Could not parse date string: " + e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return cal;
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -89,18 +118,19 @@ public class PRMS extends Application {
                     + " dateLastCleaned      TEXT    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
-            
-            sql = "SELECT count(*) FROM hotelRooms;";
-            ResultSet rsroom = stmt.executeQuery(sql);
-            if (rsroom.getInt(1) == 0) {
-                System.out.println("\n\tRoom table was empty, created a temporary Room:");
-                System.out.println("\tThis room should be deleted later on!\n");
-                sql = "INSERT INTO hotelRooms VALUES ('100', '80.00', '2', '0', '1', '0', '01012016');";
-                stmt.executeUpdate(sql);
-            }
 
+            // Create inventoryItems table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS inventoryItems (\n"
+                    + " name            TEXT    NOT NULL,\n"
+                    + " roomNumber       TEXT    NOT NULL,\n"
+                    + " quantity        INT    NOT NULL,\n"
+                    + " expectedQuantity        INT   NOT NULL,\n"
+                    + " isConsumable        NUMERIC    NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+            
             // Create hotelreservations table if it doesn't already exist
-            sql = "CREATE TABLE IF NOT EXISTS hotelreservations (\n"
+            sql = "CREATE TABLE IF NOT EXISTS hotelReservations (\n"
                     + " roomnumber     TEXT    NOT NULL,\n"
                     + " adults           INT      NOT NULL,\n"
                     + " children      INT    NOT NULL,\n"
@@ -110,17 +140,16 @@ public class PRMS extends Application {
                     + ");";
             stmt.execute(sql);
 
-            // boolean values stored in table should be of type NUMERIC
             // Create eventrooms table if it doesn't already exist
-            sql = "CREATE TABLE IF NOT EXISTS eventrooms (\n"
-                    + " roomname     TEXT    NOT NULL,\n"
+            sql = "CREATE TABLE IF NOT EXISTS eventRooms (\n"
+                    + " roomName     TEXT    NOT NULL,\n"
                     + " price      REAL    NOT NULL,\n"
-                    + " maxcapacity     INT     NOT NULL,\n"
+                    + " maxCapacity     INT     NOT NULL,\n"
                     + " hasStage      NUMERIC      NOT NULL,\n"
                     + " hasAudioVisual      NUMERIC    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
-
+            
             rs.close();
             stmt.close();
             c.close();

@@ -1,63 +1,76 @@
 /* Change Log
+11/29/2016 Fergus
+    Updated date format
+    Removed unnecessary imports
+    Merged into final project
+11/01/2016 Viraj
+    Converted fields to simple* type
 10/24/2016  Fergus
     Change the type of startDate and endDate to LocalDate
     Added bill field
  */
 package prms;
 
-import java.time.LocalDate;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class HotelReservation {
 
-    private String roomNumber;
-    private int adults;
-    private int children;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    
+    private SimpleStringProperty roomNumber = new SimpleStringProperty();
+    private SimpleStringProperty startDate = new SimpleStringProperty();
+    private SimpleStringProperty endDate = new SimpleStringProperty();
+    private SimpleIntegerProperty children = new SimpleIntegerProperty();
+    private SimpleIntegerProperty adults = new SimpleIntegerProperty();
     private Invoice bill;
 
-    public HotelReservation(String roomNumber, int adults, int children, LocalDate startDate, LocalDate endDate, Invoice bill) {
-        this.roomNumber = roomNumber;
-        this.adults = adults;
-        this.children = children;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.bill = bill;
+    public HotelReservation(String roomNumber, int adults, int children, String startDate, String endDate) {
+        setRoomNumber(roomNumber);
+        setRoomAdults(adults);
+        setRoomChildren(children);
+        setStartDate(startDate);
+        setEndDate(endDate);
     }
-
-    public String getRoomNumber() {
-        return roomNumber;
+    
+    public String getRoomNumber(){
+        return roomNumber.get();
     }
-
-    public int getAdults() {
-        return adults;
+    
+    public int getRoomAdults(){
+        return adults.get();
     }
-
-    public int getChildren() {
-        return children;
+    
+    public int getRoomChildrem(){
+        return children.get();
     }
-
-    public LocalDate getStartDate() {
-        return startDate;
+    
+    public String getStartDate(){
+        return startDate.get();
     }
-
-    public LocalDate getEndDate() {
-        return endDate;
+    
+    public String getEndDate(){
+        return endDate.get();
+    }    
+    
+    public void setRoomNumber(String number){
+        this.roomNumber.set(number);
     }
-
-    public void setAdults(int adults) {
-        this.adults = adults;
+    
+    public void setRoomAdults(int adults){
+        this.adults.set(adults);
     }
-
-    public void setChildren(int children) {
-        this.children = children;
+    
+    public void setRoomChildren(int children){
+        this.children.set(children);
     }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    
+    public void setStartDate(String date){
+        this.startDate.set(date);
     }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    
+    public void setEndDate(String date){
+        this.endDate.set(date);
     }
+    
+    
 }

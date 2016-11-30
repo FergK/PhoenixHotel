@@ -17,11 +17,14 @@
             <Tab fx:id="employeesTab" text="Employees" disable="true" >
                 <fx:include source="EmployeesTab.fxml"/>
             </Tab>
-            <Tab fx:id="roomsTab" text="Manage Rooms" disable="true" >
-                <fx:include source="ManageRoomsTab.fxml"/>
+            <Tab fx:id="hotelRoomsTab" text="Hotel Rooms" disable="true" >
+                <fx:include source="HotelRoomsTab.fxml"/>
+            </Tab>
+            <Tab fx:id="eventRoomsTab" text="Event Rooms" disable="true" >
+                <fx:include source="EventRoomsTab.fxml"/>
             </Tab>
             <Tab fx:id="maintenanceTab" text="Hotel Maintenance" disable="true" >
-                <!--Deividas, includes room inventory-->
+                <fx:include source="MaintenanceTab.fxml"/>
             </Tab> 
             <Tab fx:id="reservationsTab" text="Hotel Reservations" disable="true" >
                 <fx:include source="ReservationsTab.fxml"/>

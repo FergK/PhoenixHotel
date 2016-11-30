@@ -1,63 +1,70 @@
 /* Change Log
+11/11/2016  Fergus
+    Converted fields to simple* type
 10/24/2016  Fergus
     Renamed some variables and functions for clarity
  */
 package prms;
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class EventRoom {
 
-    private String roomName;
-    private double price;
-    private int maxCapacity;
-    private Boolean hasStage;
-    private Boolean hasAudioVisual;
+    private SimpleStringProperty roomName = new SimpleStringProperty("");
+    private SimpleDoubleProperty price = new SimpleDoubleProperty();
+    private SimpleIntegerProperty maxCapacity = new SimpleIntegerProperty();
+    private SimpleBooleanProperty hasStage = new SimpleBooleanProperty();
+    private SimpleBooleanProperty hasAudioVisual = new SimpleBooleanProperty();
 
     public EventRoom(String roomName, double price, int maxCapacity, Boolean hasStage, Boolean hasAudioVisual) {
-        this.roomName = roomName;
-        this.price = price;
-        this.maxCapacity = maxCapacity;
-        this.hasStage = hasStage;
-        this.hasAudioVisual = hasAudioVisual;
+        setRoomName(roomName);
+        setPrice(price);
+        setMaxCapacity(maxCapacity);
+        setHasStage(hasStage);
+        setHasAudioVisual(hasAudioVisual);
     }
 
     public String getRoomName() {
-        return roomName;
+        return roomName.get();
     }
 
     public double getPrice() {
-        return price;
+        return price.get();
     }
 
     public int getMaxCapacity() {
-        return maxCapacity;
+        return maxCapacity.get();
     }
 
     public boolean getHasStage() {
-        return hasStage;
+        return hasStage.get();
     }
 
     public boolean getHasAudioVisual() {
-        return hasAudioVisual;
+        return hasAudioVisual.get();
     }
 
     public void setRoomName(String roomName) {
-        this.roomName = roomName;
+        this.roomName.set(roomName);
     }
 
     public void setPrice(double price) {
-        this.price = price;
+        this.price.set(price);
     }
 
     public void setMaxCapacity(int maxCapacity) {
-        this.maxCapacity = maxCapacity;
+        this.maxCapacity.set(maxCapacity);
     }
 
     public void setHasStage(Boolean hasStage) {
-        this.hasStage = hasStage;
+        this.hasStage.set(hasStage);
     }
 
     public void setHasAudioVisual(Boolean hasAudioVisual) {
-        this.hasAudioVisual = hasAudioVisual;
+        this.hasAudioVisual.set(hasAudioVisual);
     }
 
     public String toString() {

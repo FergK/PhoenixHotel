@@ -1,5 +1,5 @@
 /* Change Log
-11/29/2016 Deividas
+11/26/2016 Deividas
     Converted fields to simple* type
 10/24/2016 Fergus
     Removed the startDate and endDate fields since those will be in the reservation
@@ -9,7 +9,6 @@
  */
 package prms;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -24,14 +23,12 @@ public class HotelRoom {
     private SimpleBooleanProperty allowsPets = new SimpleBooleanProperty();
     private SimpleBooleanProperty disabilityAccessible = new SimpleBooleanProperty();
     private SimpleBooleanProperty allowsSmoking = new SimpleBooleanProperty();
-
-    public ArrayList<InventoryItem> inventory;
     
-    // dateLastCleaned is declared as int until we figure out proper LocalDate 
-    // functionality
     private SimpleStringProperty dateLastCleaned = new SimpleStringProperty();
 
-    public HotelRoom(String roomNumber, double price, int beds, Boolean allowsPets, Boolean disabilityAccessible, Boolean allowsSmoking) {
+    public ArrayList<InventoryItem> inventory;
+
+    public HotelRoom(String roomNumber, double price, int beds, Boolean allowsPets, Boolean disabilityAccessible, Boolean allowsSmoking, String dateLastCleaned) {
 
         setRoomNumber(roomNumber);
         setPrice(price);
@@ -39,8 +36,9 @@ public class HotelRoom {
         setAllowsPets(allowsPets);
         setDisabilityAccessible(disabilityAccessible);
         setAllowsSmoking(allowsSmoking);
+        setDateLastCleaned(dateLastCleaned);
+        
         inventory = new ArrayList<InventoryItem>();
-        setDateLastCleaned("0");
 
     }
 

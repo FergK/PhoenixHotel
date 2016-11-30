@@ -1,8 +1,11 @@
 package prms;
 
+import com.sun.javafx.property.adapter.PropertyDescriptor;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SingleSelectionModel;
@@ -26,7 +29,7 @@ public class FXMLDocumentController implements Initializable {
             next.setDisable(false);
         }
         SingleSelectionModel<Tab> selectionModel = allTabs.getSelectionModel();
-        selectionModel.select(2);
+        selectionModel.select(3);
 
     }
 
