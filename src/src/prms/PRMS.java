@@ -188,6 +188,32 @@ public class PRMS extends Application {
                     + ");";
             stmt.execute(sql);
             
+            // TODO Figure out the schema for orders? One table for all types?
+            // or maybe a differ table for each type? That would make coding easier
+            
+                     /*
+             sql = "CREATE TABLE IF NOT EXISTS roomserviceorder (\n"
+                                + " roomNumber   INT    PRIMARY KEY   NOT NULL,\n"
+                                + ");";
+              stmt.execute(sql);
+            
+             sql = "CREATE TABLE IF NOT EXISTS tableserviceorder (\n"
+                                    + " tableNumber    INT    PRIMARY KEY   NOT NULL,\n"
+                                    + ");";
+               stmt.execute(sql);
+            
+            sql = "CREATE TABLE IF NOT EXISTS cateredmealorder (\n"
+                                        + " roomname    TEXT    PRIMARY KEY   NOT NULL,\n"
+                                        + ");";
+             stmt.execute(sql);
+            
+            sql = "CREATE TABLE IF NOT EXISTS maintenanceorder (\n"
+                                            + " roomname    TEXT    PRIMARY KEY   NOT NULL,\n"
+                                            + " description         TEXT    NOT NULL,\n"
+                                            + ");";
+              stmt.execute(sql);
+             */
+            
             // Create restaurantItems table if it doesn't already exist
             sql = "CREATE TABLE IF NOT EXISTS restaurantItems (\n"
                     + " itemName        TEXT    PRIMARY KEY   NOT NULL,\n"
