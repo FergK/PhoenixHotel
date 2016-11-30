@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.*?>
+
+<GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prms.InvoicesTabController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <GridPane fx:id="invoicesPane" hgap="20.0" maxWidth="Infinity" vgap="5.0" GridPane.columnIndex="1">
+      
+          <padding>
+              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+          </padding>
+         <children>
+             
+<!--                   onMouseClicked="#handleCaterMealItemSelection"-->
+             <TableView fx:id="billableItemsList" maxWidth="Infinity" GridPane.hgrow="always" GridPane.rowIndex="1" GridPane.vgrow="always">
+               <columns>
+                  <TableColumn fx:id="mealName" maxWidth="1.7976931348623157E308" minWidth="99.0" prefWidth="195.0" text="Name">
+                  <cellValueFactory>
+                        <PropertyValueFactory property="mealName" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="pricePerSeat" prefWidth="137.0" text="Price ($)">
+                      <cellValueFactory>
+                        <PropertyValueFactory property="pricePerSeat" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="mealDescription" maxWidth="1.7976931348623157E308" prefWidth="140.0" text="Date">
+                      <cellValueFactory>
+                        <PropertyValueFactory property="mealDescription" />
+                     </cellValueFactory>
+                  </TableColumn>
+               </columns>
+            </TableView>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Billable Items List" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Enter name, price and description below, respectively, to add a new item." textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <GridPane layoutX="20.0" layoutY="490.0" prefHeight="40.0" prefWidth="423.0" GridPane.rowIndex="3">
+               <children>
+<!--                   onMouseClicked="#handleAddEditCateredMealItem"-->
+                  <Button fx:id="addEditButton" mnemonicParsing="false" text="Add Item" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <TextField fx:id="customerNameField" />
+                  <TextField fx:id="priceField" prefHeight="27.0" prefWidth="53.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="timeField" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="115.0" GridPane.columnIndex="2" />
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="206.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="86.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="82.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane layoutX="20.0" layoutY="530.0" maxWidth="1.7976931348623157E308" GridPane.rowIndex="4">
+               <children>
+<!--                   onMouseClicked="#handleCateredMealDeselect"-->
+                  
+                   <Button fx:id="deselectButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Deselect" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+<!--                  onMouseClicked="#handleCateredMealDelete"-->
+                   <Button fx:id="deleteButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Delete Selected Item" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" />
+         </rowConstraints>
+          
+      </GridPane>
+      <TableView fx:id="invoiceList" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+            <TableColumn fx:id="invoiceCol" prefWidth="200" text="Invoice List">
+               <cellValueFactory>
+                  <PropertyValueFactory property="customerName" />
+               </cellValueFactory>
+            </TableColumn>
+          
+        </columns>
+      </TableView>
+   </children>
+</GridPane>

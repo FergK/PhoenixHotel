@@ -7,6 +7,8 @@
 
 package prms;
 
+// TODO This entire class
+
 import java.time.LocalDate;
 
 public class EventBooking {

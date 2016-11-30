@@ -5,43 +5,47 @@
 
 package prms;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
  * @author AndrewAn
  */
 public class CateredMealItem {
-
-    private String mealName;
-    private double pricePerSeat;
-    private String mealDescription;
-
-    public CateredMealItem(String mealName, double pricePerSeat, String mealDescription) {
-        this.mealName = mealName;
-        this.pricePerSeat = pricePerSeat;
-        this.mealDescription = mealDescription;
+    
+    private SimpleStringProperty mealName = new SimpleStringProperty();
+    private SimpleDoubleProperty pricePerSeat = new SimpleDoubleProperty();
+    private SimpleStringProperty mealDescription = new SimpleStringProperty();
+    
+    
+    public CateredMealItem(String itemName, double price, String description) {
+        setMealName(itemName);
+        setPricePerSeat(price);
+        setMealDescription(description);
     }
 
     public String getMealName() {
-        return mealName;
+        return mealName.get();
     }
 
     public double getPricePerSeat() {
-        return pricePerSeat;
+        return pricePerSeat.get();
     }
 
     public String getMealDescription() {
-        return mealDescription;
+        return mealDescription.get();
     }
 
     public void setMealName(String mealName) {
-        this.mealName = mealName;
+        this.mealName.set(mealName);
     }
 
     public void setPricePerSeat(double pricePerSeat) {
-        this.pricePerSeat = pricePerSeat;
+        this.pricePerSeat.set(pricePerSeat);
     }
 
     public void setMealDescription(String mealDescription) {
-        this.mealDescription = mealDescription;
+        this.mealDescription.set(mealDescription);
     }
 }

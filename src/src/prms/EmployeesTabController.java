@@ -186,6 +186,7 @@ public class EmployeesTabController implements Initializable {
 
             // Check if a employee already exists with that username
             String sql = "SELECT count(*) FROM employees WHERE username='" + username + "'";
+            
             ResultSet rs = stmt.executeQuery(sql);
             if (rs.getInt(1) > 0) {
                 // username is taken, display a message and quit
@@ -212,8 +213,8 @@ public class EmployeesTabController implements Initializable {
         Employee createdEmployee = new Employee(firstName, lastName, jobTitle, username, password);
         employeesTable.getItems().add(createdEmployee);
         employeesTable.sort();
-        employeesTable.getSelectionModel().select(createdEmployee);
         modifyLabel.setText("Created new employee: " + username);
+//        employeesTable.getSelectionModel().select(createdEmployee);
     }
 
     public void modifyEmployee() {

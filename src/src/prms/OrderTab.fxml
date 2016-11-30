@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65" fx:controller="prms.OrderTabController">
+   <children>
+      <TabPane fx:id="OrderTabPane" layoutX="31.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="CreateOrderTab" text="Create Order">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="63.0" text="Order Type:" AnchorPane.leftAnchor="14.0" />
+                        <Label layoutX="14.0" layoutY="111.0" text="Room Number:" AnchorPane.leftAnchor="14.0" />
+                        <Label layoutX="14.0" layoutY="151.0" text="Expected Time:" AnchorPane.leftAnchor="14.0" />
+                        <ChoiceBox fx:id="orderTypeChoiceBox" layoutX="436.0" layoutY="58.0" prefWidth="150.0" AnchorPane.rightAnchor="14.0" />
+                        <ChoiceBox fx:id="roomFloorChoiceBox" layoutX="436.0" layoutY="106.0" prefWidth="60.0" AnchorPane.rightAnchor="104.0" />
+                        <ChoiceBox fx:id="timeChoiceBox" layoutX="436.0" layoutY="146.0" prefWidth="150.0" AnchorPane.rightAnchor="14.0" />
+                        <ChoiceBox fx:id="roomNumberChoiceBox" layoutX="526.0" layoutY="106.0" prefWidth="60.0" AnchorPane.rightAnchor="14.0" />
+                        <Button fx:id="submitOrderButton" layoutX="271.0" layoutY="326.0" mnemonicParsing="false" onAction="#submitOrderHandle" text="Submit Order" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" />
+                        <Label fx:id="FeedbackLabel" layoutX="424.0" layoutY="218.0" prefHeight="21.0" prefWidth="162.0" text="Please complete all fields" AnchorPane.rightAnchor="14.0" />
+                        <DatePicker fx:id="datePicker" layoutX="436.0" layoutY="184.0" prefHeight="27.0" prefWidth="150.0" AnchorPane.rightAnchor="14.0" />
+                        <Label layoutX="14.0" layoutY="189.0" text="Expected  Date:" AnchorPane.leftAnchor="14.0" />
+                        <Label layoutX="508.0" layoutY="111.0" text="-" AnchorPane.rightAnchor="85.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="FindOrderTab" text="Find Order">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="ordersTableView" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                              <TableColumn fx:id="orderType" minWidth="200.0" prefWidth="200.0" text="Order Type">
+                                <cellValueFactory>
+                                        <PropertyValueFactory property="orderType" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="roomName" minWidth="200.0" prefWidth="200.0" text="Room Name">
+                                <cellValueFactory>
+                                        <PropertyValueFactory property="roomName" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="date" minWidth="200.0" prefWidth="200.0" text="Date">
+                                <cellValueFactory>
+                                        <PropertyValueFactory property="date" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="time" minWidth="200.0" prefWidth="200.0" text="Time">
+                                <cellValueFactory>
+                                        <PropertyValueFactory property="time" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="status" minWidth="200.0" prefWidth="200.0" text="Status">
+                                <cellValueFactory>
+                                        <PropertyValueFactory property="status" />
+                                </cellValueFactory>
+                            </TableColumn>
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

@@ -79,25 +79,58 @@ public class PRMS extends Application {
             }
 
             // Create hotelroom table if it doesn't already exist
-            sql = "CREATE TABLE IF NOT EXISTS hotelroom (\n"
+            sql = "CREATE TABLE IF NOT EXISTS hotelRooms (\n"
                     + " roomNumber    TEXT    PRIMARY KEY   NOT NULL,\n"
                     + " price         REAL    NOT NULL,\n"
                     + " beds          INT     NOT NULL,\n"
                     + " allowsPets      NUMERIC    NOT NULL,\n"
                     + " disabilityAccessible      NUMERIC    NOT NULL,\n"
                     + " allowssmoking      NUMERIC    NOT NULL,\n"
-                    + " dateLastCleaned      INT    NOT NULL\n"
+                    + " dateLastCleaned      TEXT    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
+
+            // THIS BLOCK IS FOR TROUBLESHOOTING ROOM LIST ONLY
+            // If the room table is empty, create a default one 
+            sql = "SELECT count(*) FROM hotelRooms;";
+            ResultSet rsroom = stmt.executeQuery(sql);
+            if (rsroom.getInt(1) == 0) {
+                System.out.println("\n\tRoom table was empty, created a temporary Room:");
+                System.out.println("\tThis room should be deleted later on!\n");
+                sql = "INSERT INTO hotelRooms VALUES ('100', '80.00', '2', '0', '1', '0', '01012016');";
+                stmt.executeUpdate(sql);
+            }
+
+            // Create inventoryItems table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS inventoryItems (\n"
+                    + " name            TEXT    NOT NULL,\n"
+                    + "roomNumber       TEXT    NOT NULL,\n"
+                    + " quantity        INT    NOT NULL,\n"
+                    + " expectedQuantity        INT   NOT NULL,\n"
+                    + " isConsumable        NUMERIC    NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+
+            // If the inventoryItem table is empty, create a placeholder
+            // for troubleshooting
+            sql = "SELECT count(*) FROM inventoryItems;";
+            ResultSet rsinv = stmt.executeQuery(sql);
+            if (rsinv.getInt(1) == 0) {
+                System.out.println("\n\tinventory table was empty, created a temporary item:");
+                sql = "INSERT INTO inventoryItems VALUES ('Soap','100', '5', '5', '1');";
+                System.out.println("\tSoap added!");
+                stmt.executeUpdate(sql);
+            }
 
             // Create hotelreservations table if it doesn't already exist
             sql = "CREATE TABLE IF NOT EXISTS hotelreservations (\n"
                     + " roomnumber     TEXT    NOT NULL,\n"
-                    + " adults           INT      NOT NULL,\n"
-                    + " children      INT    NOT NULL,\n"
-                    + " startDate    INT    NOT NULL,\n"
-                    + " endDate     INT    NOT NULL,\n"
-                    + " bill      INT    UNIQUE    NOT NULL\n"
+                    + " adults           TEXT      NOT NULL,\n"
+                    + " children      TEXT    NOT NULL,\n"
+                    + " startDate    TEXT    NOT NULL,\n"
+                    + " endDate     TEXT    NOT NULL,\n"
+                    + " guestName   TEXT    NOT NULL,\n"
+                    + " bill      TEXT    UNIQUE    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
 
@@ -108,57 +141,91 @@ public class PRMS extends Application {
                     + " price      REAL    NOT NULL,\n"
                     + " maxcapacity     INT     NOT NULL,\n"
                     + " hasStage      NUMERIC      NOT NULL,\n"
-                    + " hasAudioVisual      NUMERIC    NOT NULL\n"
+                    + " hasAudioVisual      NUMERIC    NOT NULL,\n"
+                    + " companyName      TEXT      NOT NULL,\n"
+                    + " dateReserved    TEXT    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
-            
+
             // boolean values stored in table should be of type NUMERIC
             // Create eventrooms table if it doesn't already exist
             sql = "CREATE TABLE IF NOT EXISTS eventrooms (\n"
-                   + " startDate    INT    NOT NULL,\n"
+                    + " startDate    INT    NOT NULL,\n"
                     + " endDate     INT    NOT NULL,\n"
                     + " bill        INT    UNIQUE   NOT NULL\n"
                     + ");";
             stmt.execute(sql);
 
-            sql = "CREATE TABLE IF NOT EXISTS inventoryitem (\n"
-            + " name    TEXT    PRIMARY KEY   NOT NULL,\n"
-            + " roomnumber         TEXT    NOT NULL,\n"
-            + " quanitity          INT     NOT NULL,\n"
-            + " expectedQuantity      INT    NOT NULL,\n"
-            + " isConsumable      NUMERIC    NOT NULL,\n"
-            + ");";
-        stmt.execute(sql);
-            
-            sql = "CREATE TABLE IF NOT EXISTS invoice (\n"
-                + " UID    INT    PRIMARY KEY   NOT NULL,\n"
-                + " customerName         TEXT    NOT NULL,\n"
-                + " CCNum          TEXT     NOT NULL,\n"
-                + " CCExp    INT    NOT NULL,\n"
-                + ");";
+            // Duplicate eventrooms tables here; which one is the definitive one?
+            // -Deividas
+            sql = "CREATE TABLE IF NOT EXISTS invoices (\n"
+                    + " UID    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " customerName         TEXT    NOT NULL,\n"
+                    + " creditCardNum          INT     NOT NULL,\n"
+                    + " creditCardExp    INT    NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+                     // If the inventoryItem table is empty, create a placeholder
+            // for troubleshooting
+            sql = "SELECT count(*) FROM invoices;";
+            ResultSet rsinvoice = stmt.executeQuery(sql);
+            if (rsinvoice.getInt(1) == 0) {
+                System.out.println("\n\tinventory table was empty, created a temporary item:");
+                sql = "INSERT INTO invoices VALUES ('mockuniqueID','rutk', '05052015', '31512');";
+                System.out.println("\tplaceholder added!");
+                stmt.executeUpdate(sql);
+            }
+
+            sql = "CREATE TABLE IF NOT EXISTS restaurant (\n"
+                    + " numofTable    TEXT    PRIMARY KEY   NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+
+            sql = "CREATE TABLE IF NOT EXISTS billableItems (\n"
+                    + " billableName    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " price         REAL    NOT NULL,\n"
+                    + " time          INT     NOT NULL,\n"
+                    + " UID      TEXT    NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+            // If the inventoryItem table is empty, create a placeholder
+            // for troubleshooting
+            sql = "SELECT count(*) FROM billableItems;";
+            ResultSet rsbill = stmt.executeQuery(sql);
+            if (rsbill.getInt(1) == 0) {
+                System.out.println("\n\tinventory table was empty, created a temporary item:");
+                sql = "INSERT INTO billableItems VALUES ('Soap','100', '05052015', 'mockuniqueID');";
+                System.out.println("\tplaceholder added!");
+                stmt.executeUpdate(sql);
+            }
+
+            sql = "CREATE TABLE IF NOT EXISTS orders (\n"
+                    + " orderType    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " roomName    TEXT    NOT NULL,\n"
+                    + " price         REAL    NOT NULL,\n"
+                    + " date          TEXT     NOT NULL,\n"
+                    + " time      TEXT    NOT NULL,\n"
+                    + " status  TEXT    NOT NULL\n"
+                    + ");";
             stmt.execute(sql);
             
-            sql = "CREATE TABLE IF NOT EXISTS restaurant (\n"
-                    + " numofTable    TEXT    PRIMARY KEY   NOT NULL,\n"
-                    + ");";
-             stmt.execute(sql); 
             
-            sql = "CREATE TABLE IF NOT EXISTS billableitems (\n"
-                        + " billableName    TEXT    PRIMARY KEY   NOT NULL,\n"
-                        + " price         REAL    NOT NULL,\n"
-                        + " date          INT     NOT NULL,\n"
-                        + " time      INT    NOT NULL,\n"
-                        + ");";
-             stmt.execute(sql);
-            
-            sql = "CREATE TABLE IF NOT EXISTS order (\n"
-                            + " InvoiceNumber    TEXT    PRIMARY KEY   NOT NULL,\n"
-                            + " orderDate         INT    NOT NULL,\n"
-                            + " orderStatus          INT     NOT NULL,\n"
-                            + " billables      TEXT    NOT NULL,\n"
-                            + ");";
-             stmt.execute(sql);
-            
+//            
+//    private SimpleStringProperty orderType = new SimpleStringProperty("");
+//    private SimpleStringProperty roomName = new SimpleStringProperty("");
+//    private SimpleDoubleProperty price = new SimpleDoubleProperty();
+//    private SimpleStringProperty date = new SimpleStringProperty("");
+//    private SimpleStringProperty time = new SimpleStringProperty("");
+//    private SimpleStringProperty status = new SimpleStringProperty("");
+
+//            sql = "CREATE TABLE IF NOT EXISTS order (\n"
+//                            + " invoiceNumber    TEXT    PRIMARY KEY   NOT NULL,\n"
+//                            + " orderDate         INT    NOT NULL,\n"
+//                            + " orderStatus          INT     NOT NULL,\n"
+//                            + " billables      TEXT    NOT NULL\n"
+//                            + ");";
+//             stmt.execute(sql);
+            /*
              sql = "CREATE TABLE IF NOT EXISTS roomserviceorder (\n"
                                 + " roomNumber   INT    PRIMARY KEY   NOT NULL,\n"
                                 + ");";
@@ -179,21 +246,32 @@ public class PRMS extends Application {
                                             + " description         TEXT    NOT NULL,\n"
                                             + ");";
               stmt.execute(sql);
-            
-            sql = "CREATE TABLE IF NOT EXISTS restaurantmenuitem (\n"
-                                                + " itemname    TEXT    PRIMARY KEY   NOT NULL,\n"
-                                                + " price         REAL    NOT NULL,\n"
-                                                + " description          TEXT     NOT NULL,\n"
-                                                + ");";
-              stmt.execute(sql);
-            
-            sql = "CREATE TABLE IF NOT EXISTS cateredmealitem (\n"
-                                                    + " mealname    TEXT    PRIMARY KEY   NOT NULL,\n"
-                                                    + " priceperseat         REAL    NOT NULL,\n"
-                                                    + " caterdescription          TEXT     NOT NULL,\n"
-                                                    + ");";
-               stmt.execute(sql);
-            
+             */
+            sql = "CREATE TABLE IF NOT EXISTS restaurantItems (\n"
+                    + " itemname    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " price         REAL    NOT NULL,\n"
+                    + " description          TEXT    \n"
+                    + ");";
+            stmt.execute(sql);
+
+            // If the inventoryItem table is empty, create a placeholder
+            // for troubleshooting
+            sql = "SELECT count(*) FROM restaurantItems;";
+            ResultSet rsrest = stmt.executeQuery(sql);
+            if (rsrest.getInt(1) == 0) {
+                System.out.println("\n\r restaurant table was empty, created a temporary item:");
+                sql = "INSERT INTO restaurantItems VALUES ('Pesto Pasta','7.00', 'Cheese');";
+                //System.out.println("\tSoap added!");
+                stmt.executeUpdate(sql);
+            }
+
+            sql = "CREATE TABLE IF NOT EXISTS cateredMealItems (\n"
+                    + " mealName    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " pricePerSeat         REAL    NOT NULL,\n"
+                    + " mealDescription          TEXT     \n"
+                    + ");";
+            stmt.execute(sql);
+
             rs.close();
             stmt.close();
             c.close();

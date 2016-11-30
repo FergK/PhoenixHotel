@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Change Log
+11/29/2016  Fergus
+    Merged into final version
+11/1/2016  Fergus
+    Created file
+-->
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.*?> 
+
+<GridPane fx:id="hotelRoomsPane" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prms.HotelRoomsTabController" hgap="20" vgap="20" maxWidth="Infinity">
+
+    <padding>
+        <Insets bottom="10.0" left="10.0" right ="10.0" top="10.0"/>
+    </padding>
+    
+    <GridPane hgap="10" vgap="10" GridPane.columnIndex="0" GridPane.rowIndex="0" minWidth="300" maxWidth="300">
+        <Label text="Enter values to create new hotel rooms, or select an room from the table to modify or remove. Floor and number fields accept ranges such as 1-5" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" wrapText="true"/>
+        
+        <Label text="Floor: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="modifyFloorField" promptText="number of floor" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        
+        <Label text="Number: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="modifyNumberField" promptText="room number on floor" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        
+        <Label text="Price: " GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <TextField fx:id="modifyPriceField" promptText="price in dollars" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        
+        <Label text="Beds: " GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="modifyBedsField" promptText="number of beds" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        
+        <CheckBox fx:id="modifyAllowsPetsCheckbox" text="Allows Pets" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <CheckBox fx:id="modifyAllowsSmokingCheckbox" text="Allows Smoking" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <CheckBox fx:id="modifyDisabilityAccessibleCheckBox" text="Disability Accessible" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        
+        <HBox GridPane.columnIndex="0" GridPane.rowIndex="8" GridPane.columnSpan="2" spacing="10" alignment="center">
+            <fx:define>
+                <ToggleGroup fx:id="toggleGroup"/>
+            </fx:define>
+            <children>
+                <RadioButton fx:id="createRadio" text="Create" toggleGroup="$toggleGroup" onAction="#handleCreateToggle" selected="true" />
+                <RadioButton fx:id="modifyRadio" text="Modify" toggleGroup="$toggleGroup" onAction="#handleModifyToggle" />
+                <RadioButton fx:id="removeRadio" text="Remove" toggleGroup="$toggleGroup" onAction="#handleRemoveToggle" />
+            </children>
+        </HBox>
+        
+        <Button fx:id="modifyButton" text="Apply" onAction="#handleHotelRoomApplyButtonPress" GridPane.columnIndex="0" GridPane.rowIndex="9" GridPane.columnSpan="2" maxWidth="Infinity"/>
+        <Label fx:id="modifyLabel" text="" GridPane.columnIndex="0" GridPane.rowIndex="10" GridPane.columnSpan="2" maxWidth="Infinity" minHeight="60" alignment="TOP_CENTER" textAlignment="CENTER" wrapText="true" />
+    </GridPane>
+    
+    <TableView fx:id="roomsTable" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.hgrow="always" GridPane.vgrow="always" maxWidth="Infinity">
+        <columns>
+             <TableColumn fx:id="roomNumberCol" text="Room">
+                 <cellValueFactory><PropertyValueFactory property="roomNumber" /></cellValueFactory>
+             </TableColumn>
+             <TableColumn fx:id="priceCol" text="Price">
+                 <cellValueFactory><PropertyValueFactory property="price" /></cellValueFactory>
+             </TableColumn>
+             <TableColumn fx:id="bedsCol" text="Beds">
+                 <cellValueFactory><PropertyValueFactory property="beds" /></cellValueFactory>
+             </TableColumn>
+             <TableColumn fx:id="allowsPetsCol" text="Allows Pets">
+                 <cellValueFactory><PropertyValueFactory property="allowsPets" /></cellValueFactory>
+             </TableColumn>
+             <TableColumn fx:id="disabilityAccessibleCol" text="Disability Access">
+                 <cellValueFactory><PropertyValueFactory property="disabilityAccessible" /></cellValueFactory>
+             </TableColumn>
+             <TableColumn fx:id="allowsSmokingCol" text="Allows Smoking">
+                 <cellValueFactory><PropertyValueFactory property="allowsSmoking" /></cellValueFactory>
+             </TableColumn>
+             <TableColumn fx:id="dateLastCleanedCol" text="Last Cleaned">
+                 <cellValueFactory><PropertyValueFactory property="dateLastCleaned" /></cellValueFactory>
+             </TableColumn>
+        </columns>    
+    </TableView>
+    
+</GridPane>

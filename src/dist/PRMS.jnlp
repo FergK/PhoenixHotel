@@ -8,13 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-<<<<<<< HEAD
-    <jar href="PRMS.jar" size="4323729" download="eager" />
-    <jar href="lib\sqlite-jdbc-3.14.2.1.jar" size="4322173" download="eager" />
-=======
-    <jar href="PRMS.jar" size="4326978" download="eager" />
+    <jar href="PRMS.jar" size="4372294" download="eager" />
     <jar href="lib/sqlite-jdbc-3.14.2.1.jar" size="4322173" download="eager" />
->>>>>>> 75dcc8bc44fd2ea8f877d0c5794064064a16700f
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="PRMS" >
     <param name="requiredFXVersion" value="8.0+"/>
