@@ -3,49 +3,60 @@
     Fixed capitalization and names of some variables
     Changed dat and time variable to single var of LocalDateTime
  */
-
 package prms;
 
-import java.time.LocalDateTime;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  *
  * @author AndrewAn
  */
-public class BillableItems {
+public class BillableItem {
 
-    private String billableName;
-    private double price;
-    private LocalDateTime time;
+    private SimpleStringProperty billableName = new SimpleStringProperty();
+    private SimpleDoubleProperty price = new SimpleDoubleProperty();
+    private SimpleIntegerProperty time = new SimpleIntegerProperty();
+    private SimpleStringProperty UID = new SimpleStringProperty();
 
-    public BillableItems(String billableName, double price, LocalDateTime time) {
-        this.billableName = billableName;
-        this.price = price;
-        this.time = time;
+    public BillableItem(String billableName, double price, int time, String billedTo) {
+        setBillableName(billableName);
+        setPrice(price);
+        setTime(time);
+        setBilledTo(billedTo);
+    }
+
+    public String getUID() {
+        return UID.get();
     }
 
     public String getBillableName() {
-        return billableName;
+        return billableName.get();
     }
 
     public double getPrice() {
-        return price;
+        return price.get();
     }
-    
-    public LocalDateTime getTime() {
-        return time;
+
+    public int getTime() {
+        return time.get();
+    }
+
+    public void setBilledTo(String UID) {
+        this.UID.set(UID);
     }
 
     public void setBillableName(String billableName) {
-        this.billableName = billableName;
+        this.billableName.set(billableName);
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPrice(Double price) {
+        this.price.set(price);
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setTime(int time) {
+        this.time.set(time);
     }
 
 }

@@ -152,54 +152,58 @@ public class PRMS extends Application {
                     + " bill        INT    UNIQUE   NOT NULL\n"
                     + ");";
             stmt.execute(sql);
-            
+
             // Duplicate eventrooms tables here; which one is the definitive one?
             // -Deividas
-
-            
-            // NOTICE:
-            // The following tables cause the following SQLITE syntax error:
-            // Database connection error: org.sqlite.SQLiteException:
-            // [SQLITE_ERROR] SQL error or missing database (near ")": syntax error)
-            // I commented them out for now for the program to be compilable
-            // and until we figure out the bug. 
-            // -Deividas
-            
-              
-                       sql = "CREATE TABLE IF NOT EXISTS invoices (\n"
-                + " UID    INT    PRIMARY KEY   NOT NULL,\n"
-                + " customerName         TEXT    NOT NULL,\n"
-                + " creditCardNum          INT     NOT NULL,\n"
-                + " creditCardExp    INT    NOT NULL\n"
-                + ");";
+            sql = "CREATE TABLE IF NOT EXISTS invoices (\n"
+                    + " UID    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " customerName         TEXT    NOT NULL,\n"
+                    + " creditCardNum          INT     NOT NULL,\n"
+                    + " creditCardExp    INT    NOT NULL\n"
+                    + ");";
             stmt.execute(sql);
-            
+                     // If the inventoryItem table is empty, create a placeholder
+            // for troubleshooting
+            sql = "SELECT count(*) FROM invoices;";
+            ResultSet rsinvoice = stmt.executeQuery(sql);
+            if (rsinvoice.getInt(1) == 0) {
+                System.out.println("\n\tinventory table was empty, created a temporary item:");
+                sql = "INSERT INTO invoices VALUES ('mockuniqueID','rutk', '05052015', '31512');";
+                System.out.println("\tplaceholder added!");
+                stmt.executeUpdate(sql);
+            }
+
             sql = "CREATE TABLE IF NOT EXISTS restaurant (\n"
                     + " numofTable    TEXT    PRIMARY KEY   NOT NULL\n"
                     + ");";
-             stmt.execute(sql); 
-            
-            sql = "CREATE TABLE IF NOT EXISTS billableitems (\n"
-                        + " billableName    TEXT    PRIMARY KEY   NOT NULL,\n"
-                        + " price         REAL    NOT NULL,\n"
-                        + " date          INT     NOT NULL,\n"
-                        + " time      INT    NOT NULL\n"
-                        + ");";
-             stmt.execute(sql);
-             
-             
-                         sql = "CREATE TABLE IF NOT EXISTS orders (\n"
-                        + " billableName    TEXT    PRIMARY KEY   NOT NULL,\n"
-                        + " price         REAL    NOT NULL,\n"
-                        + " date          INT     NOT NULL,\n"
-                        + " time      INT    NOT NULL\n"
-                        + ");";
-             stmt.execute(sql);
-             
-             
-             
-             
-            
+            stmt.execute(sql);
+
+            sql = "CREATE TABLE IF NOT EXISTS billableItems (\n"
+                    + " billableName    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " price         REAL    NOT NULL,\n"
+                    + " time          INT     NOT NULL,\n"
+                    + " UID      TEXT    NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+            // If the inventoryItem table is empty, create a placeholder
+            // for troubleshooting
+            sql = "SELECT count(*) FROM billableItems;";
+            ResultSet rsbill = stmt.executeQuery(sql);
+            if (rsbill.getInt(1) == 0) {
+                System.out.println("\n\tinventory table was empty, created a temporary item:");
+                sql = "INSERT INTO billableItems VALUES ('Soap','100', '05052015', 'mockuniqueID');";
+                System.out.println("\tplaceholder added!");
+                stmt.executeUpdate(sql);
+            }
+
+            sql = "CREATE TABLE IF NOT EXISTS orders (\n"
+                    + " billableName    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " price         REAL    NOT NULL,\n"
+                    + " date          INT     NOT NULL,\n"
+                    + " time      INT    NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+
 //            sql = "CREATE TABLE IF NOT EXISTS order (\n"
 //                            + " invoiceNumber    TEXT    PRIMARY KEY   NOT NULL,\n"
 //                            + " orderDate         INT    NOT NULL,\n"
@@ -207,7 +211,6 @@ public class PRMS extends Application {
 //                            + " billables      TEXT    NOT NULL\n"
 //                            + ");";
 //             stmt.execute(sql);
-             
             /*
              sql = "CREATE TABLE IF NOT EXISTS roomserviceorder (\n"
                                 + " roomNumber   INT    PRIMARY KEY   NOT NULL,\n"
@@ -230,15 +233,14 @@ public class PRMS extends Application {
                                             + ");";
               stmt.execute(sql);
              */
-            
             sql = "CREATE TABLE IF NOT EXISTS restaurantItems (\n"
-                                                + " itemname    TEXT    PRIMARY KEY   NOT NULL,\n"
-                                                + " price         REAL    NOT NULL,\n"
-                                                + " description          TEXT    \n"
-                                                + ");";
-              stmt.execute(sql);
-              
-                          // If the inventoryItem table is empty, create a placeholder
+                    + " itemname    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " price         REAL    NOT NULL,\n"
+                    + " description          TEXT    \n"
+                    + ");";
+            stmt.execute(sql);
+
+            // If the inventoryItem table is empty, create a placeholder
             // for troubleshooting
             sql = "SELECT count(*) FROM restaurantItems;";
             ResultSet rsrest = stmt.executeQuery(sql);
@@ -248,14 +250,14 @@ public class PRMS extends Application {
                 //System.out.println("\tSoap added!");
                 stmt.executeUpdate(sql);
             }
-            
+
             sql = "CREATE TABLE IF NOT EXISTS cateredMealItems (\n"
-                                                    + " mealname    TEXT    PRIMARY KEY   NOT NULL,\n"
-                                                    + " priceperseat         REAL    NOT NULL,\n"
-                                                    + " caterdescription          TEXT     NOT NULL\n"
-                                                    + ");";
-               stmt.execute(sql);
-             
+                    + " mealName    TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " pricePerSeat         REAL    NOT NULL,\n"
+                    + " mealDescription          TEXT     \n"
+                    + ");";
+            stmt.execute(sql);
+
             rs.close();
             stmt.close();
             c.close();

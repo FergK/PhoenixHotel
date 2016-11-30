@@ -25,12 +25,6 @@ public class RestaurantItem {
     }
 
     public double getPrice() {
-//        System.out.println((double) Math.round(price.get() * 100) / 100 );
-//        return (double) Math.round(price.get() * 100) / 100;
-
-//                DecimalFormat df = new DecimalFormat("#.00");
-//                double formattedPrice = Double.parseDouble(df.format(price.get()));
-
         return price.get();
     }
 
