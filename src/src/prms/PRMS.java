@@ -140,7 +140,9 @@ public class PRMS extends Application {
                     + " price      REAL    NOT NULL,\n"
                     + " maxcapacity     INT     NOT NULL,\n"
                     + " hasStage      NUMERIC      NOT NULL,\n"
-                    + " hasAudioVisual      NUMERIC    NOT NULL\n"
+                    + " hasAudioVisual      NUMERIC    NOT NULL,\n"
+                    + " companyName      TEXT      NOT NULL,\n"
+                    + " dateReserved    TEXT    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
 

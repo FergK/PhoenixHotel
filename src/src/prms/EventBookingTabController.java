@@ -27,6 +27,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.paint.Color;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.control.TextField;
 
 
 
@@ -70,6 +71,9 @@ public class EventBookingTabController implements Initializable {
     private Button bookReservationButton;
     
     @FXML
+    private TextField companyNameTextField;
+    
+    @FXML
     void handleEventBookingSelection(MouseEvent event) {
 
     }
@@ -82,12 +86,21 @@ public class EventBookingTabController implements Initializable {
     
     @FXML
     void reserveEvenetHandle(ActionEvent event) {
+                    
         
+        FeedbackLabel.setVisible(true);
+
         if (datePicker.getValue() == null ){
 //            System.out.println("Enter Dates son");
-            FeedbackLabel.setVisible(true);
+            FeedbackLabel.setText("Please enter a day");
             return;
         }
+        
+        if (companyNameTextField.getText().isEmpty() || companyNameTextField.getText() == null){
+            FeedbackLabel.setText("Please enter a Company Name");
+            return;
+        }
+        
         
         //Create Booking
         createEventBooking();
@@ -112,14 +125,13 @@ public class EventBookingTabController implements Initializable {
     
     public void updateResultsTable(){
         eventBookingTableView.getItems().clear();
-        eventBookingTableView.getItems().addAll(fetchRoomsFromDB());
+        eventBookingTableView.getItems().addAll(fetchEventsFromDB());
         eventBookingTableView.sort();
     }
     
-    
-    public ArrayList<HotelRoom> fetchRoomsFromDB() {
+    public ArrayList<EventRoom> fetchEventsFromDB() {
 
-        ArrayList<HotelRoom> hotelRooms = new ArrayList<>();
+        ArrayList<EventRoom> eventRooms = new ArrayList<>();
 
         Connection c = null;
         Statement stmt = null;
@@ -127,12 +139,14 @@ public class EventBookingTabController implements Initializable {
             c = DriverManager.getConnection(prms.PRMS.DBFILE);
             stmt = c.createStatement();
 
-            String sql = "SELECT * FROM hotelRooms";
+            String sql = "SELECT * FROM eventrooms";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                HotelRoom currentRoom = new HotelRoom(rs.getString("roomNumber"), rs.getDouble("price"), rs.getInt("beds"), rs.getBoolean("allowsPets"), rs.getBoolean("disabilityAccessible"), rs.getBoolean("allowsSmoking"));
                 
-                hotelRooms.add(currentRoom);
+                EventRoom currentRoom = new EventRoom(rs.getString("roomname"), rs.getDouble("price"), rs.getInt("maxcapacity"), rs.getBoolean("hasStage"), rs.getBoolean("hasAudioVisual"), rs.getString("companyName"), rs.getString("dateReserved"));
+                                System.out.println(currentRoom);
+
+                eventRooms.add(currentRoom);
             }
 
             rs.close();
@@ -143,7 +157,7 @@ public class EventBookingTabController implements Initializable {
             System.exit(0);
         }
 
-        return hotelRooms;
+        return eventRooms;
     }
     
     public void setupChoiceBoxInputs(){
@@ -191,16 +205,21 @@ public class EventBookingTabController implements Initializable {
     public void createEventBooking() {
         // Check if all fields are filled in and passwords match
         String roomName = roomChoiceBox.getValue();
+        String companyName = companyNameTextField.getText();
         double price = 105;
         String numberOfGuests = guestChoiceBox.getValue();
+        System.out.println(numberOfGuests);
         
-         int maxCapacity = 25;
+        int maxCapacity = getGuests(numberOfGuests);
 
         int bool = 0;
+        
+        Boolean flag = false;
         String needsStage = needStageChoiceBox.getValue();
         String needsAudioVisual = needsProjectorChoiceBox.getValue();
         LocalDate localDate = datePicker.getValue();
         
+        String dateReserved = localDate.toString();
         
 
 //        // Connect to the DB and perform the necessary queries
@@ -209,10 +228,10 @@ public class EventBookingTabController implements Initializable {
         
         try {
             c = DriverManager.getConnection(prms.PRMS.DBFILE);
-            stmt = c.createStatement();
+            stmt = c.createStatement();            
 
             // We can now go ahead and insert the new employee
-            String sql = "INSERT INTO eventrooms VALUES ('" + roomName + "', '" + price + "', '" + maxCapacity + "', '" + bool + "', '" + bool + "' );";
+            String sql = "INSERT INTO eventrooms VALUES ('" + roomName + "', '" + price + "', '" + maxCapacity + "', '" + bool + "', '" + bool + "', '"+ companyName +"', '"+ dateReserved +"' );";
             stmt.executeUpdate(sql);
 
             stmt.close();
@@ -222,7 +241,29 @@ public class EventBookingTabController implements Initializable {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+        
+        EventRoom newEvent = new EventRoom(roomName, price, maxCapacity, flag, flag, companyName, dateReserved);
+        eventBookingTableView.getItems().add(newEvent);
+        eventBookingTableView.getSelectionModel().select(newEvent);
+        reset();
+        EventBookingTabPane.getSelectionModel().selectNext();
 
 
+    }
+    
+    public void reset(){
+        
+        roomChoiceBox.setValue("The Grand Suite");
+        
+        guestChoiceBox.setValue("0-25");
+        
+        needsProjectorChoiceBox.setValue("Yes");
+        
+        needStageChoiceBox.setValue("Yes");
+        
+        datePicker.setValue(null);
+        companyNameTextField.setText("");
+        
+        FeedbackLabel.setVisible(false);
     }
 }

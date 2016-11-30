@@ -9,9 +9,9 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-
+<?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prms.EventBookingTabController">
    <children>
@@ -36,7 +36,9 @@
                               <Insets left="5.0" right="5.0" />
                            </padding>
                         </Button>
-                        <Label fx:id="FeedbackLabel" layoutX="463.0" layoutY="212.0" text="Please Select A Day" textFill="#ee0707" AnchorPane.rightAnchor="14.0" />
+                        <Label fx:id="FeedbackLabel" layoutX="463.0" layoutY="251.0" text="Please Select A Day" textFill="#ee0707" AnchorPane.rightAnchor="14.0" />
+                        <Label layoutX="14.0" layoutY="201.0" text="Company Name:" AnchorPane.leftAnchor="14.0" />
+                        <TextField fx:id="companyNameTextField" layoutX="386.0" layoutY="196.0" prefHeight="27.0" prefWidth="200.0" AnchorPane.rightAnchor="14.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -47,16 +49,21 @@
                      <children>
                         <TableView fx:id="eventBookingTableView" layoutX="200.0" layoutY="84.0" onMouseClicked="#handleEventBookingSelection" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                            <TableColumn fx:id="roomCol" minWidth="200.0" prefWidth="200.0" text="Room Number">
+                              <TableColumn fx:id="companyName" minWidth="200.0" prefWidth="200.0" text="Company Name">
                                 <cellValueFactory>
-                                        <PropertyValueFactory property="roomNumber" />
+                                        <PropertyValueFactory property="companyName" />
                                 </cellValueFactory>
                             </TableColumn>
-                            <TableColumn fx:id="roomPrice" minWidth="200.0" prefWidth="200.0" text="Room Price">
+                            <TableColumn fx:id="roomName" minWidth="200.0" prefWidth="200.0" text="Room Name">
                                 <cellValueFactory>
-                                        <PropertyValueFactory property="price" />
+                                        <PropertyValueFactory property="roomName" />
                                 </cellValueFactory>
                             </TableColumn>
+                            <TableColumn fx:id="dateReserved" minWidth="200.0" prefWidth="200.0" text="Date Reserved">
+                                <cellValueFactory>
+                                        <PropertyValueFactory property="dateReserved" />
+                                </cellValueFactory>
+                            </TableColumn>         
                           </columns>
                         </TableView>
                         <Button fx:id="bookReservationButton" layoutX="527.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleReservationBooking" text="Book Reservation" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="12.0" />
