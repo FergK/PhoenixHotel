@@ -8,8 +8,6 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author AndrewAn
  */
-
-// TODO
 public class RestaurantItem {
 
     private SimpleStringProperty itemName = new SimpleStringProperty();
@@ -46,8 +44,4 @@ public class RestaurantItem {
         this.description.set(description);
     }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> Fergus

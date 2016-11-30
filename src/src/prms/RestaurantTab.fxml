@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<<<<<<< HEAD
-=======
-<!-- Change Log
-// TODO
-11/1/2016  Fergus
-    Created file
--->
-
->>>>>>> Fergus
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
@@ -141,8 +132,4 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
    </rowConstraints>
     
-<<<<<<< HEAD
 </GridPane>
-=======
-</GridPane>
->>>>>>> Fergus

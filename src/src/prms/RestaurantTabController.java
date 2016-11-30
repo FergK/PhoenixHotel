@@ -3,11 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-<<<<<<< HEAD
-=======
-
-//TODO
->>>>>>> Fergus
 package prms;
 
 import java.net.URL;
@@ -88,11 +83,7 @@ public class RestaurantTabController implements Initializable {
         try {
             c = DriverManager.getConnection(prms.PRMS.DBFILE);
             stmt = c.createStatement();
-<<<<<<< HEAD
             System.out.println("\n\nCONNECTED TO DB");
-=======
-            System.out.println("CONNECTED TO DB");
->>>>>>> Fergus
             String sql = "SELECT * FROM RestaurantItems";
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -123,11 +114,7 @@ public class RestaurantTabController implements Initializable {
         try {
             c = DriverManager.getConnection(prms.PRMS.DBFILE);
             stmt = c.createStatement();
-<<<<<<< HEAD
             System.out.println("\n\nCONNECTED TO DB");
-=======
-            System.out.println("CONNECTED TO DB");
->>>>>>> Fergus
             String sql = "SELECT * FROM cateredMealItems";
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -208,11 +195,6 @@ public class RestaurantTabController implements Initializable {
             restaurantNameField.setText("");
             restaurantDescriptionField.setText("");
             selectedItem = null;
-<<<<<<< HEAD
-=======
-                        restaurantDeselectButton.setDisable(true);
-            restaurantDeleteButton.setDisable(true);
->>>>>>> Fergus
         }
     }
 
@@ -565,8 +547,4 @@ public class RestaurantTabController implements Initializable {
 
     }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> Fergus

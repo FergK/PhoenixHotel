@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -85,18 +84,4 @@ public class Order {
     
     
     
-=======
-/* Change Log
-11/28/2016  Fergus
-    Created inital version
- */
-package prms;
-
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-
-// TODO This entire class
-public class Order {
-    
->>>>>>> Fergus
 }

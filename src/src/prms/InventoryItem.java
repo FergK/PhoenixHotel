@@ -11,10 +11,10 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class InventoryItem {
 
-    public SimpleStringProperty name = new SimpleStringProperty("");
-    public SimpleIntegerProperty quantity = new SimpleIntegerProperty();
-    public SimpleIntegerProperty expectedQuantity = new SimpleIntegerProperty();
-    public SimpleBooleanProperty isConsumable = new SimpleBooleanProperty();
+    private SimpleStringProperty name = new SimpleStringProperty("");
+    private SimpleIntegerProperty quantity = new SimpleIntegerProperty();
+    private SimpleIntegerProperty expectedQuantity = new SimpleIntegerProperty();
+    private SimpleBooleanProperty isConsumable = new SimpleBooleanProperty();
 
     /* Creates an InventoryItem object
 	 * to be sent to the database.
