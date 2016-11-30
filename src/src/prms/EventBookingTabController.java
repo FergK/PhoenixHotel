@@ -128,7 +128,6 @@ public class EventBookingTabController implements Initializable {
 
     @FXML
     void handleEventInvoice(ActionEvent event) {
-        System.out.println("fuck");
         ConfirmationLabel.setText("Invoice created!");
         
         EventBookingTabPane.getSelectionModel().select(1);

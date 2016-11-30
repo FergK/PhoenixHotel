@@ -5,41 +5,41 @@
  */
 package prms;
 
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.util.ArrayList;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+
 import javafx.beans.property.SimpleStringProperty;
 
 public class HotelReservation {
 
-    
-    private SimpleStringProperty roomNumber = new SimpleStringProperty();
-    private SimpleStringProperty startDate = new SimpleStringProperty();
-    private SimpleStringProperty endDate = new SimpleStringProperty();
-    private SimpleIntegerProperty children = new SimpleIntegerProperty();
-    private SimpleIntegerProperty adults = new SimpleIntegerProperty();
+    private  SimpleStringProperty guestName = new SimpleStringProperty();
+    private  SimpleStringProperty roomNumber = new SimpleStringProperty();
+    private  SimpleStringProperty startDate = new SimpleStringProperty();
+    private  SimpleStringProperty endDate = new SimpleStringProperty();
+    private  SimpleStringProperty children = new SimpleStringProperty();
+    private  SimpleStringProperty adults = new SimpleStringProperty();
     private Invoice bill;
 
-    public HotelReservation(String roomNumber, int adults, int children, String startDate, String endDate) {
+    public HotelReservation(String roomNumber, String adults, String children, String startDate, String endDate, String guestName) {
         setRoomNumber(roomNumber);
         setRoomAdults(adults);
         setRoomChildren(children);
         setStartDate(startDate);
         setEndDate(endDate);
+        setGuestName(guestName);
+    }
+    
+    public String getGuestName(){
+        return guestName.get();
     }
     
     public String getRoomNumber(){
         return roomNumber.get();
     }
     
-    public int getRoomAdults(){
+    public String getRoomAdults(){
         return adults.get();
     }
     
-    public int getRoomChildrem(){
+    public String getRoomChildrem(){
         return children.get();
     }
     
@@ -50,16 +50,19 @@ public class HotelReservation {
     public String getEndDate(){
         return endDate.get();
     }    
+    public void setGuestName(String name){
+        this.guestName.set(name);
+    }
     
     public void setRoomNumber(String number){
         this.roomNumber.set(number);
     }
     
-    public void setRoomAdults(int adults){
+    public void setRoomAdults(String adults){
         this.adults.set(adults);
     }
     
-    public void setRoomChildren(int children){
+    public void setRoomChildren(String children){
         this.children.set(children);
     }
     
@@ -71,5 +74,12 @@ public class HotelReservation {
         this.endDate.set(date);
     }
     
+    @Override
+    public String toString() {
+        return "Guest Name: " + getGuestName()
+            + "\nStart Date: " + getStartDate()
+            + "\nEnd Date: " + getEndDate()
+            + "\nRoom Number: " + getRoomNumber();
+    }
     
 }
