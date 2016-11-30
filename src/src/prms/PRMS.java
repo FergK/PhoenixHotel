@@ -79,16 +79,25 @@ public class PRMS extends Application {
             }
 
             // Create hotelroom table if it doesn't already exist
-            sql = "CREATE TABLE IF NOT EXISTS hotelroom (\n"
+            sql = "CREATE TABLE IF NOT EXISTS hotelRooms (\n"
                     + " roomNumber    TEXT    PRIMARY KEY   NOT NULL,\n"
                     + " price         REAL    NOT NULL,\n"
                     + " beds          INT     NOT NULL,\n"
                     + " allowsPets      NUMERIC    NOT NULL,\n"
                     + " disabilityAccessible      NUMERIC    NOT NULL,\n"
-                    + " allowssmoking      NUMERIC    NOT NULL,\n"
-                    + " dateLastCleaned      INT    NOT NULL\n"
+                    + " allowsSmoking      NUMERIC    NOT NULL,\n"
+                    + " dateLastCleaned      TEXT    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
+            
+            sql = "SELECT count(*) FROM hotelRooms;";
+            ResultSet rsroom = stmt.executeQuery(sql);
+            if (rsroom.getInt(1) == 0) {
+                System.out.println("\n\tRoom table was empty, created a temporary Room:");
+                System.out.println("\tThis room should be deleted later on!\n");
+                sql = "INSERT INTO hotelRooms VALUES ('100', '80.00', '2', '0', '1', '0', '01012016');";
+                stmt.executeUpdate(sql);
+            }
 
             // Create hotelreservations table if it doesn't already exist
             sql = "CREATE TABLE IF NOT EXISTS hotelreservations (\n"
@@ -111,89 +120,7 @@ public class PRMS extends Application {
                     + " hasAudioVisual      NUMERIC    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
-            
-            // boolean values stored in table should be of type NUMERIC
-            // Create eventrooms table if it doesn't already exist
-            sql = "CREATE TABLE IF NOT EXISTS eventrooms (\n"
-                   + " startDate    INT    NOT NULL,\n"
-                    + " endDate     INT    NOT NULL,\n"
-                    + " bill        INT    UNIQUE   NOT NULL\n"
-                    + ");";
-            stmt.execute(sql);
 
-            sql = "CREATE TABLE IF NOT EXISTS inventoryitem (\n"
-            + " name    TEXT    PRIMARY KEY   NOT NULL,\n"
-            + " roomnumber         TEXT    NOT NULL,\n"
-            + " quanitity          INT     NOT NULL,\n"
-            + " expectedQuantity      INT    NOT NULL,\n"
-            + " isConsumable      NUMERIC    NOT NULL,\n"
-            + ");";
-        stmt.execute(sql);
-            
-            sql = "CREATE TABLE IF NOT EXISTS invoice (\n"
-                + " UID    INT    PRIMARY KEY   NOT NULL,\n"
-                + " customerName         TEXT    NOT NULL,\n"
-                + " CCNum          TEXT     NOT NULL,\n"
-                + " CCExp    INT    NOT NULL,\n"
-                + ");";
-            stmt.execute(sql);
-            
-            sql = "CREATE TABLE IF NOT EXISTS restaurant (\n"
-                    + " numofTable    TEXT    PRIMARY KEY   NOT NULL,\n"
-                    + ");";
-             stmt.execute(sql); 
-            
-            sql = "CREATE TABLE IF NOT EXISTS billableitems (\n"
-                        + " billableName    TEXT    PRIMARY KEY   NOT NULL,\n"
-                        + " price         REAL    NOT NULL,\n"
-                        + " date          INT     NOT NULL,\n"
-                        + " time      INT    NOT NULL,\n"
-                        + ");";
-             stmt.execute(sql);
-            
-            sql = "CREATE TABLE IF NOT EXISTS order (\n"
-                            + " InvoiceNumber    TEXT    PRIMARY KEY   NOT NULL,\n"
-                            + " orderDate         INT    NOT NULL,\n"
-                            + " orderStatus          INT     NOT NULL,\n"
-                            + " billables      TEXT    NOT NULL,\n"
-                            + ");";
-             stmt.execute(sql);
-            
-             sql = "CREATE TABLE IF NOT EXISTS roomserviceorder (\n"
-                                + " roomNumber   INT    PRIMARY KEY   NOT NULL,\n"
-                                + ");";
-              stmt.execute(sql);
-            
-             sql = "CREATE TABLE IF NOT EXISTS tableserviceorder (\n"
-                                    + " tableNumber    INT    PRIMARY KEY   NOT NULL,\n"
-                                    + ");";
-               stmt.execute(sql);
-            
-            sql = "CREATE TABLE IF NOT EXISTS cateredmealorder (\n"
-                                        + " roomname    TEXT    PRIMARY KEY   NOT NULL,\n"
-                                        + ");";
-             stmt.execute(sql);
-            
-            sql = "CREATE TABLE IF NOT EXISTS maintenanceorder (\n"
-                                            + " roomname    TEXT    PRIMARY KEY   NOT NULL,\n"
-                                            + " description         TEXT    NOT NULL,\n"
-                                            + ");";
-              stmt.execute(sql);
-            
-            sql = "CREATE TABLE IF NOT EXISTS restaurantmenuitem (\n"
-                                                + " itemname    TEXT    PRIMARY KEY   NOT NULL,\n"
-                                                + " price         REAL    NOT NULL,\n"
-                                                + " description          TEXT     NOT NULL,\n"
-                                                + ");";
-              stmt.execute(sql);
-            
-            sql = "CREATE TABLE IF NOT EXISTS cateredmealitem (\n"
-                                                    + " mealname    TEXT    PRIMARY KEY   NOT NULL,\n"
-                                                    + " priceperseat         REAL    NOT NULL,\n"
-                                                    + " caterdescription          TEXT     NOT NULL,\n"
-                                                    + ");";
-               stmt.execute(sql);
-            
             rs.close();
             stmt.close();
             c.close();

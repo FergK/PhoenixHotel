@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- Change Log
+10/13/2016  Fergus
+    Created file
+-->
+
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -7,8 +12,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.cell.*?> 
-
-<!--@author Fergus Kelley-->
 
 <GridPane fx:id="employeesPane" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prms.EmployeesTabController" hgap="20" vgap="20" maxWidth="Infinity">
 
@@ -18,7 +21,7 @@
     
     <GridPane hgap="10" vgap="10" GridPane.columnIndex="0" GridPane.rowIndex="0" minWidth="300" maxWidth="300">
         <Label text="Manage Employees" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
-        <Label text="Enter values to create a new employee profile, or select an employee to modify or remove" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"  wrapText="true"/>
+        <Label text="Enter values to create a new employee profile, or select an employee from the table to modify or remove" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"  wrapText="true"/>
         
         <Label text="First name: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <TextField fx:id="modifyFirstNameField" promptText="first name" GridPane.columnIndex="1" GridPane.rowIndex="2" />

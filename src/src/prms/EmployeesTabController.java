@@ -212,8 +212,8 @@ public class EmployeesTabController implements Initializable {
         Employee createdEmployee = new Employee(firstName, lastName, jobTitle, username, password);
         employeesTable.getItems().add(createdEmployee);
         employeesTable.sort();
-        employeesTable.getSelectionModel().select(createdEmployee);
         modifyLabel.setText("Created new employee: " + username);
+//        employeesTable.getSelectionModel().select(createdEmployee);
     }
 
     public void modifyEmployee() {

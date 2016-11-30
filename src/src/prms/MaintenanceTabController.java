@@ -70,10 +70,10 @@ public class MaintenanceTabController implements Initializable {
 
 
         // TODO implement the code that adds all the employees to the table
-//         ObservableList inventoryItems = maintenanceTable.getItems();
-//         inventoryItems.add(new InventoryItem("Towel", 3, 3, false));
-//         inventoryItems.add(new InventoryItem("Soap", 5, 5, true));
-//         inventoryItems.add(new InventoryItem("Water Bottle", 3,0, true));
+        ObservableList inventoryItems = maintenanceTable.getItems();
+        inventoryItems.add(new InventoryItem("Towel", 3, 3, false));
+        inventoryItems.add(new InventoryItem("Soap", 5, 5, true));
+        inventoryItems.add(new InventoryItem("Water Bottle", 3,0, true));
         
 
         //set inventory update buttons to disabled
