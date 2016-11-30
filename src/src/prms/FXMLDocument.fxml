@@ -41,9 +41,6 @@
             <Tab fx:id="restaurantTab" text="Restaurant" disable="true" >
                 <fx:include source="RestaurantTab.fxml"/>
             </Tab>
-            <Tab fx:id="reportsTab" text="Reports" disable="true" >
-                <fx:include source="ReportsTab.fxml"/>
-            </Tab>
         </TabPane>
     </center>
 </BorderPane>

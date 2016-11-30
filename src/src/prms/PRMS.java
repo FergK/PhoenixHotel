@@ -85,7 +85,7 @@ public class PRMS extends Application {
             // the database can be rebuilt if something breaks or is lost
             // We'll probably want to put the table definitions somewhere else
             // eventually, but for the time being we can stick them here.
-            // Create employee table if it doesn't already exist
+            // Create employees table if it doesn't already exist
             sql = "CREATE TABLE IF NOT EXISTS employees (\n"
                     + " firstName     TEXT    NOT NULL,\n"
                     + " lastName      TEXT    NOT NULL,\n"
@@ -95,7 +95,7 @@ public class PRMS extends Application {
                     + ");";
             stmt.execute(sql);
 
-            // If the employee table is empty, create a default account so we can login
+            // If the employees table is empty, create a default account so we can login
             sql = "SELECT count(*) FROM employees;";
             ResultSet rs = stmt.executeQuery(sql);
             if (rs.getInt(1) == 0) {
@@ -107,7 +107,7 @@ public class PRMS extends Application {
                 stmt.executeUpdate(sql);
             }
 
-            // Create hotelroom table if it doesn't already exist
+            // Create hotelRooms table if it doesn't already exist
             sql = "CREATE TABLE IF NOT EXISTS hotelRooms (\n"
                     + " roomNumber    TEXT    PRIMARY KEY   NOT NULL,\n"
                     + " price         REAL    NOT NULL,\n"
@@ -128,25 +128,79 @@ public class PRMS extends Application {
                     + " isConsumable        NUMERIC    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
-            
-            // Create hotelreservations table if it doesn't already exist
-            sql = "CREATE TABLE IF NOT EXISTS hotelReservations (\n"
-                    + " roomnumber     TEXT    NOT NULL,\n"
-                    + " adults           INT      NOT NULL,\n"
-                    + " children      INT    NOT NULL,\n"
-                    + " startDate    INT    NOT NULL,\n"
-                    + " endDate     INT    NOT NULL,\n"
-                    + " bill      INT    UNIQUE    NOT NULL\n"
+
+            // Create eventRooms table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS eventRooms (\n"
+                    + " roomName        TEXT        NOT NULL,\n"
+                    + " price           REAL        NOT NULL,\n"
+                    + " maxCapacity     INT         NOT NULL,\n"
+                    + " hasStage        NUMERIC     NOT NULL,\n"
+                    + " hasAudioVisual  NUMERIC     NOT NULL\n"
                     + ");";
             stmt.execute(sql);
-
-            // Create eventrooms table if it doesn't already exist
-            sql = "CREATE TABLE IF NOT EXISTS eventRooms (\n"
-                    + " roomName     TEXT    NOT NULL,\n"
-                    + " price      REAL    NOT NULL,\n"
-                    + " maxCapacity     INT     NOT NULL,\n"
-                    + " hasStage      NUMERIC      NOT NULL,\n"
-                    + " hasAudioVisual      NUMERIC    NOT NULL\n"
+            
+            // Create hotelReservations table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS hotelReservations (\n"
+                    + " roomnumber      TEXT    NOT NULL,\n"
+                    + " adults          INT     NOT NULL,\n"
+                    + " children        INT     NOT NULL,\n"
+                    + " startDate       TEXT    NOT NULL,\n"
+                    + " endDate         TEXT    NOT NULL,\n"
+                    + " invoiceUID      TEXT    NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+            
+            // Create eventBookings table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS eventBookings (\n"
+                    + " startDate       TEXT    NOT NULL,\n"
+                    + " endDate         TEXT    NOT NULL,\n"
+                    + " invoiceUID      TEXT    NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+            
+            // Create invoices table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS invoices (\n"
+                    + " invoiceUID      TEXT    PRIMARY KEY      NOT NULL,\n"
+                    + " customerName    TEXT    NOT NULL,\n"
+                    + " creditCardNum   INT     NOT NULL,\n"
+                    + " creditCardExp   INT     NOT NULL,\n"
+                    + " amountPaid      REAL    NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+            
+            // Create billableItems table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS billableItems (\n"
+                    + " billableUID     TEXT    PRIMARY KEY     NOT NULL,\n"
+                    + " invoiceUID      TEXT    NOT NULL,\n"
+                    + " billableName    TEXT    NOT NULL,\n"
+                    + " price           REAL    NOT NULL,\n"
+                    + " time            TEXT    NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+            
+            // Create orders table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS orders (\n"
+                    + " orderUID        TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " invoiceUID      TEXT    NOT NULL,\n"
+                    + " type            TEXT    NOT NULL,\n"
+                    + " state           TEXT    NOT NULL,\n"
+                    + " datetime        TEXT    NOT NULL\n"
+                    + ");";
+            stmt.execute(sql);
+            
+            // Create restaurantItems table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS restaurantItems (\n"
+                    + " itemName        TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " price           REAL    NOT NULL,\n"
+                    + " description     TEXT    \n"
+                    + ");";
+            stmt.execute(sql);
+            
+            // Create cateredMealItems table if it doesn't already exist
+            sql = "CREATE TABLE IF NOT EXISTS cateredMealItems (\n"
+                    + " mealName            TEXT    PRIMARY KEY   NOT NULL,\n"
+                    + " pricePerSeat        REAL    NOT NULL,\n"
+                    + " mealDescription     TEXT     \n"
                     + ");";
             stmt.execute(sql);
             
