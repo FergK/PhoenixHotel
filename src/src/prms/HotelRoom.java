@@ -1,5 +1,7 @@
 /* Change Log
-10/24/2016  Fergus
+11/26/2016 Deividas
+    Converted fields to simple* type
+10/24/2016 Fergus
     Removed the startDate and endDate fields since those will be in the reservation
     Change the type of hasPets, disabilityAccessible, allowsSmoking to Boolean
     Renamed some variables and functions for clarity
@@ -7,7 +9,6 @@
  */
 package prms;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -22,6 +23,7 @@ public class HotelRoom {
     private SimpleBooleanProperty allowsPets = new SimpleBooleanProperty();
     private SimpleBooleanProperty disabilityAccessible = new SimpleBooleanProperty();
     private SimpleBooleanProperty allowsSmoking = new SimpleBooleanProperty();
+<<<<<<< HEAD
 
     public ArrayList<InventoryItem> inventory;
     
@@ -46,6 +48,31 @@ public class HotelRoom {
         return price.get();
     }
 
+=======
+    
+    private SimpleStringProperty dateLastCleaned = new SimpleStringProperty();
+
+    public ArrayList<InventoryItem> inventory;
+
+    public HotelRoom(String roomNumber, double price, int beds, Boolean allowsPets, Boolean disabilityAccessible, Boolean allowsSmoking, String dateLastCleaned) {
+
+        setRoomNumber(roomNumber);
+        setPrice(price);
+        setBeds(beds);
+        setAllowsPets(allowsPets);
+        setDisabilityAccessible(disabilityAccessible);
+        setAllowsSmoking(allowsSmoking);
+        setDateLastCleaned(dateLastCleaned);
+        
+        inventory = new ArrayList<InventoryItem>();
+
+    }
+
+    public double getPrice() {
+        return price.get();
+    }
+
+>>>>>>> Fergus
     public String getDateLastCleaned() {
         return dateLastCleaned.get();
     }
@@ -68,12 +95,21 @@ public class HotelRoom {
 
     public String getRoomNumber() {
         return roomNumber.get();
+<<<<<<< HEAD
     }
 
     public ArrayList<InventoryItem> getInventory() {
         return inventory;
     }
 
+=======
+    }
+
+    public ArrayList<InventoryItem> getInventory() {
+        return inventory;
+    }
+
+>>>>>>> Fergus
     public void setRoomNumber(String roomNumber) {
         this.roomNumber.set(roomNumber);
     }
@@ -109,7 +145,8 @@ public class HotelRoom {
                 + "\n# of beds: " + this.beds
                 + "\nDisability Accessible: " + this.disabilityAccessible
                 + "\nAllows Pets: " + this.allowsPets
-                + "\nAllows Smoking: " + this.allowsSmoking;
+                + "\nAllows Smoking: " + this.allowsSmoking
+                + "\nDate last cleaned: " + this.dateLastCleaned;
     }
 
 }
