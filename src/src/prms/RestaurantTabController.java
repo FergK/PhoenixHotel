@@ -85,7 +85,7 @@ public class RestaurantTabController implements Initializable {
         try {
             c = DriverManager.getConnection(prms.PRMS.DBFILE);
             stmt = c.createStatement();
-            System.out.println("CONNECTED TO DB");
+//            System.out.println("CONNECTED TO DB");
             String sql = "SELECT * FROM RestaurantItems";
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -116,7 +116,7 @@ public class RestaurantTabController implements Initializable {
         try {
             c = DriverManager.getConnection(prms.PRMS.DBFILE);
             stmt = c.createStatement();
-            System.out.println("CONNECTED TO DB");
+//            System.out.println("CONNECTED TO DB");
             String sql = "SELECT * FROM cateredMealItems";
             ResultSet rs = stmt.executeQuery(sql);
 

@@ -125,7 +125,7 @@ public class BookingsTabController implements Initializable {
             String sql = "SELECT * FROM hotelRooms";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                HotelRoom currentRoom = new HotelRoom(rs.getString("roomNumber"), rs.getDouble("price"), rs.getInt("beds"), rs.getBoolean("allowsPets"), rs.getBoolean("disabilityAccessible"), rs.getBoolean("allowsSmoking"));
+                HotelRoom currentRoom = new HotelRoom(rs.getString("roomNumber"), rs.getDouble("price"), rs.getInt("beds"), rs.getBoolean("allowsPets"), rs.getBoolean("disabilityAccessible"), rs.getBoolean("allowsSmoking"), rs.getString("dateLastCleaned"));
                 
                 hotelRooms.add(currentRoom);
             }

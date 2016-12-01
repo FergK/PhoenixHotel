@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Change Log
+11/29/2016 Fergus
+    Merged into final project
+11/18/2016 Deividas
+    Created initial version
+-->
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.*?>
+
+<!--@author Deividas Rutkauskas-->
+
+<GridPane fx:id="maintenancePane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prms.MaintenanceTabController"  hgap="20" vgap="10" maxWidth="Infinity">
+
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
+    
+    <Label text="Select a room for maintenance and inventory" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <Label text="Room inventory" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+    
+    <TableView fx:id="roomTable" maxWidth="Infinity" onMouseClicked="#handleRoomSelection" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <columns>
+            <TableColumn fx:id="roomNumberCol" prefWidth="150" text="Room Number">
+                <cellValueFactory>
+                    <PropertyValueFactory property="roomNumber" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="roomLastCleanedCol" prefWidth="150" text="Last Cleaned">
+                <cellValueFactory>
+                    <PropertyValueFactory property="dateLastCleaned" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+       
+    <TableView fx:id="inventoryTable" maxWidth="Infinity" onMouseClicked="#handleInventorySelection" editable="true"  GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="always" GridPane.hgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="nameCol" prefWidth="125" text="Name">
+                <cellValueFactory>
+                    <PropertyValueFactory property="name" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="quantityCol" prefWidth="125" text="Quantity" editable="true">
+                <cellValueFactory>
+                    <PropertyValueFactory property="quantity" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="expQuantityCol" prefWidth="125.0" text="Expected Quantity">
+                <cellValueFactory>
+                    <PropertyValueFactory property="expectedQuantity" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="isConsumableCol" prefWidth="125.0" text="Consumable" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="isConsumable" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>    
+    </TableView>
+    
+    <GridPane hgap="10" vgap="10" GridPane.columnIndex="0" GridPane.rowIndex="2" minWidth="300" maxWidth="300">
+        <Label text="Date Last Cleaned:" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="roomServiceField" alignment="CENTER" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Button fx:id="roomServiceUpdateBtn" onMouseClicked="#handleRoomServiceUpdate" text="Update date last cleaned" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2" />
+    </GridPane>
+       
+    <GridPane hgap="10" vgap="10" GridPane.columnIndex="1" GridPane.rowIndex="2" maxWidth="Infinity" >
+        <Label fx:id="modifyQuantityLabel" text="Item quantity:" wrapText="true" minWidth="225"   GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="modifyQuantityField" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Button fx:id="quantityUpdateButton" onMouseClicked="#handleQuantityUpdate" text="Update quantity" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
+    </GridPane>
+    
+</GridPane>

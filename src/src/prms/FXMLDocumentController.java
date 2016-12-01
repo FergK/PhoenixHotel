@@ -24,12 +24,12 @@ public class FXMLDocumentController implements Initializable {
         // and you don't want to go through the login procedure every time
         // This code should stay commented out whenever you push to github
         // 
-        ObservableList<Tab> tabList = allTabs.getTabs();
-        for (Tab next : tabList) {
-            next.setDisable(false);
-        }
-        SingleSelectionModel<Tab> selectionModel = allTabs.getSelectionModel();
-        selectionModel.select(3);
+//        ObservableList<Tab> tabList = allTabs.getTabs();
+//        for (Tab next : tabList) {
+//            next.setDisable(false);
+//        }
+//        SingleSelectionModel<Tab> selectionModel = allTabs.getSelectionModel();
+//        selectionModel.select(3);
 
     }
 
