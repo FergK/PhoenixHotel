@@ -180,11 +180,12 @@ public class PRMS extends Application {
             
             // Create orders table if it doesn't already exist
             sql = "CREATE TABLE IF NOT EXISTS orders (\n"
-                    + " orderUID        TEXT    PRIMARY KEY   NOT NULL,\n"
-                    + " invoiceUID      TEXT    NOT NULL,\n"
-                    + " type            TEXT    NOT NULL,\n"
-                    + " state           TEXT    NOT NULL,\n"
-                    + " datetime        TEXT    NOT NULL\n"
+                    + " orderType    TEXT       NOT NULL,\n"
+                    + " roomName    TEXT    NOT NULL,\n"
+                    + " price         REAL    NOT NULL,\n"
+                    + " date          TEXT     NOT NULL,\n"
+                    + " time      TEXT    NOT NULL,\n"
+                    + " status  TEXT    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
             
