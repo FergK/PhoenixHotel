@@ -30,7 +30,7 @@
                 <fx:include source="ReservationsTab.fxml"/>
             </Tab>
             <Tab fx:id="bookingsTab" text="Event Bookings" disable="true" >
-                <fx:include source="BookingsTab.fxml"/>
+                <fx:include source="EventBookingTab.fxml"/>
             </Tab>
             <Tab fx:id="invoicesTab" text="Invoices" disable="true" >
                 <fx:include source="InvoicesTab.fxml"/>

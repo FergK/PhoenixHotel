@@ -152,6 +152,10 @@ public class PRMS extends Application {
             
             // Create eventBookings table if it doesn't already exist
             sql = "CREATE TABLE IF NOT EXISTS eventBookings (\n"
+                    + " roomName    TEXT    NOT NULL, \n"
+                    + " companyName    TEXT    NOT NULL, \n"
+                    + " price    REAL    NOT NULL, \n"
+                    + " maxCapacity    INT    NOT NULL, \n"
                     + " startDate       TEXT    NOT NULL,\n"
                     + " endDate         TEXT    NOT NULL,\n"
                     + " invoiceUID      TEXT    NOT NULL\n"
