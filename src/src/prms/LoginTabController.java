@@ -79,47 +79,13 @@ public class LoginTabController implements Initializable {
             logoutButton.setVisible(true);
 
             // This next chunk of code loops over all the tabs and enables them
+            // We will want to change this so that it only enables the tabs that
+            // are accessible to this user (manager, cleaning staff, restaurant, etc.)
             TabPane allTabs = (TabPane) loginLabel.getScene().lookup("#allTabs");
             ObservableList<Tab> tabList = allTabs.getTabs();
-            
-            if ( prms.PRMS.loggedInEmployee.getJobTitle().equals("Manager") ) {
-                // Enable all the tabs
-                for (Tab next : tabList) {
-                    next.setDisable(false);
-                }
-                return;
+            for (Tab next : tabList) {
+                next.setDisable(false);
             }
-            
-            if ( prms.PRMS.loggedInEmployee.getJobTitle().equals("Front-desk") ) {
-                // Enable tabs 4 through 8
-                for (int i = 4; i <= 8; i++) {
-                    tabList.get(i).setDisable(false);
-                }
-                return;
-            }
-            
-            if ( prms.PRMS.loggedInEmployee.getJobTitle().equals("Custodial") ) {
-                // Enable tabs 4 and 8
-                tabList.get(4).setDisable(false);
-                tabList.get(8).setDisable(false);
-                return;
-            }
-            
-            if ( prms.PRMS.loggedInEmployee.getJobTitle().equals("Staff") ) {
-                // Enable tabs 4 through 9
-                for (int i = 4; i <= 9; i++) {
-                    tabList.get(i).setDisable(false);
-                }
-                return;
-            }
-            
-            if ( prms.PRMS.loggedInEmployee.getJobTitle().equals("Kitchen") ) {
-                // Enable tabs 8 and 9
-                tabList.get(8).setDisable(false);
-                tabList.get(9).setDisable(false);
-                return;
-            }
-            
 
         } else {
             loginLabel.setText("Username or password incorrect, please try again.");

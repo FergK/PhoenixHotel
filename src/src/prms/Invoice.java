@@ -1,4 +1,6 @@
 /* Change Log
+11/30/2016  Deividas
+    Minor debug
 11/28/2016  Fergus
     Added amount paid field
 11/28/2016  Deividas
@@ -15,20 +17,23 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Invoice {
 
-    private SimpleStringProperty invoiceUID;
-    private SimpleStringProperty customerName;
-    private SimpleStringProperty creditCardNum;
-    private SimpleStringProperty creditCardExp;
-    private SimpleDoubleProperty amountPaid;
-    private ArrayList<BillableItem> billableItems;
+    private SimpleStringProperty invoiceUID  = new SimpleStringProperty();
+    private SimpleStringProperty customerName = new SimpleStringProperty();
+    private SimpleStringProperty creditCardNum = new SimpleStringProperty();
+    private SimpleStringProperty creditCardExp = new SimpleStringProperty();
+    private SimpleDoubleProperty amountPaid = new SimpleDoubleProperty();
+    protected ArrayList<BillableItem> billableItems;
 
-    public Invoice(String invoiceUID, String customerName, String creditCardNum, String creditCardExp) {
+    public Invoice(String invoiceUID, String customerName, String creditCardNum,String creditCardExp ) {
         setInvoiceUID(invoiceUID);
         setCustomerName(customerName);
         setCreditCardNum(creditCardNum);
         setCreditCardExp(creditCardExp);
         setAmountPaid( 0 );
+        billableItems = new ArrayList<BillableItem>();
     }
+    
+    
 
     public ArrayList<BillableItem> getBillableItems() {
         return billableItems;

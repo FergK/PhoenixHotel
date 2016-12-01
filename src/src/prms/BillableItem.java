@@ -20,7 +20,7 @@ public class BillableItem {
     private SimpleStringProperty invoiceUID = new SimpleStringProperty();
     private SimpleStringProperty billableUID = new SimpleStringProperty();
 
-    public BillableItem(String billableName, double price, String time, String invoiceUID, String billableUID) {
+    public BillableItem(String billableUID, String invoiceUID, String billableName, Double price, String time) {
         setBillableName(billableName);
         setPrice(price);
         setTime(time);

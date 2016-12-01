@@ -197,7 +197,7 @@ public class RestaurantTabController implements Initializable {
             restaurantNameField.setText("");
             restaurantDescriptionField.setText("");
             selectedItem = null;
-                        restaurantDeselectButton.setDisable(true);
+            restaurantDeselectButton.setDisable(true);
             restaurantDeleteButton.setDisable(true);
         }
     }
@@ -251,8 +251,8 @@ public class RestaurantTabController implements Initializable {
             cateredMealNameField.setText("");
             cateredMealDescriptionField.setText("");
             selectedItem = null;
-                    cateredMealDeselectBtn.setDisable(true);
-        cateredMealDeleteBtn.setDisable(true);
+            cateredMealDeselectBtn.setDisable(true);
+            cateredMealDeleteBtn.setDisable(true);
         }
     }
 

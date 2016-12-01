@@ -1,7 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* Change Log
+11/30/2016  Fergus
+    Final debug, reorganization
+    and code cleanup, upgraded
+    and finalized layout
+11/29/2016  Deividas
+    Connected controller to the 
+    database, added functions,
+    but introduced bugs
+10/28/2016  Deividas
+    Initial code, stubs generation,
+    preliminary FXML / layout added
  */
 package prms;
 
@@ -64,35 +72,75 @@ public class InvoicesTabController implements Initializable {
 
         ArrayList<Invoice> invoices = new ArrayList<>();
 
-//        Connection c = null;
-//        Statement stmt = null;
-//        Statement stmt2 = null;
-//        try {
-//            c = DriverManager.getConnection(prms.PRMS.DBFILE);
-//            stmt = c.createStatement();
-//            stmt2 = c.createStatement();
-//
-//            String sql = "SELECT * FROM invoices";
-//            ResultSet rs = stmt.executeQuery(sql);
-//            while (rs.next()) {
-//                Invoice currentInvoice = new Invoice(rs.getString("customerName"), rs.getInt("creditCardNum"), rs.getInt("creditCardExp"), rs.getString("UID"));
-//                ResultSet rs2 = stmt2.executeQuery("SELECT * FROM billableItems WHERE UID ='" + currentInvoice.getUID() + "';");
-//                while (rs2.next()) {
-//                    BillableItem currentBillableItem = new BillableItem(rs2.getString("billableName"), rs2.getDouble("price"), rs2.getInt("time"), rs2.getString("UID"), rs2.getString("billableUID"));
-//                    currentInvoice.billItems.add(currentBillableItem);
-//                    System.out.println(currentBillableItem.getBillableName() + " bill added");
-//                }
-//                invoices.add(currentInvoice);
-//            }
-//            rs.close();
-//            stmt.close();
-//            c.close();
-//        } catch (Exception e) {
-//            System.err.println("Could not fetch Invoices from database: " + e.getClass().getName() + ": " + e.getMessage());
-//            System.exit(0);
-//        }
+        Connection c = null;
+        Statement stmt = null;
+        Statement stmt2 = null;
+
+        try {
+            c = DriverManager.getConnection(prms.PRMS.DBFILE);
+            stmt = c.createStatement();
+            stmt2 = c.createStatement();
+
+            String sql = "SELECT * FROM invoices";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+
+                Invoice currentInvoice = new Invoice(rs.getString("invoiceUID"),
+                        rs.getString("customerName"), rs.getString("creditCardNum"),
+                        rs.getString("creditCardExp"));
+
+                ResultSet rs2 = stmt2.executeQuery("SELECT * FROM billableItems WHERE invoiceUID ='"
+                        + currentInvoice.getUID() + "';");
+                while (rs2.next()) {
+
+                    BillableItem currentBillableItem = new BillableItem(rs2.getString("billableUID"),
+                            rs2.getString("invoiceUID"), rs2.getString("billableName"),
+                            rs2.getDouble("price"), rs2.getString("time"));
+
+                    currentInvoice.billableItems.add(currentBillableItem);
+                }
+                invoices.add(currentInvoice);
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            System.err.println("Could not fetch Invoices from database: " + e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
 
         return invoices;
+    }
+
+    public void updateSelectedInvoiceFromDB() {
+        Connection c = null;
+        Statement stmt = null;
+        Statement stmt2 = null;
+
+        try {
+            c = DriverManager.getConnection(prms.PRMS.DBFILE);
+            stmt = c.createStatement();
+            stmt2 = c.createStatement();
+            selectedInvoice.getBillableItems().clear();
+
+            String sql = "SELECT * FROM billableItems WHERE invoiceUID ='" + selectedInvoice.getUID() + "';";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+
+                BillableItem currentBillableItem = new BillableItem(rs.getString("billableUID"),
+                        rs.getString("invoiceUID"), rs.getString("billableName"),
+                        rs.getDouble("price"), rs.getString("time"));
+
+                selectedInvoice.billableItems.add(currentBillableItem);
+                //System.out.println(currentBillableItem.getBillableName() + " bill added");
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            System.err.println("Could not fetch Invoices from database: " + e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
     }
 
     public void updateInvoiceList() {
@@ -101,38 +149,36 @@ public class InvoicesTabController implements Initializable {
         invoiceList.sort();
     }
 
-    public void updateBillableItemList(Invoice selectedInvoice) {
-        System.out.println(selectedInvoice.getUID());
+    public void updateBillableItemList() {
 
         billableItemsList.getItems().clear();
-        ArrayList<BillableItem> bills = selectedInvoice.getBillableItems();
-        billableItemsList.getItems().addAll(bills);
+        updateSelectedInvoiceFromDB();
+        billableItemsList.getItems().addAll(selectedInvoice.getBillableItems());
         billableItemsList.sort();
-
-//        billableItemsList.getItems().clear();
-//        billableItemsList.getItems().addAll(fetchInvoicesFromDB());
-//        billableItemsList.sort();
-        BillableItem selectedBillItem = (BillableItem) invoiceList.getSelectionModel().getSelectedItem();
-        if (invoiceList.getSelectionModel().getSelectedItem() != null) {
-            System.out.println("\nRoom inventory retrieved");
-        }
-
     }
+
+    Invoice selectedInvoice;
 
     @FXML
     public void handleInvoiceListSelection(MouseEvent event) {
 
-        Invoice selectedInvoice = (Invoice) invoiceList.getSelectionModel().getSelectedItem();
+        selectedInvoice = (Invoice) invoiceList.getSelectionModel().getSelectedItem();
         if (invoiceList.getSelectionModel().getSelectedItem() != null) {
-            updateBillableItemList(selectedInvoice);
+            //System.out.println("\ninvoice selected");
+
+            billableItemsList.getItems().clear();
+            ArrayList<BillableItem> bills = selectedInvoice.getBillableItems();
+            billableItemsList.getItems().addAll(bills);
+            billableItemsList.sort();
+            addEditButton.setDisable(false);
+
         }
     }
 
-    BillableItem selectedItem;
-
+    //BillableItem selectedItem;
     @FXML
     public void handleBillableItemSelection(MouseEvent event) {
-        selectedItem = (BillableItem) billableItemsList.getSelectionModel().getSelectedItem();
+        BillableItem selectedItem = (BillableItem) billableItemsList.getSelectionModel().getSelectedItem();
         if (billableItemsList.getSelectionModel().getSelectedItem() != null) {
             System.out.println(selectedItem.getBillableName() + " has been selected!");
 
@@ -148,106 +194,154 @@ public class InvoicesTabController implements Initializable {
     }
 
     @FXML
+    public void handleDeselect(MouseEvent event) {
+        billableItemsList.getSelectionModel().clearSelection();
+        customerNameField.setText("");
+        timeField.setText("");
+        priceField.setText("");
+        addEditButton.setText("Add Item");
+        deleteButton.setDisable(true);
+        deselectButton.setDisable(true);
+    }
+
+    @FXML
+    public void handleDelete(MouseEvent event) {
+
+        BillableItem selectedItem = (BillableItem) billableItemsList.getSelectionModel().getSelectedItem();
+        if (billableItemsList.getSelectionModel().getSelectedItem() != null) {
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to delete this item?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+
+                // Connect to the DB and perform the necessary queries
+                Connection c = null;
+                Statement stmt = null;
+                try {
+                    c = DriverManager.getConnection(prms.PRMS.DBFILE);
+                    stmt = c.createStatement();
+
+                    // Check if there is a billable item with that name
+                    String sql = "SELECT count(*) FROM billableItems WHERE billableUID='" + selectedItem.getBillableUID() + "';";
+                    ResultSet rs = stmt.executeQuery(sql);
+                    if (rs.getInt(1) == 0) {
+                        // No employee found
+                        System.out.println("Error removing item:\nThere is no such item! " + selectedItem.getBillableUID());
+                        rs.close();
+                        stmt.close();
+                        c.close();
+                        return;
+                    }
+
+                    // We can now go ahead and remove the item
+                    sql = "DELETE FROM billableItems WHERE billableUID='" + selectedItem.getBillableUID() + "'";
+                    stmt.executeUpdate(sql);
+
+                    rs.close();
+                    stmt.close();
+                    c.close();
+
+                } catch (Exception e) {
+                    System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                    System.exit(0);
+                }
+
+                addEditButton.setDisable(false);
+                addEditButton.setText("Add Item");
+
+                priceField.setText("");
+                timeField.setText("");
+                customerNameField.setText("");
+                deleteButton.setDisable(true);
+                deselectButton.setDisable(true);
+                selectedItem = null;
+                updateBillableItemList();
+            }
+        }
+    }
+
+    @FXML
     public void handleAddEdit(MouseEvent event) {
 
+        String mode;
+
         if (addEditButton.getText().equals("Add Item")) {
-
-            boolean doubleTest;
-            try {
-                Double.parseDouble(priceField.getText());
-                doubleTest = true;
-            } catch (NumberFormatException e) {
-                doubleTest = false;
-            }
-
-            boolean timeTest;
-            try {
-                parseInt(priceField.getText());
-                timeTest = true;
-            } catch (NumberFormatException e) {
-                timeTest = false;
-            }
-
-            Boolean pass = false;
-
-            // Connect to the DB and perform the necessary queries
-            Connection c2 = null;
-            Statement stmt2 = null;
-            try {
-                c2 = DriverManager.getConnection(prms.PRMS.DBFILE);
-                stmt2 = c2.createStatement();
-
-                Invoice x = (Invoice) invoiceList.getSelectionModel().getSelectedItem();
-                String invoiceUID = x.getUID();
-
-//                // Check if a billable already exists with that username
-//                String sql = "SELECT count(*) FROM BillableItems WHERE UID='" + invoiceUID + "'";
-//                ResultSet rs2 = stmt2.executeQuery(sql);
-//                if (rs2.getInt(1) > 0) {
-//
-//                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                    alert.setTitle("Warning!");
-//                    alert.setHeaderText(null);
-//                    alert.setContentText("Invalid input! An item with that name already exists.");
-//                    alert.showAndWait();
-//                    rs2.close();
-//                    stmt2.close();
-//                    c2.close();
-//                    return;
-//                }
-                pass = true;
-
-//                rs2.close();
-//                stmt2.close();
-//                c2.close();
-            } catch (Exception e) {
-                System.err.println(e.getClass().getName() + ": " + e.getMessage());
-                System.exit(0);
-            }
-            if (pass) {
-                if (doubleTest && customerNameField.getText() != null && timeTest) {
-
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Confirmation Dialog");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Are you sure you want to add this item?");
-                    Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == ButtonType.OK) {
-
-                        // Connect to the DB and perform the necessary queries
-                        Connection c = null;
-                        Statement stmt = null;
-
-                        Invoice x = (Invoice) invoiceList.getSelectionModel().getSelectedItem();
-                        String invoiceUID = x.getUID();
-
-                        try {
-                            c = DriverManager.getConnection(prms.PRMS.DBFILE);
-                            stmt = c.createStatement();
-                            String sql;
-                            String genUID = UUID.randomUUID().toString();
-                            sql = "INSERT INTO billableItems VALUES ('" + customerNameField.getText() + "', '" + Double.parseDouble(priceField.getText()) + "',   '" + parseInt(timeField.getText()) + "',   '" + invoiceUID + "',   '" + genUID + "' );";
-                            stmt.executeUpdate(sql);
-                            stmt.close();
-                            c.close();
-
-                        } catch (Exception e) {
-                            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-                            System.exit(0);
-                        }
-                        updateBillableItemList(x);
-                        billableItemsList.getSelectionModel().clearSelection();
-
-                    }
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Warning!");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Invalid input! Please review your entries.");
-                    alert.showAndWait();
-                }
-            }
+            mode = "Add";
         } else if (addEditButton.getText().equals("Edit Item")) {
+            mode = "Edit";
+        } else {
+            return;
+        }
+
+        boolean doubleTest;
+        try {
+            Double.parseDouble(priceField.getText());
+            doubleTest = true;
+        } catch (NumberFormatException e) {
+            doubleTest = false;
+        }
+
+        boolean isNotNullTest;
+
+        if ((priceField.getText() == null && priceField.getText().isEmpty())
+                && (timeField.getText() == null && timeField.getText().isEmpty())
+                && (customerNameField.getText() == null && customerNameField.getText().isEmpty())) {
+            isNotNullTest = false;
+        } else {
+            isNotNullTest = true;
+        }
+        try {
+            priceField.getText();
+            isNotNullTest = true;
+        } catch (NumberFormatException e) {
+            isNotNullTest = false;
+        }
+
+        if (mode.equals("Add") && isNotNullTest && doubleTest) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to add this item?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+
+                // Connect to the DB and perform the necessary queries
+                Connection c = null;
+                Statement stmt = null;
+                try {
+                    c = DriverManager.getConnection(prms.PRMS.DBFILE);
+                    stmt = c.createStatement();
+
+                    String billableUID = UUID.randomUUID().toString();
+                    String invoiceUID = selectedInvoice.getUID();
+                    String billableName = customerNameField.getText();
+                    Double price = Double.parseDouble(priceField.getText());
+                    String time = timeField.getText();
+
+                    // We can now go ahead and insert the new employee
+                    String sql = "INSERT INTO billableItems VALUES ('" + billableUID + "', '"
+                            + invoiceUID + "', '" + billableName + "', '" + price + "', '" + time + "' );";
+                    stmt.executeUpdate(sql);
+
+                    stmt.close();
+                    c.close();
+
+                    updateBillableItemList();
+
+                } catch (Exception e) {
+                    System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                    System.exit(0);
+                }
+
+            }
+
+        } else if (mode.equals("Edit") && isNotNullTest && doubleTest) {
+
+            BillableItem selectedBillableItem = (BillableItem) billableItemsList.getSelectionModel().getSelectedItem();
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText(null);
@@ -255,325 +349,38 @@ public class InvoicesTabController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
 
-//                // Connect to the DB and perform the necessary queries
-//                Connection c = null;
-//                Statement stmt = null;
-//                try {
-//                    c = DriverManager.getConnection(prms.PRMS.DBFILE);
-//                    stmt = c.createStatement();
-//
-//                    String sql = "UPDATE billableItems SET customerName ='" + customerNameField.getText()
-//                            + "', price = '" + priceField.getText() + "', time = '" + timeField.getText()
-//                            + "' WHERE billableUID ='" + selectedItem.getBillableUID() + "';";
-//                    stmt.executeUpdate(sql);
-//                    stmt.close();
-//                    c.close();
-//
-//                } catch (Exception e) {
-//                    System.err.println(e.getClass().getName() + ": " + e.getMessage());
-//                    System.exit(0);
-//                }
-//                Invoice x = (Invoice) invoiceList.getSelectionModel().getSelectedItem();
-//
-//                updateBillableItemList(x);
-//                billableItemsList.getSelectionModel().clearSelection();
-            }
-        }
-    }
-    
-    
-    
-            @FXML
-    public void handleDeselect(MouseEvent event) {
-        billableItemsList.getSelectionModel().clearSelection();
-        customerNameField.setText("");
-        timeField.setText("");
-        priceField.setText("");
-        addEditButton.setText("Add Item");
-    }
-    
-    
-    
-    
-            @FXML
-    public void handleDelete() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Are you sure you want to delete this item?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            
-            BillableItem test = (BillableItem) billableItemsList.getSelectionModel().getSelectedItem();
+                // Connect to the DB and perform the necessary queries
+                Connection c = null;
+                Statement stmt = null;
+                try {
+                    c = DriverManager.getConnection(prms.PRMS.DBFILE);
+                    stmt = c.createStatement();
 
-            // Connect to the DB and perform the necessary queries
-            Connection c = null;
-            Statement stmt = null;
-            try {
-                c = DriverManager.getConnection(prms.PRMS.DBFILE);
-                stmt = c.createStatement();
-
-                // Check if there is item with that name
-                String sql = "SELECT count(*) FROM billableItems WHERE billableUID='" + test.getBillableUID() + "';";
-                ResultSet rs = stmt.executeQuery(sql);
-                if (rs.getInt(1) == 0) {
-                    // No employee found
-                    System.out.println("Error removing item:\nThere is no such item! " + test.getBillableUID());
-                    rs.close();
+                    String sql = "UPDATE billableItems SET billableName ='" + customerNameField.getText()
+                            + "', price = '" + priceField.getText() + "', time = '" + timeField.getText()
+                            + "' WHERE billableUID ='" + selectedBillableItem.getBillableUID() + "';";
+                    stmt.executeUpdate(sql);
                     stmt.close();
                     c.close();
-                    return;
+
+                } catch (Exception e) {
+                    System.err.println(e.getClass().getName() + ": " + e.getMessage());
+                    System.exit(0);
                 }
+                //Invoice x = (Invoice) invoiceList.getSelectionModel().getSelectedItem();
 
-                // We can now go ahead and remove the item
-                sql = "DELETE FROM restaurantItems WHERE billableUID ='" + test.getBillableUID() + "'";
-                stmt.executeUpdate(sql);
-
-                rs.close();
-                stmt.close();
-                c.close();
-
-            } catch (Exception e) {
-                System.err.println(e.getClass().getName() + ": " + e.getMessage());
-                System.exit(0);
+                updateBillableItemList();
+                //billableItemsList.getSelectionModel().clearSelection();
             }
-            billableItemsList.getSelectionModel().clearSelection();
-                Invoice x = (Invoice) invoiceList.getSelectionModel().getSelectedItem();
 
-                updateBillableItemList(x);
-            addEditButton.setDisable(false);
-            addEditButton.setText("Add Item");
-
-            customerNameField.setText("");
-            timeField.setText("");
-            priceField.setText("");
-            selectedItem = null;
+        } else if (!doubleTest || !isNotNullTest) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Warning!");
+            alert.setHeaderText(null);
+            alert.setContentText("Invalid input! Please review your entries.");
+            alert.showAndWait();
         }
-    }
-    
-    
 
-//           @FXML
-//    public void handleRoomSelection(MouseEvent event) {
-//        
-//
-//        
-//        HotelRoom selectedRoom = (HotelRoom) roomTable.getSelectionModel().getSelectedItem();
-//        if (roomTable.getSelectionModel().getSelectedItem() != null) {
-//            updateInventoryTable(selectedRoom);
-//            replenishUpdateLabel.setVisible(false);
-//            dateUpdateLabel.setVisible(false);
-//            System.out.println(selectedRoom.getDateLastCleaned());
-//            roomServiceUpdateBtn.setDisable(false);
-//
-//            String temp = selectedRoom.getDateLastCleaned();
-//            roomServiceField.setText(
-//                    temp.substring(0, 2) + "-"
-//                    + temp.substring(2, 4) + "-"
-//                    + temp.substring(4)
-//            );
-//        }
-//
-//    }
-//       
-//       
-//           @FXML
-//    public void handleRestaurantDelete() {
-//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//        alert.setTitle("Confirmation Dialog");
-//        alert.setHeaderText(null);
-//        alert.setContentText("Are you sure you want to delete this item?");
-//        Optional<ButtonType> result = alert.showAndWait();
-//        if (result.get() == ButtonType.OK) {
-//
-//            // Connect to the DB and perform the necessary queries
-//            Connection c = null;
-//            Statement stmt = null;
-//            try {
-//                c = DriverManager.getConnection(prms.PRMS.DBFILE);
-//                stmt = c.createStatement();
-//
-//                // Check if there is item with that name
-//                String sql = "SELECT count(*) FROM restaurantItems WHERE itemName='" + restaurantNameField.getText() + "';";
-//                ResultSet rs = stmt.executeQuery(sql);
-//                if (rs.getInt(1) == 0) {
-//                    // No employee found
-//                    System.out.println("Error removing item:\nThere is no such item! " + restaurantNameField.getText());
-//                    rs.close();
-//                    stmt.close();
-//                    c.close();
-//                    return;
-//                }
-//
-//                // We can now go ahead and remove the item
-//                sql = "DELETE FROM restaurantItems WHERE itemName='" + restaurantNameField.getText() + "'";
-//                stmt.executeUpdate(sql);
-//
-//                rs.close();
-//                stmt.close();
-//                c.close();
-//
-//            } catch (Exception e) {
-//                System.err.println(e.getClass().getName() + ": " + e.getMessage());
-//                System.exit(0);
-//            }
-//            restaurantTable.getSelectionModel().clearSelection();
-//            updateRestaurantTable();
-//            addEditButton.setDisable(false);
-//            addEditButton.setText("Add Item");
-//
-//            restaurantPriceField.setText("");
-//            restaurantNameField.setText("");
-//            restaurantDescriptionField.setText("");
-//            selectedItem = null;
-//        }
-//    }
-//    
-//        @FXML
-//    public void handleRestaurantDeselect(MouseEvent event) {
-//        restaurantTable.getSelectionModel().clearSelection();
-//        restaurantNameField.setText("");
-//        restaurantDescriptionField.setText("");
-//        restaurantPriceField.setText("");
-//        addEditButton.setText("Add Item");
-//    }
-//    
-//       @FXML
-//    public void handleAddEditRestaurantItem(MouseEvent event) {
-//
-//        if (addEditButton.getText().equals("Add Item")) {
-//
-//            boolean doubleTest;
-//            try {
-//                Double.parseDouble(restaurantPriceField.getText());
-//                doubleTest = true;
-//            } catch (NumberFormatException e) {
-//                doubleTest = false;
-//            }
-//
-//            Boolean pass = false;
-//
-//            // Connect to the DB and perform the necessary queries
-//            Connection c2 = null;
-//            Statement stmt2 = null;
-//            try {
-//                c2 = DriverManager.getConnection(prms.PRMS.DBFILE);
-//                stmt2 = c2.createStatement();
-//
-//                // Check if a employee already exists with that username
-//                String sql = "SELECT count(*) FROM restaurantItems WHERE itemName='" + restaurantNameField.getText() + "'";
-//                ResultSet rs2 = stmt2.executeQuery(sql);
-//                if (rs2.getInt(1) > 0) {
-//
-//                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                    alert.setTitle("Warning!");
-//                    alert.setHeaderText(null);
-//                    alert.setContentText("Invalid input! An item with that name already exists.");
-//                    alert.showAndWait();
-//                    rs2.close();
-//                    stmt2.close();
-//                    c2.close();
-//                    return;
-//                }
-//
-//                pass = true;
-//
-//                rs2.close();
-//                stmt2.close();
-//                c2.close();
-//
-//            } catch (Exception e) {
-//                System.err.println(e.getClass().getName() + ": " + e.getMessage());
-//                System.exit(0);
-//            }
-//            if (pass) {
-//                if (doubleTest && restaurantNameField.getText() != null) {
-//
-//                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//                    alert.setTitle("Confirmation Dialog");
-//                    alert.setHeaderText(null);
-//                    alert.setContentText("Are you sure you want to add this item?");
-//                    Optional<ButtonType> result = alert.showAndWait();
-//                    if (result.get() == ButtonType.OK) {
-//
-//                        // Connect to the DB and perform the necessary queries
-//                        Connection c = null;
-//                        Statement stmt = null;
-//                        try {
-//                            c = DriverManager.getConnection(prms.PRMS.DBFILE);
-//                            stmt = c.createStatement();
-//                            String sql;
-//                            sql = "INSERT INTO restaurantItems VALUES ('" + restaurantNameField.getText() + "', '" + Double.parseDouble(restaurantPriceField.getText()) + "',   '" + restaurantDescriptionField.getText() + "' );";
-//                            stmt.executeUpdate(sql);
-//                            stmt.close();
-//                            c.close();
-//
-//                        } catch (Exception e) {
-//                            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-//                            System.exit(0);
-//                        }
-//                        updateRestaurantTable();
-//                        restaurantTable.getSelectionModel().clearSelection();
-//
-//                    }
-//                } else {
-//                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                    alert.setTitle("Warning!");
-//                    alert.setHeaderText(null);
-//                    alert.setContentText("Invalid input! Please review your entries.");
-//                    alert.showAndWait();
-//                }
-//            }
-//        } else if (addEditButton.getText().equals("Edit Item")) {
-//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//            alert.setTitle("Confirmation Dialog");
-//            alert.setHeaderText(null);
-//            alert.setContentText("Are you sure you want to edit this item?");
-//            Optional<ButtonType> result = alert.showAndWait();
-//            if (result.get() == ButtonType.OK) {
-//
-//                // Connect to the DB and perform the necessary queries
-//                Connection c = null;
-//                Statement stmt = null;
-//                try {
-//                    c = DriverManager.getConnection(prms.PRMS.DBFILE);
-//                    stmt = c.createStatement();
-//
-//                    String sql = "UPDATE restaurantItems SET itemName ='" + restaurantNameField.getText()
-//                            + "', price = '" + restaurantPriceField.getText() + "', description = '" + restaurantDescriptionField.getText()
-//                            + "' WHERE itemName ='" + selectedItem.getItemName() + "';";
-//                    stmt.executeUpdate(sql);
-//                    stmt.close();
-//                    c.close();
-//
-//                } catch (Exception e) {
-//                    System.err.println(e.getClass().getName() + ": " + e.getMessage());
-//                    System.exit(0);
-//                }
-//                restaurantTable.getSelectionModel().clearSelection();
-//                updateRestaurantTable();
-//            }
-//        }
-//    }
-//    
-//    
-//    
-//        RestaurantItem selectedItem;
-//
-//    @FXML
-//    public void handleRestaurantItemSelection(MouseEvent event) {
-//        selectedItem = (RestaurantItem) restaurantTable.getSelectionModel().getSelectedItem();
-//        if (restaurantTable.getSelectionModel().getSelectedItem() != null) {
-//            System.out.println(selectedItem.getItemName() + " has been selected!");
-//
-//            restaurantNameField.setText(selectedItem.getItemName());
-//            restaurantDescriptionField.setText(selectedItem.getDescription());
-//            restaurantPriceField.setText(String.valueOf(selectedItem.getPrice()));
-//            addEditButton.setText("Edit Item");
-//
-//            restaurantDeselectButton.setDisable(false);
-//            restaurantDeleteButton.setDisable(false);
-//        }
-//
-//    }
+    }
+
 }
