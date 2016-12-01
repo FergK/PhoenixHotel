@@ -96,6 +96,7 @@ public class OrderTabController implements Initializable {
     public void createOrder(){
     
         String orderType = orderTypeChoiceBox.getValue();
+        String mealName =  mealNameChoiceBox.getValue();
         String roomFloor = roomFloorChoiceBox.getValue();
         String roomNumber = roomNumberChoiceBox.getValue();
         String roomName = roomFloor + " - " + roomNumber;
@@ -111,7 +112,7 @@ public class OrderTabController implements Initializable {
             c = DriverManager.getConnection(prms.PRMS.DBFILE);
             stmt = c.createStatement();            
 
-            String sql = "INSERT INTO orders VALUES ('" + orderType + "', '" + roomName + "', '" + price + "', '" + date + "', '" + time + "', '"+ status +"' );";
+            String sql = "INSERT INTO orders VALUES ('" + orderType + "','" + mealName + "', '" + roomName + "', '" + price + "', '" + date + "', '" + time + "', '"+ status +"' );";
             stmt.executeUpdate(sql);
 
             stmt.close();
@@ -122,7 +123,7 @@ public class OrderTabController implements Initializable {
             System.exit(0);
         }
     
-        Order currentOrder = new Order(orderType, roomName, price, date, time, status);
+        Order currentOrder = new Order(orderType, mealName, roomName, price, date, time, status);
         ordersTableView.getItems().add(currentOrder);
         ordersTableView.getSelectionModel().select(currentOrder);
         OrderTabPane.getSelectionModel().selectNext();
@@ -225,7 +226,7 @@ public class OrderTabController implements Initializable {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 
-                Order currentOrder = new Order(rs.getString("orderType"), rs.getString("roomName"), rs.getDouble("price"), rs.getString("date"), rs.getString("time"), rs.getString("status"));
+                Order currentOrder = new Order(rs.getString("orderType"), rs.getString("mealName"), rs.getString("roomName"), rs.getDouble("price"), rs.getString("date"), rs.getString("time"), rs.getString("status"));
 
                 orders.add(currentOrder);
             }

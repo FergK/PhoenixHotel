@@ -185,6 +185,7 @@ public class PRMS extends Application {
             // Create orders table if it doesn't already exist
             sql = "CREATE TABLE IF NOT EXISTS orders (\n"
                     + " orderType    TEXT       NOT NULL,\n"
+                    + " mealName    TEXT    NOT NULL,\n"
                     + " roomName    TEXT    NOT NULL,\n"
                     + " price         REAL    NOT NULL,\n"
                     + " date          TEXT     NOT NULL,\n"

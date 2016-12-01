@@ -15,14 +15,16 @@ import javafx.beans.property.SimpleDoubleProperty;
 public class Order {
     
     private SimpleStringProperty orderType = new SimpleStringProperty("");
+    private SimpleStringProperty mealName = new SimpleStringProperty("");
     private SimpleStringProperty roomName = new SimpleStringProperty("");
     private SimpleDoubleProperty price = new SimpleDoubleProperty();
     private SimpleStringProperty date = new SimpleStringProperty("");
     private SimpleStringProperty time = new SimpleStringProperty("");
     private SimpleStringProperty status = new SimpleStringProperty("");
     
-    public Order( String orderType, String roomName, double price, String date, String time, String status ) {
+    public Order( String orderType, String mealName, String roomName, double price, String date, String time, String status ) {
         setOrderType(orderType);
+        setMealName(mealName);
         setRoomName(roomName);
         setPrice(price);
         setDate(date);
@@ -38,6 +40,15 @@ public class Order {
     public void setOrderType(String orderType){
         this.orderType.set(orderType);
     }
+    
+    public void setMealName(String mealName){
+        this.mealName.set(mealName);
+    }
+    
+    public String getMealName(){
+        return mealName.get();
+    }
+    
     
     public void setRoomName(String roomName){
         this.roomName.set(roomName);

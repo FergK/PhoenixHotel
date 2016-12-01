@@ -49,7 +49,7 @@
                      <children>
                         <TableView fx:id="eventBookingTableView" layoutX="200.0" layoutY="84.0" onMouseClicked="#handleEventBookingSelection" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                            <TableColumn fx:id="companyName" minWidth="200.0" prefWidth="200.0" text="Room Name">
+                            <TableColumn fx:id="companyName" minWidth="200.0" prefWidth="200.0" text="Company Name">
                                 <cellValueFactory>
                                         <PropertyValueFactory property="companyName" />
                                 </cellValueFactory>

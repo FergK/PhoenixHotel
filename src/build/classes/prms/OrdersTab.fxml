@@ -48,6 +48,11 @@
                                         <PropertyValueFactory property="orderType" />
                                 </cellValueFactory>
                             </TableColumn>
+                              <TableColumn fx:id="mealName" minWidth="200.0" prefWidth="200.0" text="Meal Name">
+                                <cellValueFactory>
+                                        <PropertyValueFactory property="mealName" />
+                                </cellValueFactory>
+                            </TableColumn>
                             <TableColumn fx:id="roomName" minWidth="200.0" prefWidth="200.0" text="Room Name">
                                 <cellValueFactory>
                                         <PropertyValueFactory property="roomName" />
