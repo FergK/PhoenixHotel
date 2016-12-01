@@ -140,13 +140,14 @@ public class PRMS extends Application {
             stmt.execute(sql);
             
             // Create hotelReservations table if it doesn't already exist
-            sql = "CREATE TABLE IF NOT EXISTS hotelReservations (\n"
-                    + " roomnumber      TEXT    NOT NULL,\n"
-                    + " adults          INT     NOT NULL,\n"
-                    + " children        INT     NOT NULL,\n"
-                    + " startDate       TEXT    NOT NULL,\n"
-                    + " endDate         TEXT    NOT NULL,\n"
-                    + " invoiceUID      TEXT    NOT NULL\n"
+            sql = "CREATE TABLE IF NOT EXISTS hotelreservations (\n"
+                    + " roomnumber     TEXT    NOT NULL,\n"
+                    + " adults           TEXT      NOT NULL,\n"
+                    + " children      TEXT    NOT NULL,\n"
+                    + " startDate    TEXT    NOT NULL,\n"
+                    + " endDate     TEXT    NOT NULL,\n"
+                    + " guestName   TEXT    NOT NULL,\n"
+                    + " bill      TEXT    UNIQUE    NOT NULL\n"
                     + ");";
             stmt.execute(sql);
             

@@ -27,7 +27,7 @@
                 <fx:include source="MaintenanceTab.fxml"/>
             </Tab> 
             <Tab fx:id="reservationsTab" text="Hotel Reservations" disable="true" >
-                <fx:include source="ReservationsTab.fxml"/>
+                <fx:include source="ReservationBookingTab.fxml"/>
             </Tab>
             <Tab fx:id="bookingsTab" text="Event Bookings" disable="true" >
                 <fx:include source="EventBookingTab.fxml"/>
