@@ -93,7 +93,7 @@ public class RestaurantTabController implements Initializable {
                 RestaurantItem currentMenuItem = new RestaurantItem(rs.getString("itemName"),
                         rs.getDouble("price"), rs.getString("description"));
 
-                System.out.println(currentMenuItem.getItemName() + " added");
+//                System.out.println(currentMenuItem.getItemName() + " added");
                 menu.add(currentMenuItem);
             }
 
@@ -123,7 +123,7 @@ public class RestaurantTabController implements Initializable {
             while (rs.next()) {
                 CateredMealItem currentCaterMenuItem = new CateredMealItem(rs.getString("mealName"),
                         rs.getDouble("pricePerSeat"), rs.getString("mealDescription"));
-                System.out.println(currentCaterMenuItem.getMealName() + " added");
+//                System.out.println(currentCaterMenuItem.getMealName() + " added");
                 caterMenu.add(currentCaterMenuItem);
             }
             rs.close();
