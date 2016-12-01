@@ -11,9 +11,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -129,7 +131,7 @@ public class ReservationBookingTabController implements Initializable {
        guestNameLabel.setText(selectedRoom.getGuestName());
        dateLabel.setText(selectedRoom.getEndDate());
        roomNameLabel.setText(selectedRoom.getRoomNumber());
-       priceLabel.setText("$1,920");
+       priceLabel.setText("$199");
        ConfirmationLabel.setText("");
 
       ReservationBookingTabPane.getSelectionModel().selectNext();
@@ -139,6 +141,87 @@ public class ReservationBookingTabController implements Initializable {
 
     @FXML
     void handleReservationInvoice(ActionEvent event) {
+        
+        System.out.println("Button Pressed");
+        if (ccNumberTextField.getText().isEmpty() || ccNumberTextField.getText() == null){
+          ConfirmationLabel.setText("Enter values for credit card number!");
+          return;
+        }
+        
+        if (ccExpirationTextField.getText().isEmpty() || ccExpirationTextField.getText() == null){
+          ConfirmationLabel.setText("Enter values for credit card exipration!");
+          return;
+        }
+        
+        if (ccCodeTextField.getText().isEmpty() || ccCodeTextField.getText() == null){
+          ConfirmationLabel.setText("Enter values for credit card code!");
+          return;
+        }
+        
+        
+        HotelReservation selectedRoom = (HotelReservation) reservationTableView.getSelectionModel().getSelectedItem();
+
+        
+        String room = selectedRoom.getRoomNumber();
+       
+        String invoiceUID = UUID.randomUUID().toString();
+        
+        int creditCardNum = 00010102011;
+        int creditCardExp = 0115;
+        String customerName = selectedRoom.getGuestName();
+        //String creditCardExp = ccExpirationTextField.getText();
+        String time = Instant.now().toString();
+        double price = 129.0;
+        
+        Connection c = null;
+        Connection c2 = null;
+        
+        Statement stmt = null;
+        Statement stmt2 = null;
+        
+        try {
+            c = DriverManager.getConnection(prms.PRMS.DBFILE);
+            stmt = c.createStatement();            
+
+            // We can now go ahead and insert the new employee
+            String sql = "INSERT INTO invoices VALUES ('" + invoiceUID + "', '" + customerName + "', '" + creditCardNum + "', '" + creditCardExp + "', '" + price + "' );";
+            stmt.executeUpdate(sql);
+
+            stmt.close();
+            c.close();
+
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        
+        try {
+            c2 = DriverManager.getConnection(prms.PRMS.DBFILE);
+            stmt2 = c2.createStatement();            
+            
+            // We can now go ahead and insert the new employee
+            String sql = "INSERT INTO billableItems VALUES ('" + invoiceUID + "', '" + invoiceUID + "', '" + room + "', '" + price + "', '" + time + "' );";
+            stmt2.executeUpdate(sql);
+
+            stmt2.close();
+            c2.close();
+
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    
+//        Invoice eventInvoice = new Invoice(invoiceUID, customerName, creditCardNum, creditCardExp);
+//        BillableItem eventBill = new BillableItem(room, price, time, invoiceUID, invoiceUID);
+//        
+//        
+        
+
+//        eventBookingTableView.
+
+
+        ReservationBookingTabPane.getSelectionModel().select(1);
+        ReservationPaymentTab.setDisable(true);
 
     }
 

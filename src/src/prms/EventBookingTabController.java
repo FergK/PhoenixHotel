@@ -117,13 +117,15 @@ public class EventBookingTabController implements Initializable {
 
     @FXML
     void handleReservationBooking(ActionEvent event) {
-       
-//       EventRoom selectedRoom = (EventRoom) eventBookingTableView.getSelectionModel().getSelectedItem();
-//       
-//       companyNameLabel.setText(selectedRoom.getCompanyName());
-//       dateLabel.setText(selectedRoom.getDateReserved());
-//       roomNameLabel.setText(selectedRoom.getRoomName());
-//       priceLabel.setText("$1,920");
+ 
+
+        EventBooking selectedBooking = (EventBooking) eventBookingTableView.getSelectionModel().getSelectedItem();
+        companyNameLabel.setText(selectedBooking.getCompanyName());
+        dateLabel.setText(selectedBooking.getStartDate());
+        roomNameLabel.setText(selectedBooking.getName());
+        priceLabel.setText("$499.99");
+
+
        ConfirmationLabel.setText("");
 
       EventBookingTabPane.getSelectionModel().selectNext();
