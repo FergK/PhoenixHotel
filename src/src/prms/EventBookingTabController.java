@@ -192,10 +192,6 @@ public class EventBookingTabController implements Initializable {
         try {
             c2 = DriverManager.getConnection(prms.PRMS.DBFILE);
             stmt2 = c2.createStatement();            
-
-            
-//           
-            
             
             // We can now go ahead and insert the new employee
             String sql = "INSERT INTO billableItems VALUES ('" + invoiceUID + "', '" + invoiceUID + "', '" + room + "', '" + price + "', '" + time + "' );";
@@ -239,6 +235,11 @@ public class EventBookingTabController implements Initializable {
             return;
         }
         
+        if (roomChoiceBox.getValue() == null){
+          FeedbackLabel.setText("Please select a event room");
+          return;
+        }
+        
         
         //Create Booking
         createEventBooking();
@@ -263,8 +264,35 @@ public class EventBookingTabController implements Initializable {
     
     public void updateResultsTable(){
         eventBookingTableView.getItems().clear();
-        //eventBookingTableView.getItems().addAll(fetchEventsFromDB());
+        eventBookingTableView.getItems().addAll(fetchEventBookingsFromDB());
         eventBookingTableView.sort();
+    }
+    
+    public ArrayList<String> getEventRoomNames(){
+
+        ArrayList<String> eventRooms = new ArrayList<>();
+        
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            c = DriverManager.getConnection(prms.PRMS.DBFILE);
+            stmt = c.createStatement();
+            
+            String sql = "SELECT * FROM eventRooms";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                eventRooms.add(rs.getString("roomName"));
+            }
+
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            System.err.println("Could not fetch Restaurant items from database: " + e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return eventRooms;
     }
     
     public ArrayList<EventBooking> fetchEventBookingsFromDB() {
@@ -299,9 +327,10 @@ public class EventBookingTabController implements Initializable {
     
     public void setupChoiceBoxInputs(){
 
+        ObservableList<String> list = FXCollections.observableArrayList(getEventRoomNames());
+     
+        roomChoiceBox.setItems(list);
         
-        roomChoiceBox.setValue("The Grand Suite");
-        roomChoiceBox.setItems(roomList);
         
         guestChoiceBox.setValue("0-25");
         guestChoiceBox.setItems(guestList);
