@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Change Log
+10/13/2016  Fergus
+    Created file
+-->
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.*?> 
+
+<GridPane fx:id="employeesPane" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prms.EmployeesTabController" hgap="20" vgap="20" maxWidth="Infinity">
+
+    <padding>
+        <Insets bottom="10.0" left="10.0" right ="10.0" top="10.0"/>
+    </padding>
+    
+    <GridPane hgap="10" vgap="10" GridPane.columnIndex="0" GridPane.rowIndex="0" minWidth="300" maxWidth="300">
+        <Label text="Enter values to create a new employee profile, or select an employee from the table to modify or remove" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"  wrapText="true"/>
+        
+        <Label text="First name: " GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="modifyFirstNameField" promptText="first name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        
+        <Label text="Last name: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="modifyLastNameField" promptText="last name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        
+        <Label text="Job title: " GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <ChoiceBox fx:id="modifyJobTitleChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="3" maxWidth="Infinity" />
+        
+        <Label text="Username: " GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField fx:id="modifyUsernameField" promptText="username" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        
+        <Label text="Password: " GridPane.columnIndex="0" GridPane.rowIndex="5" />
+        <PasswordField fx:id="modifyPasswordField" promptText="password" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        
+        <Label text="Confirm PW: " GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <PasswordField fx:id="confirmPasswordField" promptText="confirm password" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        
+        <HBox GridPane.columnIndex="0" GridPane.rowIndex="7" GridPane.columnSpan="2" spacing="10" alignment="center">
+            <fx:define>
+                <ToggleGroup fx:id="toggleGroup"/>
+            </fx:define>
+            <children>
+                <RadioButton fx:id="createRadio" text="Create" toggleGroup="$toggleGroup" onAction="#handleCreateToggle" selected="true" />
+                <RadioButton fx:id="modifyRadio" text="Modify" toggleGroup="$toggleGroup" onAction="#handleModifyToggle" />
+                <RadioButton fx:id="removeRadio" text="Remove" toggleGroup="$toggleGroup" onAction="#handleRemoveToggle" />
+            </children>
+        </HBox>
+        
+        <Button fx:id="modifyButton" text="Apply" onAction="#handleEmployeeApplyButtonPress" GridPane.columnIndex="0" GridPane.rowIndex="8" GridPane.columnSpan="2" maxWidth="Infinity"/>
+        <Label fx:id="modifyLabel" text="" GridPane.columnIndex="0" GridPane.rowIndex="9" GridPane.columnSpan="2" maxWidth="Infinity" minHeight="60" alignment="TOP_CENTER" textAlignment="CENTER" wrapText="true" />
+    </GridPane>
+    
+    <TableView fx:id="employeesTable" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.hgrow="always" GridPane.vgrow="always" maxWidth="Infinity">
+        <columns>
+             <TableColumn fx:id="usernameCol" text="Username" prefWidth="125">
+                 <cellValueFactory><PropertyValueFactory property="username" /></cellValueFactory>
+             </TableColumn>
+             <TableColumn fx:id="firstNameCol" text="First Name" prefWidth="125">
+                 <cellValueFactory><PropertyValueFactory property="firstName" /></cellValueFactory>
+             </TableColumn>
+             <TableColumn fx:id="lastNameCol" text="Last Name" prefWidth="125">
+                 <cellValueFactory><PropertyValueFactory property="lastName" /></cellValueFactory>
+             </TableColumn>
+             <TableColumn fx:id="jobTitleCol" text="Job Title" prefWidth="125">
+                 <cellValueFactory><PropertyValueFactory property="jobTitle" /></cellValueFactory>
+             </TableColumn>
+        </columns>    
+    </TableView>
+    
+</GridPane>
